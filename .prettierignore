@@ -1,0 +1,4 @@
+.idea/
+dist/
+dist-cjs/
+packages/mittwald/src/generated/**/*
