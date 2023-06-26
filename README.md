@@ -370,6 +370,10 @@ const getUserResource = resourceify(getUser);
 // `myUser` is an async resource
 const myUser = getUserResource(["me"], { refresh: { seconds: 30 } });
 myUser.watch();
+
+// Factory method for HTTP GET-Requests via Axios
+import axios from "axios";
+export const getHttpResource = resourceify(axios.get);
 ```
 
 ## Caching
