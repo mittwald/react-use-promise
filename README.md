@@ -54,7 +54,7 @@ const App = () => {
 ## Features
 
 - Simple and declarative use of Promises, [loading-](#defining-loading-views)
-  and error views
+  and [error views](#error-handling)
 - [Auto-refresh](#autorefresh) after timeout
 - Type-Safe API
 - No "double-loading" when using "same" Promise in different places in your app
@@ -389,7 +389,7 @@ not be called again and the cached value is used instead.
 
 ### Challenges concerning Caching
 
-This caching approach comes with two essential to care about:
+This caching approach comes with two essential issues one has to care about:
 
 - creating unique cache keys to store results
 - providing flexible ways of cache invalidation
@@ -689,7 +689,7 @@ interface Props {
 }
 
 const UserAvatar: FC<Props> = ({ user, size }) => {
-  // .watch() ⏰ triggers loading when needed
+  // .watch() 🔔 triggers loading when needed
   const profile = user.watch();
   return <Avatar imageUrl={profile.avatarUrl} size={size} />;
 };
