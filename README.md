@@ -863,6 +863,9 @@ const App = () => (
 
 ```tsx
 // File resources/user.ts
+import { getUserProfile } from "../resources/user";
+import { resourceify } from "@mittwald/react-use-promise";
+
 export const getUserProfile = resourceify(apiClient.loadUserProfile);
 
 // File models/UserProfile.ts
@@ -885,6 +888,10 @@ export class UserProfile {
     return new UserProfile(data);
   }
 
+  public getFullName(): string {
+    return `${this.firstName} ${this.lastName}`;
+  }
+
   public async updateName(firstName: string, lastName: string): Promise<void> {
     await apiClient.updateProfile({
       firstName,
@@ -898,10 +905,6 @@ import { UserProfile } from "../models/UserProfile";
 
 export const UserProfileName: FC<{ id: string }> = (props) => {
   const user = UserProfile.useLoadById(props.id);
-  return (
-    <>
-      {user.firstName} {user.lastName}
-    </>
-  );
+  return <>{user.getFullName()}</>;
 };
 ```
