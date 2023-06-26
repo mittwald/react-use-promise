@@ -56,7 +56,7 @@ const App = () => {
 - Simple and declarative use of Promises, [loading-](#defining-loading-views)
   and error views
 - [Auto-refresh](#autorefresh) after timeout
-- [Type-Safe API](#usage-with-typescript)
+- Type-Safe API
 - No "double-loading" when using "same" Promise in different places in your app
 - Caching with support for [custom tags](#tags-1)
 - [Cache invalidation](#refreshing-resources) with
@@ -65,6 +65,7 @@ const App = () => {
 - Set up [lazy-loading](#-lazy-loading-with-async-resources) "async resources"
   with the alternative [`getAsyncResource`-API](#getasyncresource) and pass them
   as prop to child components
+- ["Resourceify"](#resourceify) any async function
 - Fully tested and well-structured TypeScript code-base
 
 ## Table of Contents
