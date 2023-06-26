@@ -8,7 +8,7 @@
     "name": "Mittwald CM Service GmbH & Co. KG",
     "email": "opensource@mittwald.de"
   },
-  "homepage": "https://github.com/mittwald/react-use-promise",
+  "homepage": "https://github.com/mittwald/react-use-promise#readme",
   "main": "dist/index.js",
   "type": "module",
   "exports": {
