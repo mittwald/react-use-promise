@@ -1,15 +1,16 @@
 import { beforeEach, expect, jest, test } from "@jest/globals";
 import React, { FC } from "react";
-import { AsyncLoader } from "./types.js";
+import { AsyncLoader, UseWatchResourceOptions } from "./types.js";
 import { AsyncResource } from "./AsyncResource.js";
 import { useWatchResourceValue } from "./useWatchResourceValue.js";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import { RenderWithLoadingView, sleep } from "../lib/testing.js";
 
-let nameResource: AsyncResource<string>;
+let testResource: AsyncResource<string>;
 let getName: jest.Mock<() => string>;
 let getNameAsync: jest.Mock<AsyncLoader<string>>;
 let renderCount: number;
+let options: UseWatchResourceOptions;
 const loadingTime = 10000;
 
 beforeEach(() => {
@@ -20,7 +21,8 @@ beforeEach(() => {
     await sleep(loadingTime);
     return getName();
   });
-  nameResource = new AsyncResource(getNameAsync);
+  testResource = new AsyncResource(getNameAsync);
+  options = {};
 });
 
 afterEach(() => {
@@ -28,12 +30,12 @@ afterEach(() => {
   jest.useRealTimers();
 });
 
-const GreetingView: FC = () => (
+const TestView: FC = () => (
   <RenderWithLoadingView>
     {() => {
       renderCount++;
-      const name = useWatchResourceValue(nameResource);
-      return <span data-testid="greeting-view">Hello {name}</span>;
+      const value = useWatchResourceValue(testResource, options);
+      return <span data-testid="resource-value">{JSON.stringify(value)}</span>;
     }}
   </RenderWithLoadingView>
 );
@@ -43,39 +45,57 @@ const waitForRendered = async (count: number): Promise<void> => {
   await waitFor(() => expect(renderCount).toBe(count));
 };
 
+const expectValue = (value: unknown): void => {
+  screen.getByText(JSON.stringify(value));
+};
+
 test("Loading view is triggered", async () => {
-  render(<GreetingView />);
+  render(<TestView />);
   screen.getByTestId("loading-view");
   await waitForRendered(2);
 });
 
+test("Loading view is not triggered, when not using suspense", async () => {
+  options.useSuspense = false;
+  render(<TestView />);
+  screen.getByTestId("resource-value");
+});
+
 test("Greeting component renders after some time", async () => {
-  render(<GreetingView />);
+  render(<TestView />);
   await waitForRendered(2);
-  screen.getByTestId("greeting-view");
+  screen.getByTestId("resource-value");
 });
 
 test("useWatchResourceValue() returns resolved resource value", async () => {
-  render(<GreetingView />);
+  render(<TestView />);
   await waitForRendered(2);
-  screen.getByText("Hello Foo");
+  expectValue("Foo");
+});
+
+test("useWatchResourceValue() returns eventual value, when not using suspense", async () => {
+  options.useSuspense = false;
+  render(<TestView />);
+  expectValue({ isSet: false });
+  await waitForRendered(2);
+  expectValue({ isSet: true, value: "Foo" });
 });
 
 test("renders old value when reloading and then new value", async () => {
-  render(<GreetingView />);
+  render(<TestView />);
   await waitForRendered(2);
 
-  screen.getByText("Hello Foo");
+  expectValue("Foo");
 
   // refresh resource
   getName.mockReturnValue("Bar");
   await act(() => {
-    nameResource.refresh();
+    testResource.refresh();
   });
   // wait some time -> old value visible
   await jest.advanceTimersByTimeAsync(loadingTime / 2);
-  screen.getByText("Hello Foo");
+  expectValue("Foo");
 
   await waitForRendered(4);
-  screen.getByText("Hello Bar");
+  expectValue("Bar");
 });

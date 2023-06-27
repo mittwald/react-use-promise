@@ -1,23 +1,35 @@
 import { expectAssignable, expectError } from "tsd";
-import { AsyncLoader } from "../dist-cjs/resource/types.js";
-import { usePromise } from "../dist-cjs/index.js";
+import { AsyncLoader } from "../dist/resource/types.js";
+import { usePromise } from "../dist/index.js";
+import { EventualValue } from "../dist/lib/EventualValue.js";
+
+interface ResultType {
+  foo: number;
+  bar: boolean;
+}
+
+declare const loader: AsyncLoader<ResultType>;
 
 function testResultOfUsePromiseMatchesAsyncLoaderReturnType() {
-  interface ResultType {
-    foo: number;
-    bar: boolean;
-  }
-
-  const loader = {} as AsyncLoader<ResultType>;
   const result = usePromise(loader, []);
   expectAssignable<ResultType>(result);
   expectError(result.unknownProp);
 }
 
+function testResultOfUsePromiseMatchesAsyncLoaderReturnTypeWithDisabledSuspense() {
+  const result = usePromise(loader, [], {
+    useSuspense: false,
+  });
+  expectAssignable<EventualValue<ResultType>>(result);
+}
+
 function testParametersOfUsePromiseMatchingAsyncLoaderParameters() {
-  type AsyncLoader = (foo: number, bar: string) => Promise<unknown>;
-  expectError(usePromise({} as AsyncLoader, []));
-  expectError(usePromise({} as AsyncLoader, ["foo"]));
-  expectError(usePromise({} as AsyncLoader, [42, 42]));
-  usePromise({} as AsyncLoader, [42, "bar"]);
+  type TestAsyncLoader = (foo: number, bar: string) => Promise<unknown>;
+  const testAsyncLoader = {} as TestAsyncLoader;
+
+  expectError(usePromise(testAsyncLoader, []));
+  expectError(usePromise(testAsyncLoader, ["foo"]));
+  expectError(usePromise(testAsyncLoader, [42, 42]));
+
+  usePromise(testAsyncLoader, [42, "bar"]);
 }

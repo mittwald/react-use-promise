@@ -1,18 +1,19 @@
 import { AsyncResource } from "./AsyncResource.js";
-import { DurationLikeObject } from "luxon";
 import { useRef } from "react";
 import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
+import { UseWatchResourceOptions, UseWatchResourceResult } from "./types.js";
+import { emptyValue } from "../lib/EventualValue.js";
 
-export interface UseWatchResourceOptions {
-  keepValueWhileLoading?: boolean;
-  autoRefresh?: DurationLikeObject;
-}
-
-export const useWatchResourceValue = <T>(
+export const useWatchResourceValue = <
+  T,
+  TOptions extends UseWatchResourceOptions,
+>(
   resource: AsyncResource<T>,
-  options: UseWatchResourceOptions = {},
-): T => {
-  const { keepValueWhileLoading = true } = options;
+  options: TOptions = {} as TOptions,
+): UseWatchResourceResult<T, typeof options> => {
+  type Result = UseWatchResourceResult<T, typeof options>;
+
+  const { keepValueWhileLoading = true, useSuspense = true } = options;
 
   const observedValue = useWatchObservableValue(resource.value);
   const error = useWatchObservableValue(resource.error);
@@ -22,16 +23,23 @@ export const useWatchResourceValue = <T>(
 
   if (observedValue.isSet) {
     previousValue.current = observedValue;
-    return observedValue.value;
+
+    return (useSuspense ? observedValue.value : observedValue) as Result;
   }
 
   if (keepValueWhileLoading && previousValue.current.isSet) {
-    return previousValue.current.value;
+    return (
+      useSuspense ? previousValue.current.value : previousValue.current
+    ) as Result;
   }
 
   if (error.isSet) {
     throw error.value;
   }
 
-  throw resource.loaderPromise;
+  if (useSuspense) {
+    throw resource.loaderPromise;
+  }
+
+  return emptyValue as Result;
 };
