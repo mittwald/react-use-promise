@@ -317,6 +317,14 @@ the "same code" issue (see
 ["Caveats of default storage key generation"](#caveats-of-default-storage-key-generation)),
 you can set an explicit loader ID, that identifies the loader function.
 
+#### useSuspense
+
+Type: `boolean`\
+Default: `true`
+
+Set this to `false` to opt-out suspense-based loading behavior. See
+[Opt-Out Suspense](#opt-out-suspense) for more details.
+
 ### refresh
 
 If you do not have direct access to the resource that should be refreshed, you
@@ -752,14 +760,14 @@ Resources.
 In this example the fallback component will not be shown:
 
 ```jsx
-const UserAvatar = ({ user, size }) => {
-  const profile = user.watch();
+const UserAvatar = ({ userResource, size }) => {
+  const user = userResource.watch();
   // 👆 any code below this line will not be executed 🙅 until the async loader is done.
   const loadingView = <AvatarSkeleton size={size} />;
   return (
     <Suspense fallback={loadingView}>
       {/* This fallback 👆 is not rendered for the watched resource from above. 😢 */}
-      <Avatar imageUrl={profile.avatarUrl} size={size} />
+      <Avatar imageUrl={user.avatarUrl} size={size} />
     </Suspense>
   );
 };
@@ -772,9 +780,9 @@ The following approaches can help you to solve this issue:
   forwarding props to it.
 
 ```jsx
-const Component = ({ user, size }) => {
-  const profile = user.watch();
-  return <Avatar imageUrl={profile.avatarUrl} size={size} />;
+const Component = ({ userResource, size }) => {
+  const user = userResource.watch();
+  return <Avatar imageUrl={user.avatarUrl} size={size} />;
 };
 
 export const UserAvatar = (props) => {
@@ -788,32 +796,76 @@ export const UserAvatar = (props) => {
 };
 ```
 
+- Opt-out suspense-based loading behavior.
+
+```jsx
+const UserAvatar = ({ userResource, size }) => {
+  const user = userResource.watch({ useSuspense: false });
+
+  // `user` is an object with `isSet` and `value` properties
+  if (!user.isSet) {
+    return <AvatarSkeleton size={size} />;
+  }
+
+  // `value` only exists when `isSet === true`
+  return <Avatar imageUrl={user.value.avatarUrl} size={size} />;
+};
+```
+
 - Use a Higher Order Component (HOC) that enhances your regular implementation
   with a loading boundary. This HOC could optionally add an error boundary.
 
 ```jsx
-const UserAvatar = withLoadingBoundary(({ user, size }) => {
-  const profile = user.watch();
-  return <Avatar imageUrl={profile.avatarUrl} size={size} />;
+const UserAvatar = withLoadingBoundary(({ userResource, size }) => {
+  const user = userResource.watch();
+  return <Avatar imageUrl={user.avatarUrl} size={size} />;
 }, AvatarSkeleton);
 ```
 
 - Use a render component where you access the resource:
 
 ```jsx
-const UserAvatar = ({ user, size }) => {
+const UserAvatar = ({ userResource, size }) => {
   const loadingView = <AvatarSkeleton size={size} />;
   return (
     <Suspense fallback={loadingView}>
       <Render>
         {() => {
-          const profile = user.watch();
-          return <Avatar imageUrl={profile.avatarUrl} size={size} />;
+          const user = userResource.watch();
+          return <Avatar imageUrl={user.avatarUrl} size={size} />;
         }}
       </Render>
     </Suspense>
   );
 };
+```
+
+## Opt-Out Suspense
+
+When you explicitly want to react on the loading-state, the suspense-based
+loading behavior is a little bit obstructive, e.g. when you want to define
+components with
+[built-in loading views](#gotchas-when-defining-built-in-loading-views).
+
+You can opt-out suspense by setting the `useSuspense` option to `false`. When
+suspense is disabled, calling `.watch()` resp. `usePromise()` will not trigger
+any `<Suspense />` component. Instead, an eventual value is returned, meaning
+you have to check if the value has loaded, before you can access it.
+
+```typescript
+type EventualValue<T> = { isSet: true; value: T } | { isSet: false };
+```
+
+Example of how the opt-out behaves:
+
+```tsx
+const message = usePromise(loadMessage, ["12345"], { useSuspense: false });
+
+if (!message.isSet) {
+  return <LoadingView />;
+}
+
+return <MessageView message={message.value} />;
 ```
 
 ## Error handling
