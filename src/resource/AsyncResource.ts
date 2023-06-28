@@ -1,5 +1,10 @@
 import { emptyValue, EventualValue, setValue } from "../lib/EventualValue.js";
-import { AsyncLoader, AsyncResourceState } from "./types.js";
+import {
+  AsyncLoader,
+  AsyncResourceState,
+  UseWatchResourceOptions,
+  UseWatchResourceResult,
+} from "./types.js";
 import { Duration, DurationLikeObject } from "luxon";
 import { ObservableValue } from "../observable-value/ObservableValue.js";
 import { useWatchResourceValue } from "./useWatchResourceValue.js";
@@ -94,8 +99,10 @@ export class AsyncResource<T = unknown> {
     }
   }
 
-  public watch(): T {
-    return useWatchResourceValue(this);
+  public watch<TOptions extends UseWatchResourceOptions>(
+    options: TOptions = {} as TOptions,
+  ): UseWatchResourceResult<T, TOptions> {
+    return useWatchResourceValue(this, options);
   }
 
   public watchState(): AsyncResourceState {

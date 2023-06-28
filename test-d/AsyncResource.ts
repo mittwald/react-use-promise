@@ -1,5 +1,5 @@
 import { expectAssignable, expectError } from "tsd";
-import { AsyncResource } from "../dist-cjs/resource/AsyncResource.js";
+import { AsyncResource } from "../dist/resource/AsyncResource.js";
 
 function testResultOfWatchMatchesAsyncLoaderReturnType() {
   interface ResultType {
