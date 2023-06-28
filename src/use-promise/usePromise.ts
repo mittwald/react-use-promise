@@ -1,14 +1,11 @@
-import {
-  AsyncFn,
-  GetAsyncResourceOptions,
-  UseWatchResourceResult,
-} from "../resource/types.js";
+import { AsyncFn, UseWatchResourceResult } from "../resource/types.js";
 import { getAsyncResource } from "../resource/getAsyncResource.js";
+import { UsePromiseOptions } from "./types.js";
 
 export const usePromise = <
   TResult,
   TArgs extends unknown[],
-  TOptions extends GetAsyncResourceOptions,
+  TOptions extends UsePromiseOptions,
 >(
   asyncLoader: AsyncFn<TResult, TArgs>,
   parameters: TArgs,

@@ -12,14 +12,14 @@ export type AnyAsyncFn = AsyncFn<unknown, any[]>; // eslint-disable-line @typesc
 
 export type AsyncResourceState = "void" | "loading" | "loaded" | "error";
 
-export interface GetAsyncResourceOptions extends UseWatchResourceOptions {
+export interface GetAsyncResourceOptions {
   loaderId?: string;
   tags?: Tags;
+  autoRefresh?: DurationLikeObject;
 }
 
-export interface UseWatchResourceOptions {
+export interface UseWatchResourceOptions extends GetAsyncResourceOptions {
   keepValueWhileLoading?: boolean;
-  autoRefresh?: DurationLikeObject;
   useSuspense?: boolean;
 }
 
