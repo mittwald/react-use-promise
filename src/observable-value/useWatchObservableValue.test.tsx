@@ -38,3 +38,12 @@ test("unbinds observer on unmount", async () => {
   dom.rerender(<></>);
   expect(v.observerCount).toBe(0);
 });
+
+test("updates value when observable instance changes", async () => {
+  const v1 = new ObservableValue("foo");
+  const v2 = new ObservableValue("bar");
+  const dom = render(<TestComponent value={v1} />);
+  screen.getByText("foo");
+  dom.rerender(<TestComponent value={v2} />);
+  screen.getByText("bar");
+});
