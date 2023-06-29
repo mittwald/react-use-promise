@@ -2,7 +2,6 @@ import { AsyncResource } from "./AsyncResource.js";
 import { useRef } from "react";
 import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
 import { UseWatchResourceOptions, UseWatchResourceResult } from "./types.js";
-import { emptyValue } from "../lib/EventualValue.js";
 
 export const useWatchResourceValue = <
   T,
@@ -23,14 +22,29 @@ export const useWatchResourceValue = <
 
   if (observedValue.isSet) {
     previousValue.current = observedValue;
+    if (useSuspense) {
+      return observedValue.value as Result;
+    }
 
-    return (useSuspense ? observedValue.value : observedValue) as Result;
+    return Object.freeze({
+      maybeValue: observedValue.value,
+      value: observedValue.value,
+      hasValue: true,
+      isLoading: false,
+    }) as Result;
   }
 
   if (keepValueWhileLoading && previousValue.current.isSet) {
-    return (
-      useSuspense ? previousValue.current.value : previousValue.current
-    ) as Result;
+    if (useSuspense) {
+      return previousValue.current.value as Result;
+    }
+
+    return Object.freeze({
+      maybeValue: previousValue.current.value,
+      value: previousValue.current.value,
+      hasValue: true,
+      isLoading: true,
+    }) as Result;
   }
 
   if (error.isSet) {
@@ -41,5 +55,9 @@ export const useWatchResourceValue = <
     throw resource.loaderPromise;
   }
 
-  return emptyValue as Result;
+  return Object.freeze({
+    maybeValue: undefined,
+    hasValue: false,
+    isLoading: true,
+  }) as Result;
 };

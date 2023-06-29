@@ -1,6 +1,5 @@
 import { Tags } from "../store/types.js";
 import { DurationLikeObject } from "luxon";
-import { EventualValue } from "../lib/EventualValue.js";
 
 export type AsyncLoader<TResult = unknown> = () => Promise<TResult>;
 
@@ -23,8 +22,23 @@ export interface UseWatchResourceOptions extends GetAsyncResourceOptions {
   useSuspense?: boolean;
 }
 
+export type NoSuspenseReturnType<T> = Readonly<
+  {
+    maybeValue: T | undefined;
+    isLoading: boolean;
+  } & (
+    | {
+        hasValue: false;
+      }
+    | {
+        hasValue: true;
+        value: T;
+      }
+  )
+>;
+
 export type UseWatchResourceResult<TResult, TOptions> = TOptions extends {
   useSuspense: false;
 }
-  ? EventualValue<TResult>
+  ? NoSuspenseReturnType<TResult>
   : TResult;
