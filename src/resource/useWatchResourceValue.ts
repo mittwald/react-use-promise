@@ -18,7 +18,7 @@ export const useWatchResourceValue = <
   const error = useWatchObservableValue(resource.error);
   const previousValue = useRef(observedValue);
 
-  resource.load();
+  void resource.load();
 
   if (observedValue.isSet) {
     previousValue.current = observedValue;

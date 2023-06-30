@@ -1,11 +1,22 @@
-import { AsyncFn, GetAsyncResourceOptions } from "./types.js";
+import {
+  AsyncFn,
+  FnParameters,
+  GetAsyncResourceOptions,
+  NullableResourceValue,
+} from "./types.js";
 import { AsyncResource } from "./AsyncResource.js";
 import { getAsyncResource } from "./getAsyncResource.js";
 
 export const resourceify =
-  <TResult, TArgs extends unknown[]>(asyncFn: AsyncFn<TResult, TArgs>) =>
+  <
+    TValue,
+    TParams extends FnParameters,
+    TNullableParams extends TParams | null,
+  >(
+    asyncFn: AsyncFn<TValue, TParams>,
+  ) =>
   (
-    parameters: TArgs,
+    parameters: TNullableParams,
     options?: GetAsyncResourceOptions,
-  ): AsyncResource<TResult> =>
+  ): AsyncResource<NullableResourceValue<TValue, TParams, TNullableParams>> =>
     getAsyncResource(asyncFn, parameters, options);

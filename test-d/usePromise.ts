@@ -1,4 +1,4 @@
-import { expectAssignable, expectError } from "tsd";
+import { expectAssignable, expectError, expectType } from "tsd";
 import { AsyncLoader } from "../dist/resource/types.js";
 import { usePromise } from "../dist/index.js";
 import { NoSuspenseReturnType } from "../dist-cjs/resource/types.js";
@@ -32,4 +32,11 @@ function testParametersOfUsePromiseMatchingAsyncLoaderParameters() {
   expectError(usePromise(testAsyncLoader, [42, 42]));
 
   usePromise(testAsyncLoader, [42, "bar"]);
+}
+
+function testResultTypeIncludeUndefinedWhenParametersAreNull() {
+  type TestAsyncLoader = () => Promise<number>;
+  const testAsyncLoader = {} as TestAsyncLoader;
+  const result = usePromise(testAsyncLoader, null);
+  expectType<number | undefined>(result);
 }

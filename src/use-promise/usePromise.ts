@@ -1,16 +1,25 @@
-import { AsyncFn, UseWatchResourceResult } from "../resource/types.js";
+import {
+  AsyncFn,
+  FnParameters,
+  NullableResourceValue,
+  UseWatchResourceResult,
+} from "../resource/types.js";
 import { getAsyncResource } from "../resource/getAsyncResource.js";
 import { UsePromiseOptions } from "./types.js";
 
 export const usePromise = <
-  TResult,
-  TArgs extends unknown[],
+  TValue,
+  TParams extends FnParameters,
+  TNullableParams extends TParams | null,
   TOptions extends UsePromiseOptions,
 >(
-  asyncLoader: AsyncFn<TResult, TArgs>,
-  parameters: TArgs,
+  asyncLoader: AsyncFn<TValue, TParams>,
+  parameters: TNullableParams,
   options: TOptions = {} as TOptions,
-): UseWatchResourceResult<TResult, TOptions> =>
+): UseWatchResourceResult<
+  NullableResourceValue<TValue, TParams, TNullableParams>,
+  TOptions
+> =>
   getAsyncResource(asyncLoader, parameters, options).watch(
     options,
-  ) as UseWatchResourceResult<TResult, TOptions>;
+  ) as UseWatchResourceResult<TValue, TOptions>;

@@ -40,7 +40,7 @@ export class AsyncResource<T = unknown> {
     this.state.updateValue("void");
   }
 
-  public load(): void {
+  public async load(): Promise<void> {
     if (this.value.value.isSet || this.error.value.isSet) {
       return;
     }
@@ -48,6 +48,7 @@ export class AsyncResource<T = unknown> {
     if (this.loaderPromise === undefined) {
       this.loaderPromise = this.handleLoading();
     }
+    return this.loaderPromise;
   }
 
   public isMatchingError(error: true | unknown): boolean {
