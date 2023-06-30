@@ -1,7 +1,7 @@
 import { expectAssignable, expectError } from "tsd";
 import { AsyncLoader } from "../dist/resource/types.js";
 import { usePromise } from "../dist/index.js";
-import { EventualValue } from "../dist/lib/EventualValue.js";
+import { NoSuspenseReturnType } from "../dist-cjs/resource/types.js";
 
 interface ResultType {
   foo: number;
@@ -20,7 +20,7 @@ function testResultOfUsePromiseMatchesAsyncLoaderReturnTypeWithDisabledSuspense(
   const result = usePromise(loader, [], {
     useSuspense: false,
   });
-  expectAssignable<EventualValue<ResultType>>(result);
+  expectAssignable<NoSuspenseReturnType<ResultType>>(result);
 }
 
 function testParametersOfUsePromiseMatchingAsyncLoaderParameters() {

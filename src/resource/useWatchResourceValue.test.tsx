@@ -55,12 +55,6 @@ test("Loading view is triggered", async () => {
   await waitForRendered(2);
 });
 
-test("Loading view is not triggered, when not using suspense", async () => {
-  options.useSuspense = false;
-  render(<TestView />);
-  screen.getByTestId("resource-value");
-});
-
 test("Greeting component renders after some time", async () => {
   render(<TestView />);
   await waitForRendered(2);
@@ -71,14 +65,6 @@ test("useWatchResourceValue() returns resolved resource value", async () => {
   render(<TestView />);
   await waitForRendered(2);
   expectValue("Foo");
-});
-
-test("useWatchResourceValue() returns eventual value, when not using suspense", async () => {
-  options.useSuspense = false;
-  render(<TestView />);
-  expectValue({ isSet: false });
-  await waitForRendered(2);
-  expectValue({ isSet: true, value: "Foo" });
 });
 
 test("renders old value when reloading and then new value", async () => {
@@ -98,4 +84,100 @@ test("renders old value when reloading and then new value", async () => {
 
   await waitForRendered(4);
   expectValue("Bar");
+});
+
+describe("with disabled suspense", () => {
+  beforeEach(() => {
+    options.useSuspense = false;
+  });
+
+  test("Loading view is not triggered", async () => {
+    render(<TestView />);
+    screen.getByTestId("resource-value");
+  });
+
+  test("useWatchResourceValue() returns empty value when not loaded", async () => {
+    render(<TestView />);
+    expectValue({
+      hasValue: false,
+      isLoading: true,
+    });
+  });
+
+  test("useWatchResourceValue() returns eventual value when loaded", async () => {
+    render(<TestView />);
+    await waitForRendered(2);
+    expectValue({
+      maybeValue: "Foo",
+      value: "Foo",
+      hasValue: true,
+      isLoading: false,
+    });
+  });
+
+  test("'isLoading' is true when reloading", async () => {
+    render(<TestView />);
+    await waitForRendered(2);
+
+    expectValue({
+      maybeValue: "Foo",
+      value: "Foo",
+      hasValue: true,
+      isLoading: false,
+    });
+
+    // refresh resource
+    getName.mockReturnValue("Bar");
+    await act(() => {
+      testResource.refresh();
+    });
+    // wait some time -> old value visible
+    await jest.advanceTimersByTimeAsync(loadingTime / 2);
+
+    expectValue({
+      maybeValue: "Foo",
+      value: "Foo",
+      hasValue: true,
+      isLoading: true,
+    });
+
+    await waitForRendered(4);
+
+    expectValue({
+      maybeValue: "Bar",
+      value: "Bar",
+      hasValue: true,
+      isLoading: false,
+    });
+  });
+
+  test("value is not set when reloading and 'keepValueWhileLoading' is disabled", async () => {
+    options.keepValueWhileLoading = false;
+
+    render(<TestView />);
+    await waitForRendered(2);
+
+    // refresh resource
+    getName.mockReturnValue("Bar");
+    await act(() => {
+      testResource.refresh();
+    });
+
+    // wait some time -> old value visible
+    await jest.advanceTimersByTimeAsync(loadingTime / 2);
+
+    expectValue({
+      hasValue: false,
+      isLoading: true,
+    });
+
+    await waitForRendered(4);
+
+    expectValue({
+      maybeValue: "Bar",
+      value: "Bar",
+      hasValue: true,
+      isLoading: false,
+    });
+  });
 });

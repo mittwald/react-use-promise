@@ -196,7 +196,8 @@ The async resource returned by `getAsyncResource` has the following API.
 
 #### .watch()
 
-Returns: the value of the async resource
+Returns: the value of the async resource, or the result object when
+`useSuspense: false` (see [Opt-out Suspense](#opt-out-suspense))
 
 Calling the `watch` method will actually start the loading process and returns
 the value of the async resource, once it is loaded. Everytime the resource is
@@ -322,7 +323,7 @@ you can set an explicit loader ID, that identifies the loader function.
 Type: `boolean`\
 Default: `true`
 
-Set this to `false` to opt-out suspense-based loading behavior. See
+Set this to `false` to opt-out Suspense-based loading behavior. See
 [Opt-Out Suspense](#opt-out-suspense) for more details.
 
 ### refresh
@@ -719,7 +720,7 @@ const UserProfileMenu: FC = () => {
 
 ## Defining loading views
 
-When using `@mittwald/react-use-promise` (or other suspense-based approaches)
+When using `@mittwald/react-use-promise` (or other Suspense-based approaches)
 you have to define a loading boundary (Reacts `<Suspense />` component) to
 display the loading view. Loading boundaries are quite similar to error
 boundaries. They "catch" active loading processes in any child component and
@@ -796,7 +797,7 @@ export const UserAvatar = (props) => {
 };
 ```
 
-- Opt-out suspense-based loading behavior.
+- Opt-out Suspense-based loading behavior.
 
 ```jsx
 const UserAvatar = ({ userResource, size }) => {
@@ -842,30 +843,69 @@ const UserAvatar = ({ userResource, size }) => {
 
 ## Opt-Out Suspense
 
-When you explicitly want to react on the loading-state, the suspense-based
+When you want to react explicitly on the loading-state, the suspense-based
 loading behavior is a little bit obstructive, e.g. when you want to define
 components with
 [built-in loading views](#gotchas-when-defining-built-in-loading-views).
 
-You can opt-out suspense by setting the `useSuspense` option to `false`. When
-suspense is disabled, calling `.watch()` resp. `usePromise()` will not trigger
-any `<Suspense />` component. Instead, an eventual value is returned, meaning
-you have to check if the value has loaded, before you can access it.
-
-```typescript
-type EventualValue<T> = { isSet: true; value: T } | { isSet: false };
-```
+You can opt-out Suspense by setting the `useSuspense` option to `false`. When
+Suspense is disabled, calling `.watch()` resp. `usePromise()` will not trigger
+any `<Suspense />` component. Instead, a result object is returned, containing
+loading information and the eventual value.
 
 Example of how the opt-out behaves:
 
 ```tsx
 const message = usePromise(loadMessage, ["12345"], { useSuspense: false });
 
-if (!message.isSet) {
+if (!message.hasValue) {
   return <LoadingView />;
 }
 
-return <MessageView message={message.value} />;
+return (
+  <MessageView message={message.value} activitySpinner={message.isLoading} />
+);
+```
+
+### Return object with disabled Suspense
+
+The object returned by `.watch()` resp. `usePromise()` has the following
+properties, when Suspense is disabled.
+
+- `isLoading`: Is `true` when the resource is loading or reloading. `false`
+  otherwise.
+- `hasValue`: Is `true` when a resource value is available, including the "old"
+  value when reloading. `false` otherwise.
+- `value`: Contains the resource value. Is only available if `hasValue` is
+  `true`.
+- `maybeValue`: Contains the resource value, when the resource has loaded.
+  `undefined` otherwise.
+
+Examples of result objects:
+
+```js
+// Loading the first time or reloading with keepValueWhileLoading disabled
+({
+  isLoading: true,
+  maybeValue: undefined,
+  hasValue: false,
+});
+
+// When value has loaded
+({
+  isLoading: false,
+  maybeValue: "Foo",
+  value: "Foo",
+  hasValue: true,
+});
+
+// When value is reloading
+({
+  isLoading: true,
+  maybeValue: "Foo",
+  value: "Foo",
+  hasValue: true,
+});
 ```
 
 ## Error handling
