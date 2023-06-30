@@ -1,8 +1,6 @@
 import React, { createElement, FC, ReactNode, Suspense } from "react";
 
-export const sleep = (ms: number) => {
-  return new Promise((res) => setTimeout(res, ms));
-};
+export const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 export const squareAsync = async (value: number, sleepTimeMs: number) => {
   await sleep(sleepTimeMs);

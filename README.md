@@ -59,6 +59,7 @@ const App = () => {
 - Type-Safe API
 - No "double-loading" when using "same" Promise in different places in your app
 - Caching with support for [custom tags](#tags-1)
+- [Opt-out Suspense-based loading](#opt-out-suspense)
 - [Cache invalidation](#refreshing-resources) with
   [glob support](#hierarchical-tags)
 - [Observable loading state](#watchstate)
@@ -88,6 +89,8 @@ const App = () => {
 - [Refreshing resources](#refreshing-resources)
 - [Lazy loading with Async Resources](#-lazy-loading-with-async-resources)
 - [Defining loading views](#defining-loading-views)
+- [Opt-Out Suspense](#opt-out-suspense)
+- [Opt-Out Loading](#opt-out-loading)
 - [Error handling](#error-handling)
 - [Best practices](#best-practices)
 
@@ -906,6 +909,38 @@ Examples of result objects:
   value: "Foo",
   hasValue: true,
 });
+```
+
+## Opt-Out Loading
+
+You probably know that you should
+[not call hooks conditionally](https://react.dev/warnings/invalid-hook-call-warning#breaking-rules-of-hooks).
+But what if the loader parameters you want to use e.g. in `usePromise` are
+optional properties, and the loader function requires them? In this case just
+use `null` as parameters and loading is disabled!
+
+😈 Bad:
+
+```jsx
+const Username = ({ id }) => {
+  if (!id) {
+    return null;
+  }
+  // 💥 This will throw a React error because `usePromise` is called conditionally!
+  const user = usePromise(loadUseProfile, [id]).watch();
+  return <>{user.name}</>;
+};
+```
+
+😇 Good:
+
+```jsx
+const Username = ({ id }) => {
+  // When required loader parameters can be undefined: use null 👇
+  const user = usePromise(loadUseProfile, id ? [id] : null).watch();
+  // ⚠️ In this case, `user` can also be `undefined`!
+  return <>{user ? user.name : "Unknown"}</>;
+};
 ```
 
 ## Error handling
