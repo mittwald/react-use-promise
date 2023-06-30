@@ -927,7 +927,7 @@ const Username = ({ id }) => {
     return null;
   }
   // 💥 This will throw a React error because `usePromise` is called conditionally!
-  const user = usePromise(loadUseProfile, [id]).watch();
+  const user = usePromise(loadUseProfile, [id]);
   return <>{user.name}</>;
 };
 ```
@@ -937,7 +937,7 @@ const Username = ({ id }) => {
 ```jsx
 const Username = ({ id }) => {
   // When required loader parameters can be undefined: use null 👇
-  const user = usePromise(loadUseProfile, id ? [id] : null).watch();
+  const user = usePromise(loadUseProfile, id ? [id] : null);
   // ⚠️ In this case, `user` can also be `undefined`!
   return <>{user ? user.name : "Unknown"}</>;
 };
