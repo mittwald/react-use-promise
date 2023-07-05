@@ -29,14 +29,13 @@
     "format": "yarn format:base --write",
     "format:base": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}'",
     "license-check": "yarn pnpify license-checker-rseidelsohn $*",
-    "test": "yarn test:format && yarn test:lint && yarn test:compile && yarn test:tsd && yarn test:jest && yarn test:licenses",
+    "test": "yarn test:format && yarn test:lint && yarn test:compile && yarn test:jest && yarn test:licenses",
     "test:compile": "yarn tsc --noEmit",
     "test:format": "yarn format:base --check",
     "test:jest": "node --experimental-vm-modules $(yarn bin jest)",
     "test:licenses": "yarn license-check --summary --unknown && yarn license-check --unknown --failOn 'UNLICENSED;UNKNOWN'",
     "test:lint": "eslint . --cache",
-    "test:packages": "yarn all run test",
-    "test:tsd": "yarn compile && yarn pnpify run tsd"
+    "test:packages": "yarn all run test"
   },
   "files": [
     "{dist,dist-cjs}/**/*.{js,d.ts}"

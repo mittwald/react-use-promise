@@ -13,7 +13,8 @@
     "strict": true,
     "skipLibCheck": true,
     "baseUrl": ".",
-    "strictFunctionTypes": true
+    "strictFunctionTypes": true,
+    "strictNullChecks": true
   },
   "exclude": ["test-d/**/*", "*.test.ts"],
   "include": ["src/**/*.ts"],
