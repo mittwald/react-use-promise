@@ -1,10 +1,4 @@
-import {
-  AnyAsyncFn,
-  AsyncFn,
-  FnParameters,
-  GetAsyncResourceOptions,
-  NullableResourceValue,
-} from "./types.js";
+import { AsyncFn, FnParameters, GetAsyncResourceOptions } from "./types.js";
 import { defaultStorageKeyBuilder } from "../store/defaultStorageKeyBuilder.js";
 import { Store } from "../store/Store.js";
 import { AsyncResource, AsyncResourceOptions } from "./AsyncResource.js";
@@ -12,41 +6,46 @@ import { AsyncResource, AsyncResourceOptions } from "./AsyncResource.js";
 const buildEmptyResource = (options: AsyncResourceOptions) =>
   new AsyncResource<undefined>(() => Promise.resolve(undefined), options);
 
-export const getAsyncResource = <
-  TValue,
-  TParams extends FnParameters,
-  TNullableParams extends TParams | null,
->(
+// function overloads for nullable parameters
+export function getAsyncResource<TValue, TParams extends FnParameters>(
   asyncFn: AsyncFn<TValue, TParams>,
-  parameters: TNullableParams,
+  parameters: TParams,
+  options?: GetAsyncResourceOptions,
+): AsyncResource<TValue>;
+
+export function getAsyncResource<TValue, TParams extends FnParameters>(
+  asyncFn: AsyncFn<TValue, TParams>,
+  parameters: TParams | null,
+  options?: GetAsyncResourceOptions,
+): AsyncResource<TValue | undefined>;
+
+export function getAsyncResource<TValue, TParams extends FnParameters>(
+  asyncFn: AsyncFn<TValue, TParams>,
+  parameters: TParams | null,
   options: GetAsyncResourceOptions = {},
-): AsyncResource<NullableResourceValue<TValue, TParams, TNullableParams>> => {
+): AsyncResource<TValue | undefined> {
   const { loaderId, tags, autoRefresh } = options;
 
   const asyncResourceOptions: AsyncResourceOptions = {
     ttl: autoRefresh,
   };
 
-  type Result = AsyncResource<
-    NullableResourceValue<TValue, TParams, TNullableParams>
-  >;
-
   if (parameters === null) {
-    return buildEmptyResource(asyncResourceOptions) as Result;
+    return buildEmptyResource(asyncResourceOptions);
   }
 
   const storageKey = defaultStorageKeyBuilder({
-    asyncFn: asyncFn as AnyAsyncFn,
+    asyncFn,
     parameters,
     loaderId,
   });
 
-  const asyncResourceLoader = () => asyncFn.call(asyncFn, ...parameters);
+  const asyncResourceLoader = () => asyncFn(...parameters);
 
   const resourceBuilder = () =>
     new AsyncResource(asyncResourceLoader, asyncResourceOptions);
 
   return Store.default.getOrSet(storageKey, resourceBuilder, {
     tags: tags,
-  }) as Result;
-};
+  });
+}

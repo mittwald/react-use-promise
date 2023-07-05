@@ -4,34 +4,26 @@ import { DurationLikeObject } from "luxon";
 // Async function types
 export type FnParameters = unknown[];
 
-export type NullableResourceValue<
-  TValue,
-  TParams extends FnParameters,
-  TNullableParams extends TParams | null,
-> = TParams extends TNullableParams ? TValue : TValue | undefined;
-
 export type AsyncFn<TResult, TParams extends FnParameters> = (
   ...args: TParams
 ) => Promise<TResult>;
-
-export type AnyAsyncFn = AsyncFn<unknown, any[]>; // eslint-disable-line @typescript-eslint/no-explicit-any
 
 // Async resource types
 export type AsyncLoader<TResult = unknown> = () => Promise<TResult>;
 
 export type AsyncResourceState = "void" | "loading" | "loaded" | "error";
 
-export interface GetAsyncResourceOptions {
+export type GetAsyncResourceOptions = {
   loaderId?: string;
   tags?: Tags;
   autoRefresh?: DurationLikeObject;
-}
+};
 
 // useWatchResource types
-export interface UseWatchResourceOptions extends GetAsyncResourceOptions {
+export type UseWatchResourceOptions = {
   keepValueWhileLoading?: boolean;
   useSuspense?: boolean;
-}
+} & GetAsyncResourceOptions;
 
 export type NoSuspenseReturnType<T> = Readonly<
   {

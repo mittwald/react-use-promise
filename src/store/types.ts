@@ -1,5 +1,4 @@
 import { AsyncResource } from "../resource/AsyncResource.js";
-import { AnyAsyncFn, FnParameters } from "../resource/types.js";
 
 export type Tag = string;
 export type TagPattern = string;
@@ -14,10 +13,6 @@ export interface StorageEntry {
   readonly tags: Tags;
 }
 
-interface StorageKeyBuilderInput {
-  asyncFn: AnyAsyncFn;
-  parameters: FnParameters;
-  loaderId?: string;
-}
+type StorageKeyBuilderInput = unknown;
 
 export type StorageKeyBuilder = (input: StorageKeyBuilderInput) => string;
