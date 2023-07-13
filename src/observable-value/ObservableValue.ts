@@ -4,7 +4,7 @@ export class ObservableValue<T> {
   public value: T;
 
   // using unknown since otherwise the ObservableValue seems to be invariant on type T
-  private observers = new Set<Observer<unknown>>();
+  private readonly observers = new Set<Observer<unknown>>();
 
   public constructor(value: T) {
     this.value = value;

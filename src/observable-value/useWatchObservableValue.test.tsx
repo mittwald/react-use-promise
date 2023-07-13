@@ -21,17 +21,17 @@ test("returns initial value", () => {
   screen.getByText("foo");
 });
 
-test("returns updated value and re-renders component", async () => {
+test("returns updated value and re-renders component", () => {
   const v = new ObservableValue("foo");
   render(<TestComponent value={v} />);
-  await act(() => {
+  act(() => {
     v.updateValue("bar");
   });
   screen.getByText("bar");
   expect(renderCount).toBe(2);
 });
 
-test("unbinds observer on unmount", async () => {
+test("unbinds observer on unmount", () => {
   const v = new ObservableValue("foo");
   const dom = render(<TestComponent value={v} />);
   expect(v.observerCount).toBe(1);
@@ -39,7 +39,7 @@ test("unbinds observer on unmount", async () => {
   expect(v.observerCount).toBe(0);
 });
 
-test("updates value when observable instance changes", async () => {
+test("updates value when observable instance changes", () => {
   const v1 = new ObservableValue("foo");
   const v2 = new ObservableValue("bar");
   const dom = render(<TestComponent value={v1} />);
