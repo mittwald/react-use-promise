@@ -48,7 +48,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["license-checker-rseidelsohn", "npm:4.2.6"],\
             ["luxon", "npm:3.3.0"],\
             ["minimatch", "npm:9.0.3"],\
-            ["object-code", "npm:1.2.4"],\
+            ["object-code", "npm:1.3.0"],\
             ["prettier", "npm:2.8.8"],\
             ["prettier-plugin-jsdoc", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:0.4.2"],\
             ["prettier-plugin-package", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.3.1"],\
@@ -1398,7 +1398,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["license-checker-rseidelsohn", "npm:4.2.6"],\
             ["luxon", "npm:3.3.0"],\
             ["minimatch", "npm:9.0.3"],\
-            ["object-code", "npm:1.2.4"],\
+            ["object-code", "npm:1.3.0"],\
             ["prettier", "npm:2.8.8"],\
             ["prettier-plugin-jsdoc", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:0.4.2"],\
             ["prettier-plugin-package", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.3.1"],\
@@ -6982,10 +6982,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["object-code", [\
-        ["npm:1.2.4", {\
-          "packageLocation": "./.yarn/cache/object-code-npm-1.2.4-4d2917d02c-b5dd65c817.zip/node_modules/object-code/",\
+        ["npm:1.3.0", {\
+          "packageLocation": "./.yarn/cache/object-code-npm-1.3.0-d30a77b2b5-bc5e3df85a.zip/node_modules/object-code/",\
           "packageDependencies": [\
-            ["object-code", "npm:1.2.4"]\
+            ["object-code", "npm:1.3.0"]\
           ],\
           "linkType": "HARD"\
         }]\

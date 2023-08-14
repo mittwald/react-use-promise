@@ -5654,9 +5654,9 @@ __metadata:
   linkType: hard
 
 "object-code@npm:^1.2.4":
-  version: 1.2.4
-  resolution: "object-code@npm:1.2.4"
-  checksum: b5dd65c81793705c996cacaea4009287d88629add24e70f8a610d58747fea6d19196e43bf32e134aab582dc1f3ba4867cbacaf84e1d194b70126cd33689c8d5b
+  version: 1.3.0
+  resolution: "object-code@npm:1.3.0"
+  checksum: bc5e3df85ac54785b3d1d9b8a9b2e168eb5f69e02be3c958fc05aebaa85ec659c55903852bf15ebf44e98053212f88eb7d3a9e28a50f10c4d60d820f80aa8d64
   languageName: node
   linkType: hard
 
