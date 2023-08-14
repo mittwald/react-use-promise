@@ -33,7 +33,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "npm:5.17.0"],\
             ["@testing-library/react", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:14.0.0"],\
             ["@types/jest", "npm:29.5.3"],\
-            ["@types/luxon", "npm:3.3.0"],\
+            ["@types/luxon", "npm:3.3.1"],\
             ["@types/react", "npm:18.2.20"],\
             ["@types/react-dom", "npm:18.2.7"],\
             ["@typescript-eslint/eslint-plugin", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.0.0"],\
@@ -46,7 +46,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.6.2"],\
             ["jest-environment-jsdom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.6.2"],\
             ["license-checker-rseidelsohn", "npm:4.2.6"],\
-            ["luxon", "npm:3.3.0"],\
+            ["luxon", "npm:3.4.0"],\
             ["minimatch", "npm:9.0.3"],\
             ["object-code", "npm:1.3.0"],\
             ["prettier", "npm:2.8.8"],\
@@ -1383,7 +1383,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "npm:5.17.0"],\
             ["@testing-library/react", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:14.0.0"],\
             ["@types/jest", "npm:29.5.3"],\
-            ["@types/luxon", "npm:3.3.0"],\
+            ["@types/luxon", "npm:3.3.1"],\
             ["@types/react", "npm:18.2.20"],\
             ["@types/react-dom", "npm:18.2.7"],\
             ["@typescript-eslint/eslint-plugin", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.0.0"],\
@@ -1396,7 +1396,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.6.2"],\
             ["jest-environment-jsdom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.6.2"],\
             ["license-checker-rseidelsohn", "npm:4.2.6"],\
-            ["luxon", "npm:3.3.0"],\
+            ["luxon", "npm:3.4.0"],\
             ["minimatch", "npm:9.0.3"],\
             ["object-code", "npm:1.3.0"],\
             ["prettier", "npm:2.8.8"],\
@@ -1811,10 +1811,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/luxon", [\
-        ["npm:3.3.0", {\
-          "packageLocation": "./.yarn/cache/@types-luxon-npm-3.3.0-f9cb3e11d9-f7e3a89fc3.zip/node_modules/@types/luxon/",\
+        ["npm:3.3.1", {\
+          "packageLocation": "./.yarn/cache/@types-luxon-npm-3.3.1-7a55f9bb5d-da8f6158ed.zip/node_modules/@types/luxon/",\
           "packageDependencies": [\
-            ["@types/luxon", "npm:3.3.0"]\
+            ["@types/luxon", "npm:3.3.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6171,10 +6171,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["luxon", [\
-        ["npm:3.3.0", {\
-          "packageLocation": "./.yarn/cache/luxon-npm-3.3.0-bdbae9bfd5-50cf17a0dc.zip/node_modules/luxon/",\
+        ["npm:3.4.0", {\
+          "packageLocation": "./.yarn/cache/luxon-npm-3.4.0-8e0b97226e-ca9b6d0e0a.zip/node_modules/luxon/",\
           "packageDependencies": [\
-            ["luxon", "npm:3.3.0"]\
+            ["luxon", "npm:3.4.0"]\
           ],\
           "linkType": "HARD"\
         }]\
