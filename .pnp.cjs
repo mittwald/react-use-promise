@@ -30,7 +30,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@jest/globals", "npm:29.6.2"],\
             ["@testing-library/dom", "npm:9.3.1"],\
-            ["@testing-library/jest-dom", "npm:5.16.5"],\
+            ["@testing-library/jest-dom", "npm:5.17.0"],\
             ["@testing-library/react", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:14.0.0"],\
             ["@types/jest", "npm:29.5.3"],\
             ["@types/luxon", "npm:3.3.0"],\
@@ -1380,7 +1380,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@mittwald/react-use-promise", "workspace:."],\
             ["@jest/globals", "npm:29.6.2"],\
             ["@testing-library/dom", "npm:9.3.1"],\
-            ["@testing-library/jest-dom", "npm:5.16.5"],\
+            ["@testing-library/jest-dom", "npm:5.17.0"],\
             ["@testing-library/react", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:14.0.0"],\
             ["@types/jest", "npm:29.5.3"],\
             ["@types/luxon", "npm:3.3.0"],\
@@ -1551,10 +1551,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@testing-library/jest-dom", [\
-        ["npm:5.16.5", {\
-          "packageLocation": "./.yarn/cache/@testing-library-jest-dom-npm-5.16.5-b6d1f4e02f-94911f901a.zip/node_modules/@testing-library/jest-dom/",\
+        ["npm:5.17.0", {\
+          "packageLocation": "./.yarn/cache/@testing-library-jest-dom-npm-5.17.0-a702605ee4-9f28dbca8b.zip/node_modules/@testing-library/jest-dom/",\
           "packageDependencies": [\
-            ["@testing-library/jest-dom", "npm:5.16.5"],\
+            ["@testing-library/jest-dom", "npm:5.17.0"],\
             ["@adobe/css-tools", "npm:4.2.0"],\
             ["@babel/runtime", "npm:7.22.3"],\
             ["@types/testing-library__jest-dom", "npm:5.14.6"],\
