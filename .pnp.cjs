@@ -52,7 +52,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.8.8"],\
             ["prettier-plugin-jsdoc", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:0.4.2"],\
             ["prettier-plugin-package", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.3.1"],\
-            ["prettier-plugin-sort-json", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.0.0"],\
+            ["prettier-plugin-sort-json", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:2.0.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"],\
             ["rimraf", "npm:5.0.1"],\
@@ -1403,7 +1403,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.8.8"],\
             ["prettier-plugin-jsdoc", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:0.4.2"],\
             ["prettier-plugin-package", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.3.1"],\
-            ["prettier-plugin-sort-json", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.0.0"],\
+            ["prettier-plugin-sort-json", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:2.0.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"],\
             ["rimraf", "npm:5.0.1"],\
@@ -7320,17 +7320,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["prettier-plugin-sort-json", [\
-        ["npm:1.0.0", {\
-          "packageLocation": "./.yarn/cache/prettier-plugin-sort-json-npm-1.0.0-5150f78f5b-4a490e1eec.zip/node_modules/prettier-plugin-sort-json/",\
+        ["npm:2.0.0", {\
+          "packageLocation": "./.yarn/cache/prettier-plugin-sort-json-npm-2.0.0-82f38b7bad-2fbe83b345.zip/node_modules/prettier-plugin-sort-json/",\
           "packageDependencies": [\
-            ["prettier-plugin-sort-json", "npm:1.0.0"]\
+            ["prettier-plugin-sort-json", "npm:2.0.0"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.0.0", {\
-          "packageLocation": "./.yarn/__virtual__/prettier-plugin-sort-json-virtual-3717b3e1e1/0/cache/prettier-plugin-sort-json-npm-1.0.0-5150f78f5b-4a490e1eec.zip/node_modules/prettier-plugin-sort-json/",\
+        ["virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:2.0.0", {\
+          "packageLocation": "./.yarn/__virtual__/prettier-plugin-sort-json-virtual-81eef04d5c/0/cache/prettier-plugin-sort-json-npm-2.0.0-82f38b7bad-2fbe83b345.zip/node_modules/prettier-plugin-sort-json/",\
           "packageDependencies": [\
-            ["prettier-plugin-sort-json", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.0.0"],\
+            ["prettier-plugin-sort-json", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:2.0.0"],\
             ["@types/prettier", "npm:2.7.3"],\
             ["prettier", "npm:2.8.8"]\
           ],\
