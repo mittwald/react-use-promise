@@ -3,8 +3,9 @@ import { defaultStorageKeyBuilder } from "../store/defaultStorageKeyBuilder.js";
 import { Store } from "../store/Store.js";
 import { AsyncResource, AsyncResourceOptions } from "./AsyncResource.js";
 
-const buildEmptyResource = (options: AsyncResourceOptions) =>
-  new AsyncResource<undefined>(() => Promise.resolve(undefined), options);
+const emptyResource = new AsyncResource<undefined>(() =>
+  Promise.resolve(undefined),
+);
 
 // function overloads for nullable parameters
 export function getAsyncResource<TValue, TParams extends FnParameters>(
@@ -31,7 +32,7 @@ export function getAsyncResource<TValue, TParams extends FnParameters>(
   };
 
   if (parameters === null) {
-    return buildEmptyResource(asyncResourceOptions);
+    return emptyResource;
   }
 
   const storageKey = defaultStorageKeyBuilder({

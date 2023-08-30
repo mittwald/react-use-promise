@@ -28,16 +28,35 @@ const waitForRendered = async (count: number): Promise<void> => {
   await waitFor(() => expect(renderCount).toBe(count));
 };
 
-const SquareNumberView: FC<{ value: number }> = (props) => (
+interface Props {
+  value: number | null;
+}
+
+const SquareNumberView: FC<Props> = (props) => (
   <RenderWithLoadingView>
     {() => {
       const { value } = props;
       renderCount++;
-      const squareNumber = usePromise(squareAsync, [value, loadingTime]);
-      return <span data-testid="square-number-component">{squareNumber}</span>;
+
+      const squareNumber = usePromise(
+        squareAsync,
+        value === null ? null : [value, loadingTime],
+      );
+
+      const squareNumberString =
+        squareNumber === undefined ? "undefined" : squareNumber;
+
+      return (
+        <span data-testid="square-number-component">{squareNumberString}</span>
+      );
     }}
   </RenderWithLoadingView>
 );
+
+const expectRenderedNumberToBe = (number: string): void => {
+  const squareComponent = screen.getByTestId("square-number-component");
+  expect(squareComponent.textContent).toBe(number);
+};
 
 test("Loading view is triggered", async () => {
   render(<SquareNumberView value={4} />);
@@ -45,12 +64,18 @@ test("Loading view is triggered", async () => {
   await waitForRendered(2);
 });
 
+test("usePromise() returns 'undefined' when loader parameters are 'null'", async () => {
+  render(<SquareNumberView value={null} />);
+  screen.getByTestId("loading-view");
+  await waitForRendered(2);
+  expectRenderedNumberToBe("undefined");
+});
+
 test("SquareNumber component renders after some time", async () => {
   render(<SquareNumberView value={4} />);
   screen.getByTestId("loading-view");
   await waitForRendered(2);
-  const squareComponent = screen.getByTestId("square-number-component");
-  expect(squareComponent.textContent).toBe("16");
+  expectRenderedNumberToBe("16");
 });
 
 test("AsyncLoader is not called twice when already loaded", async () => {
