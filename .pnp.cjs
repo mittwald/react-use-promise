@@ -57,7 +57,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"],\
             ["rimraf", "npm:5.0.1"],\
             ["ts-jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.1.1"],\
-            ["tsd", "npm:0.28.1"],\
+            ["tsd", "npm:0.29.0"],\
             ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"]\
           ],\
           "linkType": "SOFT"\
@@ -1482,7 +1482,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"],\
             ["rimraf", "npm:5.0.1"],\
             ["ts-jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.1.1"],\
-            ["tsd", "npm:0.28.1"],\
+            ["tsd", "npm:0.29.0"],\
             ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"]\
           ],\
           "linkType": "SOFT"\
@@ -1701,10 +1701,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@tsd/typescript", [\
-        ["npm:5.0.4", {\
-          "packageLocation": "./.yarn/cache/@tsd-typescript-npm-5.0.4-873f9a98a7-5e4fd1ed62.zip/node_modules/@tsd/typescript/",\
+        ["npm:5.2.2", {\
+          "packageLocation": "./.yarn/cache/@tsd-typescript-npm-5.2.2-f2ad70644c-b72d631135.zip/node_modules/@tsd/typescript/",\
           "packageDependencies": [\
-            ["@tsd/typescript", "npm:5.0.4"]\
+            ["@tsd/typescript", "npm:5.2.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -8650,11 +8650,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["tsd", [\
-        ["npm:0.28.1", {\
-          "packageLocation": "./.yarn/cache/tsd-npm-0.28.1-9d5017f301-ca0f0d2ba3.zip/node_modules/tsd/",\
+        ["npm:0.29.0", {\
+          "packageLocation": "./.yarn/cache/tsd-npm-0.29.0-ae29c74af5-66b5f5f04c.zip/node_modules/tsd/",\
           "packageDependencies": [\
-            ["tsd", "npm:0.28.1"],\
-            ["@tsd/typescript", "npm:5.0.4"],\
+            ["tsd", "npm:0.29.0"],\
+            ["@tsd/typescript", "npm:5.2.2"],\
             ["eslint-formatter-pretty", "npm:4.1.0"],\
             ["globby", "npm:11.1.0"],\
             ["jest-diff", "npm:29.6.0"],\
