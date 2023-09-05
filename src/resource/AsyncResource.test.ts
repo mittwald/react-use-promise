@@ -59,25 +59,6 @@ describe("calling load()", () => {
     expect(loader).toHaveBeenCalledTimes(1);
   });
 
-  test("twice does trigger loader twice when TTL is reached", async () => {
-    const resource = new AsyncResource(loader, {
-      ttl: { milliseconds: 100 },
-    });
-    // load
-    void resource.load();
-    expect(loader).toHaveBeenCalledTimes(1);
-    // wait for load
-    await jest.advanceTimersByTimeAsync(loadingTime);
-    // wait for TTL-1 -> not loading again
-    await jest.advanceTimersByTimeAsync(99);
-    void resource.load();
-    expect(loader).toHaveBeenCalledTimes(1);
-    // wait for TTL rest -> loading again
-    await jest.advanceTimersByTimeAsync(1);
-    void resource.load();
-    expect(loader).toHaveBeenCalledTimes(2);
-  });
-
   test("can be superseded by another load() call if cleared in between", async () => {
     const resource = new AsyncResource(loader);
     // #1 load for 50ms
@@ -138,22 +119,6 @@ describe(".value", () => {
     expect(resource.value.value.isSet).toBe(false);
   });
 
-  test("is empty when becoming stale", async () => {
-    const resource = new AsyncResource(loader, {
-      ttl: {
-        milliseconds: 100,
-      },
-    });
-    // load
-    void resource.load();
-    // wait for load
-    await jest.advanceTimersByTimeAsync(loadingTime);
-    expect(resource.value.value.isSet).toBe(true);
-    // after TTL
-    jest.advanceTimersByTime(100);
-    expect(resource.value.value.isSet).toBe(false);
-  });
-
   test("is updated after loading again when cleared", async () => {
     const resource = new AsyncResource(loader);
     // load
@@ -201,19 +166,12 @@ describe(".error", () => {
   });
 
   test("is empty when becoming stale", async () => {
-    const resource = new AsyncResource(errorLoader, {
-      ttl: {
-        milliseconds: 100,
-      },
-    });
+    const resource = new AsyncResource(errorLoader);
     // load
     void resource.load();
     // wait for load
     await jest.advanceTimersByTimeAsync(loadingTime);
     expect(resource.error.value.isSet).toBe(true);
-    // after TTL
-    jest.advanceTimersByTime(100);
-    expect(resource.error.value.isSet).toBe(false);
   });
 
   test("is updated after loading again when cleared", async () => {
@@ -234,32 +192,4 @@ describe(".error", () => {
     expect(resource.value.value.value).toBe("#2 call");
     expect(resource.error.value.isSet).toBe(false);
   });
-});
-
-test("TTL is 'restarted' on reload", async () => {
-  const ttl = loadingTime * 4;
-  const resource = new AsyncResource(loader, {
-    ttl: {
-      milliseconds: ttl,
-    },
-  });
-
-  // load
-  void resource.load();
-  // wait for load
-  await jest.advanceTimersByTimeAsync(loadingTime);
-  // wait for TTL/2
-  await jest.advanceTimersByTimeAsync(ttl / 2);
-  // reload resource
-  resource.refresh();
-  // load
-  void resource.load();
-  // wait for load
-  await jest.advanceTimersByTimeAsync(loadingTime);
-  // wait for TTL/2 -> resource not cleared
-  await jest.advanceTimersByTimeAsync(ttl / 2);
-  expect(resource.value.value.isSet).toBe(true);
-  // wait for another TTL/2 -> resource finally cleared due to TTL
-  await jest.advanceTimersByTimeAsync(ttl / 2);
-  expect(resource.value.value.isSet).toBe(false);
 });

@@ -16,7 +16,6 @@ export type AsyncResourceState = "void" | "loading" | "loaded" | "error";
 export type GetAsyncResourceOptions = {
   loaderId?: string;
   tags?: Tags;
-  autoRefresh?: DurationLikeObject;
 };
 
 // useWatchResource types
