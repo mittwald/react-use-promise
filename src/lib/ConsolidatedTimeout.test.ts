@@ -81,3 +81,10 @@ test("Callback is triggered instantly when adding due timeout while already runn
   timeout.addTimeout({ milliseconds: 500 });
   expect(callback).toHaveBeenCalledTimes(1);
 });
+
+test("Removing last timeout will not trigger callback", (): void => {
+  timeout.start();
+  const removeTimeout = timeout.addTimeout({ milliseconds: 1000 });
+  removeTimeout();
+  testCallbackIsNotCalledAfter(1000);
+});

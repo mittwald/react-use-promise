@@ -35,6 +35,7 @@ export class ConsolidatedTimeout {
 
     return () => {
       this.timeoutMillis.delete(timeoutMs);
+      this.startNextTimeout();
     };
   }
 
