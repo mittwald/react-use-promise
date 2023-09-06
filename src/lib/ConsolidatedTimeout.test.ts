@@ -1,4 +1,4 @@
-import { jest, afterEach, beforeEach } from "@jest/globals";
+import { beforeEach, jest } from "@jest/globals";
 import { ConsolidatedTimeout } from "./ConsolidatedTimeout.js";
 
 const callback = jest.fn();
@@ -9,10 +9,6 @@ beforeEach((): void => {
   jest.resetAllMocks();
   jest.useFakeTimers();
   timeout = new ConsolidatedTimeout(callback);
-});
-
-afterEach((): void => {
-  timeout.stop();
 });
 
 const testCallbackIsCalledAfter = (ms: number): void => {

@@ -20,7 +20,7 @@ export class ConsolidatedTimeout {
     this.startNextTimeout();
   }
 
-  public stop(): void {
+  private clear(): void {
     if (this.runningTimeout) {
       clearTimeout(this.runningTimeout);
       this.runningTimeout = undefined;
@@ -39,7 +39,7 @@ export class ConsolidatedTimeout {
   }
 
   private startNextTimeout(): void {
-    this.stop();
+    this.clear();
 
     if (this.timeouts.size === 0) {
       return;
