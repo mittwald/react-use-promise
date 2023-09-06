@@ -7,7 +7,7 @@ type Timeout = ReturnType<typeof setTimeout>;
 export class ConsolidatedTimeout {
   private readonly callback: ExecutionCallback;
   private startTime: DateTime;
-  private timeouts = new Set<number>();
+  private timeoutMillis = new Set<number>();
   private runningTimeout?: Timeout;
 
   public constructor(callback: ExecutionCallback) {
@@ -30,22 +30,22 @@ export class ConsolidatedTimeout {
   public addTimeout(timeout: DurationLikeObject): RemoveTimeout {
     const timeoutMs = Duration.fromDurationLike(timeout).toMillis();
 
-    this.timeouts.add(timeoutMs);
+    this.timeoutMillis.add(timeoutMs);
     this.startNextTimeout();
 
     return () => {
-      this.timeouts.delete(timeoutMs);
+      this.timeoutMillis.delete(timeoutMs);
     };
   }
 
   private startNextTimeout(): void {
     this.clear();
 
-    if (this.timeouts.size === 0) {
+    if (this.timeoutMillis.size === 0) {
       return;
     }
 
-    const shortestTimeout = Math.min(...this.timeouts);
+    const shortestTimeout = Math.min(...this.timeoutMillis);
     const elapsedTime = this.startTime.diffNow().negate().toMillis();
     const ms = shortestTimeout - elapsedTime;
 
