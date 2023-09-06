@@ -184,9 +184,7 @@ const userResource = getAsyncResource(getUser, [123]);
 
 // 3. With options
 const userResource = getAsyncResource(getUser, [123], {
-  autoRefresh: {
-    seconds: 30,
-  },
+  tags: ["api"],
 });
 
 // 4. Usage in factory function
@@ -270,14 +268,15 @@ const Score = ({ matchId }) => {
 You can configure `usePromise` and `getAsyncResource` with the following
 options:
 
-#### autoRefresh
+#### autoRefresh (only supported by `usePromise`)
 
 Type:
 [Duration like object](https://moment.github.io/luxon/api-docs/index.html#durationfromobject)\
 Default: `undefined`
 
 When a duration is configured, the resource will automatically be refreshed in
-the provided interval.
+the provided interval. If the same resource has multiple auto-refresh intervals,
+the shortest interval will be used.
 
 ```javascript
 autoRefresh: {
@@ -285,7 +284,7 @@ autoRefresh: {
 }
 ```
 
-#### keepValueWhileLoading
+#### keepValueWhileLoading (only supported by `usePromise`)
 
 Type: `boolean`\
 Default: `true`
@@ -321,7 +320,7 @@ the "same code" issue (see
 ["Caveats of default storage key generation"](#caveats-of-default-storage-key-generation)),
 you can set an explicit loader ID, that identifies the loader function.
 
-#### useSuspense
+#### useSuspense (only supported by `usePromise`)
 
 Type: `boolean`\
 Default: `true`

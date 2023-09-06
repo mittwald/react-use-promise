@@ -5,31 +5,28 @@ import {
   UseWatchResourceOptions,
   UseWatchResourceResult,
 } from "./types.js";
-import { Duration, DurationLikeObject } from "luxon";
 import { ObservableValue } from "../observable-value/ObservableValue.js";
 import { useWatchResourceValue } from "./useWatchResourceValue.js";
 import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
-
-export interface AsyncResourceOptions {
-  ttl?: DurationLikeObject;
-}
+import { DurationLikeObject } from "luxon";
+import {
+  ConsolidatedTimeout,
+  RemoveTimeout,
+} from "../lib/ConsolidatedTimeout.js";
 
 export class AsyncResource<T = unknown> {
   public readonly loader: AsyncLoader<T>;
   public loaderPromise: Promise<void> | undefined;
   private loaderPromiseVersion = 0;
-
-  private readonly options: AsyncResourceOptions;
+  private autoRefreshTimeout: ConsolidatedTimeout;
 
   public value = new ObservableValue<EventualValue<T>>(emptyValue);
   public error = new ObservableValue<EventualValue<unknown>>(emptyValue);
   public state = new ObservableValue<AsyncResourceState>("void");
 
-  private activeTtlTimeout: ReturnType<typeof setTimeout> | undefined;
-
-  public constructor(loader: AsyncLoader<T>, opts?: AsyncResourceOptions) {
+  public constructor(loader: AsyncLoader<T>) {
     this.loader = loader;
-    this.options = opts ?? {};
+    this.autoRefreshTimeout = new ConsolidatedTimeout(() => this.refresh());
   }
 
   public refresh(): void {
@@ -38,6 +35,10 @@ export class AsyncResource<T = unknown> {
     this.value.updateValue(emptyValue);
     this.error.updateValue(emptyValue);
     this.state.updateValue("void");
+  }
+
+  public addTTL(ttl: DurationLikeObject): RemoveTimeout {
+    return this.autoRefreshTimeout.addTimeout(ttl);
   }
 
   public async load(): Promise<void> {
@@ -56,18 +57,6 @@ export class AsyncResource<T = unknown> {
       return false;
     }
     return error === true || this.error.value.value === error;
-  }
-
-  private clearAfterTtl(): void {
-    const ttl = this.options.ttl;
-
-    if (ttl !== undefined) {
-      clearTimeout(this.activeTtlTimeout);
-
-      this.activeTtlTimeout = setTimeout(() => {
-        this.refresh();
-      }, Duration.fromDurationLike(ttl).toMillis());
-    }
   }
 
   private async handleLoading(): Promise<void> {
@@ -95,9 +84,9 @@ export class AsyncResource<T = unknown> {
         this.error.updateValue(error);
         this.state.updateValue("error");
       }
-
-      this.clearAfterTtl();
     }
+
+    this.autoRefreshTimeout.start();
   }
 
   public watch<TOptions extends UseWatchResourceOptions>(

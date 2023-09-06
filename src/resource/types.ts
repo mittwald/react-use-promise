@@ -16,13 +16,13 @@ export type AsyncResourceState = "void" | "loading" | "loaded" | "error";
 export type GetAsyncResourceOptions = {
   loaderId?: string;
   tags?: Tags;
-  autoRefresh?: DurationLikeObject;
 };
 
 // useWatchResource types
 export type UseWatchResourceOptions = {
   keepValueWhileLoading?: boolean;
   useSuspense?: boolean;
+  autoRefresh?: DurationLikeObject;
 } & GetAsyncResourceOptions;
 
 export type NoSuspenseReturnType<T> = Readonly<
