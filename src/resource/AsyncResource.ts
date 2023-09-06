@@ -8,11 +8,17 @@ import {
 import { ObservableValue } from "../observable-value/ObservableValue.js";
 import { useWatchResourceValue } from "./useWatchResourceValue.js";
 import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
+import { DurationLikeObject } from "luxon";
+import {
+  ConsolidatedTimeout,
+  RemoveTimeout,
+} from "../lib/ConsolidatedTimeout.js";
 
 export class AsyncResource<T = unknown> {
   public readonly loader: AsyncLoader<T>;
   public loaderPromise: Promise<void> | undefined;
   private loaderPromiseVersion = 0;
+  private autoRefreshTimeout: ConsolidatedTimeout;
 
   public value = new ObservableValue<EventualValue<T>>(emptyValue);
   public error = new ObservableValue<EventualValue<unknown>>(emptyValue);
@@ -20,6 +26,7 @@ export class AsyncResource<T = unknown> {
 
   public constructor(loader: AsyncLoader<T>) {
     this.loader = loader;
+    this.autoRefreshTimeout = new ConsolidatedTimeout(() => this.refresh());
   }
 
   public refresh(): void {
@@ -28,6 +35,10 @@ export class AsyncResource<T = unknown> {
     this.value.updateValue(emptyValue);
     this.error.updateValue(emptyValue);
     this.state.updateValue("void");
+  }
+
+  public addTTL(ttl: DurationLikeObject): RemoveTimeout {
+    return this.autoRefreshTimeout.addTimeout(ttl);
   }
 
   public async load(): Promise<void> {
@@ -74,6 +85,8 @@ export class AsyncResource<T = unknown> {
         this.state.updateValue("error");
       }
     }
+
+    this.autoRefreshTimeout.start();
   }
 
   public watch<TOptions extends UseWatchResourceOptions>(

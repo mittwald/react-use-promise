@@ -1,7 +1,8 @@
 import { AsyncResource } from "./AsyncResource.js";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
 import { UseWatchResourceOptions, UseWatchResourceResult } from "./types.js";
+import { hash } from "object-code";
 
 export const useWatchResourceValue = <
   T,
@@ -12,11 +13,21 @@ export const useWatchResourceValue = <
 ): UseWatchResourceResult<T, typeof options> => {
   type Result = UseWatchResourceResult<T, typeof options>;
 
-  const { keepValueWhileLoading = true, useSuspense = true } = options;
+  const {
+    keepValueWhileLoading = true,
+    useSuspense = true,
+    autoRefresh,
+  } = options;
 
   const observedValue = useWatchObservableValue(resource.value);
   const error = useWatchObservableValue(resource.error);
   const previousValue = useRef(observedValue);
+
+  useEffect(() => {
+    if (autoRefresh) {
+      return resource.addTTL(autoRefresh);
+    }
+  }, [hash(autoRefresh)]);
 
   void resource.load();
 

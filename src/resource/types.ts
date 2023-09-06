@@ -22,6 +22,7 @@ export type GetAsyncResourceOptions = {
 export type UseWatchResourceOptions = {
   keepValueWhileLoading?: boolean;
   useSuspense?: boolean;
+  autoRefresh?: DurationLikeObject;
 } & GetAsyncResourceOptions;
 
 export type NoSuspenseReturnType<T> = Readonly<
