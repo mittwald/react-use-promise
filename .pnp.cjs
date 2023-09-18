@@ -46,7 +46,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.6.4"],\
             ["jest-environment-jsdom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.6.4"],\
             ["license-checker-rseidelsohn", "npm:4.2.6"],\
-            ["luxon", "npm:3.4.2"],\
+            ["luxon", "npm:3.4.3"],\
             ["minimatch", "npm:9.0.3"],\
             ["object-code", "npm:1.3.0"],\
             ["prettier", "npm:2.8.8"],\
@@ -1397,7 +1397,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.6.4"],\
             ["jest-environment-jsdom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.6.4"],\
             ["license-checker-rseidelsohn", "npm:4.2.6"],\
-            ["luxon", "npm:3.4.2"],\
+            ["luxon", "npm:3.4.3"],\
             ["minimatch", "npm:9.0.3"],\
             ["object-code", "npm:1.3.0"],\
             ["prettier", "npm:2.8.8"],\
@@ -6189,10 +6189,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["luxon", [\
-        ["npm:3.4.2", {\
-          "packageLocation": "./.yarn/cache/luxon-npm-3.4.2-4241e9f066-efefdfaea9.zip/node_modules/luxon/",\
+        ["npm:3.4.3", {\
+          "packageLocation": "./.yarn/cache/luxon-npm-3.4.3-1b54517fa6-3eade81506.zip/node_modules/luxon/",\
           "packageDependencies": [\
-            ["luxon", "npm:3.4.2"]\
+            ["luxon", "npm:3.4.3"]\
           ],\
           "linkType": "HARD"\
         }]\
