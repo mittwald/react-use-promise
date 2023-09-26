@@ -224,7 +224,7 @@ import getScoreResource from "../resources/score";
 const Score = ({ matchId }) => {
   const scoreResource = getScoreResource(matchId);
   const score = scoreResource.watch();
-  const reloadScore = () => score.refresh(); // 👈 refresh the resource
+  const reloadScore = () => scoreResource.refresh(); // 👈 refresh the resource
 
   return (
     <ScoreBox>
