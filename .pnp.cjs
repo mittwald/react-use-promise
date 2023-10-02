@@ -45,7 +45,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:4.2.1"],\
             ["jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.7.0"],\
             ["jest-environment-jsdom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.7.0"],\
-            ["license-checker-rseidelsohn", "npm:4.2.6"],\
+            ["license-checker-rseidelsohn", "npm:4.2.8"],\
             ["luxon", "npm:3.4.3"],\
             ["minimatch", "npm:9.0.3"],\
             ["object-code", "npm:1.3.0"],\
@@ -1470,7 +1470,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:4.2.1"],\
             ["jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.7.0"],\
             ["jest-environment-jsdom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.7.0"],\
-            ["license-checker-rseidelsohn", "npm:4.2.6"],\
+            ["license-checker-rseidelsohn", "npm:4.2.8"],\
             ["luxon", "npm:3.4.3"],\
             ["minimatch", "npm:9.0.3"],\
             ["object-code", "npm:1.3.0"],\
@@ -6263,10 +6263,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["license-checker-rseidelsohn", [\
-        ["npm:4.2.6", {\
-          "packageLocation": "./.yarn/cache/license-checker-rseidelsohn-npm-4.2.6-d8e6b9f474-6c74faa8bf.zip/node_modules/license-checker-rseidelsohn/",\
+        ["npm:4.2.8", {\
+          "packageLocation": "./.yarn/cache/license-checker-rseidelsohn-npm-4.2.8-a11ec1f3bc-870d5d5647.zip/node_modules/license-checker-rseidelsohn/",\
           "packageDependencies": [\
-            ["license-checker-rseidelsohn", "npm:4.2.6"],\
+            ["license-checker-rseidelsohn", "npm:4.2.8"],\
             ["chalk", "npm:4.1.2"],\
             ["debug", "virtual:7501c8e8f823bc1c6deaa766accda3a9cf15cbe2c790c23852a0629b14a9b0e779ab99c317d9f10040977caa57aa3426effccf4f2a5abe15b98a318e5e37d17a#npm:4.3.4"],\
             ["lodash.clonedeep", "npm:4.5.0"],\
