@@ -1765,10 +1765,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"abbrev@npm:1, abbrev@npm:^1.0.0":
+"abbrev@npm:^1.0.0":
   version: 1.1.1
   resolution: "abbrev@npm:1.1.1"
   checksum: a4a97ec07d7ea112c517036882b2ac22f3109b7b19077dc656316d07d308438aac28e4d9746dc4d84bf6b1e75b4a7b0a5f3cb30592419f128ca9a8cee3bcfa17
+  languageName: node
+  linkType: hard
+
+"abbrev@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "abbrev@npm:2.0.0"
+  checksum: 0e994ad2aa6575f94670d8a2149afe94465de9cedaaaac364e7fb43a40c3691c980ff74899f682f4ca58fa96b4cbd7421a015d3a6defe43a442117d7821a2f36
   languageName: node
   linkType: hard
 
@@ -5046,14 +5053,14 @@ __metadata:
   linkType: hard
 
 "license-checker-rseidelsohn@npm:^4.2.6":
-  version: 4.2.8
-  resolution: "license-checker-rseidelsohn@npm:4.2.8"
+  version: 4.2.10
+  resolution: "license-checker-rseidelsohn@npm:4.2.10"
   dependencies:
     chalk: 4.1.2
     debug: ^4.3.4
     lodash.clonedeep: ^4.5.0
     mkdirp: ^1.0.4
-    nopt: ^5.0.0
+    nopt: ^7.2.0
     read-installed-packages: ^2.0.1
     semver: ^7.3.5
     spdx-correct: ^3.1.1
@@ -5062,7 +5069,7 @@ __metadata:
     treeify: ^1.1.0
   bin:
     license-checker-rseidelsohn: bin/license-checker-rseidelsohn
-  checksum: 870d5d564724f0a969fa4d3ce76b6223b9b21e5b9092922debc6e6db4212e149e807c375190370cc163a93146d73c2d1840635e939c0b3f94bc4774996bea833
+  checksum: d0c141cb4b9de651e9b3cb49ee95affa24322d9154853e38458307dce3fee24ab6c6ac237d994f5e527d95ea9baf2db2fee224862f3cc4e75e2220228f53bd80
   languageName: node
   linkType: hard
 
@@ -5816,17 +5823,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nopt@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "nopt@npm:5.0.0"
-  dependencies:
-    abbrev: 1
-  bin:
-    nopt: bin/nopt.js
-  checksum: d35fdec187269503843924e0114c0c6533fb54bbf1620d0f28b4b60ba01712d6687f62565c55cc20a504eff0fbe5c63e22340c3fad549ad40469ffb611b04f2f
-  languageName: node
-  linkType: hard
-
 "nopt@npm:^6.0.0":
   version: 6.0.0
   resolution: "nopt@npm:6.0.0"
@@ -5835,6 +5831,17 @@ __metadata:
   bin:
     nopt: bin/nopt.js
   checksum: 82149371f8be0c4b9ec2f863cc6509a7fd0fa729929c009f3a58e4eb0c9e4cae9920e8f1f8eb46e7d032fec8fb01bede7f0f41a67eb3553b7b8e14fa53de1dac
+  languageName: node
+  linkType: hard
+
+"nopt@npm:^7.2.0":
+  version: 7.2.0
+  resolution: "nopt@npm:7.2.0"
+  dependencies:
+    abbrev: ^2.0.0
+  bin:
+    nopt: bin/nopt.js
+  checksum: a9c0f57fb8cb9cc82ae47192ca2b7ef00e199b9480eed202482c962d61b59a7fbe7541920b2a5839a97b42ee39e288c0aed770e38057a608d7f579389dfde410
   languageName: node
   linkType: hard
 
