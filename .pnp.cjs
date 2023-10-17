@@ -34,7 +34,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/react", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:14.0.0"],\
             ["@types/jest", "npm:29.5.5"],\
             ["@types/luxon", "npm:3.3.2"],\
-            ["@types/react", "npm:18.2.21"],\
+            ["@types/react", "npm:18.2.28"],\
             ["@types/react-dom", "npm:18.2.13"],\
             ["@typescript-eslint/eslint-plugin", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.7.3"],\
             ["@typescript-eslint/parser", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.7.5"],\
@@ -1459,7 +1459,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/react", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:14.0.0"],\
             ["@types/jest", "npm:29.5.5"],\
             ["@types/luxon", "npm:3.3.2"],\
-            ["@types/react", "npm:18.2.21"],\
+            ["@types/react", "npm:18.2.28"],\
             ["@types/react-dom", "npm:18.2.13"],\
             ["@typescript-eslint/eslint-plugin", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.7.3"],\
             ["@typescript-eslint/parser", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.7.5"],\
@@ -1662,7 +1662,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/react", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:14.0.0"],\
             ["@babel/runtime", "npm:7.22.3"],\
             ["@testing-library/dom", "npm:9.3.3"],\
-            ["@types/react", "npm:18.2.21"],\
+            ["@types/react", "npm:18.2.28"],\
             ["@types/react-dom", "npm:18.2.13"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"]\
@@ -1971,10 +1971,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/react", [\
-        ["npm:18.2.21", {\
-          "packageLocation": "./.yarn/cache/@types-react-npm-18.2.21-c50bc2f785-ffed203bfe.zip/node_modules/@types/react/",\
+        ["npm:18.2.28", {\
+          "packageLocation": "./.yarn/cache/@types-react-npm-18.2.28-8e8cf3938c-81381bedeb.zip/node_modules/@types/react/",\
           "packageDependencies": [\
-            ["@types/react", "npm:18.2.21"],\
+            ["@types/react", "npm:18.2.28"],\
             ["@types/prop-types", "npm:15.7.5"],\
             ["@types/scheduler", "npm:0.16.3"],\
             ["csstype", "npm:3.1.2"]\
@@ -1987,7 +1987,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-react-dom-npm-18.2.13-1f38112e81-22ba066b14.zip/node_modules/@types/react-dom/",\
           "packageDependencies": [\
             ["@types/react-dom", "npm:18.2.13"],\
-            ["@types/react", "npm:18.2.21"]\
+            ["@types/react", "npm:18.2.28"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -7815,7 +7815,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/__virtual__/react-dom-virtual-876ec877a9/0/cache/react-dom-npm-18.2.0-dd675bca1c-7d323310be.zip/node_modules/react-dom/",\
           "packageDependencies": [\
             ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"],\
-            ["@types/react", "npm:18.2.21"],\
+            ["@types/react", "npm:18.2.28"],\
             ["loose-envify", "npm:1.4.0"],\
             ["react", "npm:18.2.0"],\
             ["scheduler", "npm:0.23.0"]\
