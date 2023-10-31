@@ -9,23 +9,19 @@
     "email": "opensource@mittwald.de"
   },
   "homepage": "https://github.com/mittwald/react-use-promise#readme",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "default": "./dist-cjs/index.js"
-    },
-    "./types": {
-      "import": "./dist/types.js",
-      "default": "./dist-cjs/types.js"
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
     }
   },
   "scripts": {
-    "clean:dist": "rimraf dist dist-cjs",
-    "compile": "yarn clean:dist && yarn compile:cjs && yarn compile:esm",
-    "compile:cjs": "yarn tsc --build tsconfig.cjs.json",
-    "compile:esm": "yarn tsc --build",
+    "compile": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "compile:watch": "yarn compile --watch src",
     "format": "yarn format:base --write",
     "format:base": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}'",
     "license-check": "yarn pnpify license-checker-rseidelsohn $*",
@@ -92,6 +88,7 @@
     "rimraf": "^5.0.1",
     "ts-jest": "^29.1.0",
     "tsd": "^0.29.0",
+    "tsup": "^7.2.0",
     "typescript": "^5.1.3"
   },
   "types": "./dist/index.d.ts",
