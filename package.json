@@ -34,7 +34,7 @@
     "test:packages": "yarn all run test"
   },
   "files": [
-    "{dist,dist-cjs}/**/*.{js,d.ts}"
+    "dist/**/*.*"
   ],
   "keywords": [
     "react",
