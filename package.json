@@ -9,18 +9,18 @@
     "email": "opensource@mittwald.de"
   },
   "homepage": "https://github.com/mittwald/react-use-promise#readme",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "type": "module",
   "exports": {
     ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     }
   },
   "scripts": {
-    "compile": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "compile": "tsup src/index.ts --format esm,cjs --dts --clean",
     "compile:watch": "yarn compile --watch src",
     "format": "yarn format:base --write",
     "format:base": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}'",
