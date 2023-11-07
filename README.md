@@ -22,7 +22,7 @@ const NewsItem = ({ id }) => {
     // Use tags 🏷️ with support for "tree structures" 🌳
   });
 
-  // Do not care about any loading states - just use the result 🤩
+  // Do not care about any loading states – just use the result 🤩
   return (
     <li>
       {news.by}: {news.title}
@@ -93,6 +93,7 @@ const App = () => {
 - [Opt-Out Loading](#opt-out-loading)
 - [Error handling](#error-handling)
 - [Best practices](#best-practices)
+- [Migration guides](#migration-guides)
 
 ## Installing
 
@@ -292,7 +293,7 @@ Default: `true`
 If `true`, the previously loaded value will be returned during refresh is in
 progress. The loading view will only be triggered during initial load.
 
-If `false`, the loading view will always be triggered - during initial load and
+If `false`, the loading view will always be triggered – during initial load and
 refresh as well.
 
 #### tags
@@ -412,7 +413,7 @@ resource is created or an existing resource is taken from the resource store. If
 a resources has loaded once, it exists in the store and contains the cached
 result of the async loader function.
 
-It is noticeable that not the raw result is cached in some "result cache" - **it
+It is noticeable that not the raw result is cached in some "result cache" – **it
 is the resource the keeps the cached result which itself is stored in the
 resource store**.
 
@@ -757,7 +758,7 @@ const App = () => (
 ### Gotchas when defining "built-in" loading views
 
 When you are using `.use()` or `usePromise()` in your component, it can not
-define its own loading boundary - at least not for directly used Async
+define its own loading boundary – at least not for directly used Async
 Resources.
 
 In this example the fallback component will not be shown:
@@ -778,7 +779,7 @@ const UserAvatar = ({ userResource, size }) => {
 
 The following approaches can help you to solve this issue:
 
-- Split up your component into two separate components - one private with the
+- Split up your component into two separate components – one private with the
   regular rendering, and another one wrapping it with a loading boundary while
   forwarding props to it.
 
@@ -1039,3 +1040,10 @@ export const UserProfileName: FC<{ id: string }> = (props) => {
   return <>{user.getFullName()}</>;
 };
 ```
+
+## Migration guides
+
+### V1 to V2
+
+- For more naming consistency the `.watch()` method of the Async Resource has
+  changed to `.use()`. Replace all usages of `watch()` with `use()`.

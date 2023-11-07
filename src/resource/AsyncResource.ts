@@ -95,6 +95,13 @@ export class AsyncResource<T = unknown> {
     return useWatchResourceValue(this, options);
   }
 
+  /** @deprecated Renamed to `use` in version 2 */
+  public watch<TOptions extends UseWatchResourceOptions>(
+    options: TOptions = {} as TOptions,
+  ): UseWatchResourceResult<T, TOptions> {
+    return this.use(options);
+  }
+
   public watchState(): AsyncResourceState {
     return useWatchObservableValue(this.state);
   }
