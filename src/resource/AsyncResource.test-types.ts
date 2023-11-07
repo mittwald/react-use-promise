@@ -10,7 +10,7 @@ interface ResultType {
 function testResultOfWatchMatchesAsyncLoaderReturnType() {
   const resource = {} as AsyncResource<ResultType>;
 
-  const result = resource.watch();
+  const result = resource.use();
   expectType<ResultType>(result);
 
   // @ts-expect-error Test access to unknown props

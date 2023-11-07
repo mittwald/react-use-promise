@@ -97,5 +97,10 @@
       "email": "m.falkenberg@mittwald.de"
     }
   ],
+  "dependenciesMeta": {
+    "prettier@2.8.8": {
+      "unplugged": true
+    }
+  },
   "packageManager": "yarn@4.0.1"
 }

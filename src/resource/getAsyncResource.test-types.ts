@@ -23,12 +23,12 @@ function testGetAsyncResourceRequiresCorrectParameters() {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testWatchedResultIsLoaderReturnType() {
-  const value = getAsyncResource(loader, [true, "foo"]).watch();
+  const value = getAsyncResource(loader, [true, "foo"]).use();
   expectType<number>(value);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testWatchedResultIncludesUndefinedWhenParametersIsNull() {
-  const optionalValue = getAsyncResource(loader, null).watch();
+  const optionalValue = getAsyncResource(loader, null).use();
   expectType<number | undefined>(optionalValue);
 }
