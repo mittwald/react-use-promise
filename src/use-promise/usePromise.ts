@@ -36,5 +36,5 @@ export function usePromise<
   parameters: TParams | null,
   options: TOptions = {} as TOptions,
 ): UseWatchResourceResult<TValue | undefined, TOptions> {
-  return getAsyncResource(asyncLoader, parameters, options).watch(options);
+  return getAsyncResource(asyncLoader, parameters, options).use(options);
 }

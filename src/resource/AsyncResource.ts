@@ -89,7 +89,7 @@ export class AsyncResource<T = unknown> {
     this.autoRefreshTimeout.start();
   }
 
-  public watch<TOptions extends UseWatchResourceOptions>(
+  public use<TOptions extends UseWatchResourceOptions>(
     options: TOptions = {} as TOptions,
   ): UseWatchResourceResult<T, TOptions> {
     return useWatchResourceValue(this, options);

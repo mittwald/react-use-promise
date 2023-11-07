@@ -161,7 +161,7 @@ details see
 [Lazy Loading with Async Resources](#-lazy-loading-with-async-resources). The
 `usePromise` hook uses the [`getAsyncResource`-API](#getasyncresource) under the
 hood and is basically just a shortcut for
-`getAsyncResource(asyncLoader, loaderParameters, options).watch()`.
+`getAsyncResource(asyncLoader, loaderParameters, options).use()`.
 
 Get an async resource by passing an async loader with the relevant loader
 parameters and an optional configuration to the `getAsyncResource` function.
@@ -195,20 +195,20 @@ const getUserResource = (id) => getAsyncResource(getUser, [id]);
 
 The async resource returned by `getAsyncResource` has the following API.
 
-#### .watch()
+#### .use()
 
 Returns: the value of the async resource, or the result object when
 `useSuspense: false` (see [Opt-out Suspense](#opt-out-suspense))
 
-Calling the `watch` method will actually start the loading process and returns
-the value of the async resource, once it is loaded. Everytime the resource is
-refreshed, the watched value automatically updates itself.
+Calling the `use` method will actually start the loading process and returns the
+value of the async resource, once it is loaded. Everytime the resource is
+refreshed, the used value automatically updates itself.
 
 ```jsx
 import getUserResource from "../resources/user";
 
 const Username = ({ id }) => {
-  const user = getUserResource(id).watch(); // 👈 watching the resource value
+  const user = getUserResource(id).use(); // 👈 using the resource value
   return <>{user.name}</>;
 };
 ```
@@ -216,14 +216,14 @@ const Username = ({ id }) => {
 #### .refresh()
 
 Calling the `refresh` method will clear the cached resource value and trigger a
-reload, if the resource is being watched in any mounted component.
+reload, if the resource is being used in any mounted component.
 
 ```jsx
 import getScoreResource from "../resources/score";
 
 const Score = ({ matchId }) => {
   const scoreResource = getScoreResource(matchId);
-  const score = scoreResource.watch();
+  const score = scoreResource.use();
   const reloadScore = () => scoreResource.refresh(); // 👈 refresh the resource
 
   return (
@@ -249,7 +249,7 @@ import getScoreResource from "../resources/score";
 const Score = ({ matchId }) => {
   const scoreResource = getScoreResource(matchId);
   const scoreResourceState = scoreResource.watchState();
-  const score = scoreResource.watch();
+  const score = scoreResource.use();
   const scoreIsLoading = scoreResourceState === "loading";
 
   return (
@@ -381,7 +381,7 @@ const getUser = (id) => axios(`/user/${id}`);
 const getUserResource = resourceify(getUser);
 // `myUser` is an async resource
 const myUser = getUserResource(["me"], { refresh: { seconds: 30 } });
-myUser.watch();
+myUser.use();
 
 // Factory method for HTTP GET-Requests via Axios
 import axios from "axios";
@@ -684,8 +684,8 @@ For instance if user profiles can be loaded via multiple API methods, the
 `<UserAvatar />` component can still be used without any changes.
 
 It is noticeable that creating Async Resources in any parent component does
-**not trigger the loading process**. Therefore, the `.watch()` method can be
-used in the child components, where the data is actually needed.
+**not trigger the loading process**. Therefore, the `.use()` method can be used
+in the child components, where the data is actually needed.
 
 Alternative Container Component with lazy loading:
 
@@ -700,8 +700,8 @@ interface Props {
 }
 
 const UserAvatar: FC<Props> = ({ user, size }) => {
-  // .watch() 🔔 triggers loading when needed
-  const profile = user.watch();
+  // .use() 🔔 triggers loading when needed
+  const profile = user.use();
   return <Avatar imageUrl={profile.avatarUrl} size={size} />;
 };
 
@@ -756,7 +756,7 @@ const App = () => (
 
 ### Gotchas when defining "built-in" loading views
 
-When you are using `.watch()` or `usePromise()` in your component, it can not
+When you are using `.use()` or `usePromise()` in your component, it can not
 define its own loading boundary - at least not for directly used Async
 Resources.
 
@@ -764,12 +764,12 @@ In this example the fallback component will not be shown:
 
 ```jsx
 const UserAvatar = ({ userResource, size }) => {
-  const user = userResource.watch();
+  const user = userResource.use();
   // 👆 any code below this line will not be executed 🙅 until the async loader is done.
   const loadingView = <AvatarSkeleton size={size} />;
   return (
     <Suspense fallback={loadingView}>
-      {/* This fallback 👆 is not rendered for the watched resource from above. 😢 */}
+      {/* This fallback 👆 is not rendered for the used resource from above. 😢 */}
       <Avatar imageUrl={user.avatarUrl} size={size} />
     </Suspense>
   );
@@ -784,7 +784,7 @@ The following approaches can help you to solve this issue:
 
 ```jsx
 const Component = ({ userResource, size }) => {
-  const user = userResource.watch();
+  const user = userResource.use();
   return <Avatar imageUrl={user.avatarUrl} size={size} />;
 };
 
@@ -803,7 +803,7 @@ export const UserAvatar = (props) => {
 
 ```jsx
 const UserAvatar = ({ userResource, size }) => {
-  const user = userResource.watch({ useSuspense: false });
+  const user = userResource.use({ useSuspense: false });
 
   // `user` is an object with `isSet` and `value` properties
   if (!user.isSet) {
@@ -820,7 +820,7 @@ const UserAvatar = ({ userResource, size }) => {
 
 ```jsx
 const UserAvatar = withLoadingBoundary(({ userResource, size }) => {
-  const user = userResource.watch();
+  const user = userResource.use();
   return <Avatar imageUrl={user.avatarUrl} size={size} />;
 }, AvatarSkeleton);
 ```
@@ -834,7 +834,7 @@ const UserAvatar = ({ userResource, size }) => {
     <Suspense fallback={loadingView}>
       <Render>
         {() => {
-          const user = userResource.watch();
+          const user = userResource.use();
           return <Avatar imageUrl={user.avatarUrl} size={size} />;
         }}
       </Render>
@@ -851,8 +851,8 @@ components with
 [built-in loading views](#gotchas-when-defining-built-in-loading-views).
 
 You can opt-out Suspense by setting the `useSuspense` option to `false`. When
-Suspense is disabled, calling `.watch()` resp. `usePromise()` will not trigger
-any `<Suspense />` component. Instead, a result object is returned, containing
+Suspense is disabled, calling `.use()` resp. `usePromise()` will not trigger any
+`<Suspense />` component. Instead, a result object is returned, containing
 loading information and the eventual value.
 
 Example of how the opt-out behaves:
@@ -871,7 +871,7 @@ return (
 
 ### Return object with disabled Suspense
 
-The object returned by `.watch()` resp. `usePromise()` has the following
+The object returned by `.use()` resp. `usePromise()` has the following
 properties, when Suspense is disabled.
 
 - `isLoading`: Is `true` when the resource is loading or reloading. `false`
@@ -1015,7 +1015,7 @@ export class UserProfile {
   }
 
   public static useLoadById(id: string): UserProfile {
-    const data = getUserProfile([id]).watch();
+    const data = getUserProfile([id]).use();
     return new UserProfile(data);
   }
 

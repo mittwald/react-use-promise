@@ -1014,6 +1014,9 @@ __metadata:
     typescript: "npm:~5.2.2"
   peerDependencies:
     react: ">=17.0"
+  dependenciesMeta:
+    prettier@2.8.8:
+      unplugged: true
   languageName: unknown
   linkType: soft
 

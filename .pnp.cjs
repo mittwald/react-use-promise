@@ -7423,7 +7423,7 @@ const RAW_RUNTIME_STATE =
     ]],\
     ["prettier", [\
       ["npm:2.8.8", {\
-        "packageLocation": "./.yarn/cache/prettier-npm-2.8.8-430828a36c-00cdb6ab02.zip/node_modules/prettier/",\
+        "packageLocation": "./.yarn/unplugged/prettier-npm-2.8.8-430828a36c/node_modules/prettier/",\
         "packageDependencies": [\
           ["prettier", "npm:2.8.8"]\
         ],\
