@@ -9,23 +9,17 @@
     "email": "opensource@mittwald.de"
   },
   "homepage": "https://github.com/mittwald/react-use-promise#readme",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
   "type": "module",
   "exports": {
-    ".": {
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
+    ".": "./dist/index.mjs"
   },
   "scripts": {
-    "compile": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "build": "unbuild",
     "format": "yarn format:base --write",
     "format:base": "prettier $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}'",
     "license-check": "yarn pnpify license-checker-rseidelsohn $*",
-    "test": "yarn test:format && yarn test:lint && yarn test:compile && yarn test:jest && yarn test:licenses",
-    "test:compile": "yarn tsc --noEmit",
+    "test": "yarn test:format && yarn test:lint && yarn test:build && yarn test:jest && yarn test:licenses",
+    "test:build": "yarn build",
     "test:format": "yarn format:base --check",
     "test:jest": "node --experimental-vm-modules $(yarn bin jest)",
     "test:licenses": "yarn license-check --summary --unknown && yarn license-check --unknown --failOn 'UNLICENSED;UNKNOWN'",
@@ -33,7 +27,7 @@
     "test:packages": "yarn all run test"
   },
   "files": [
-    "dist/**/*.*"
+    "dist"
   ],
   "keywords": [
     "react",
@@ -87,20 +81,17 @@
     "rimraf": "^5.0.5",
     "ts-jest": "^29.1.1",
     "tsd": "^0.29.0",
-    "tsup": "^7.2.0",
-    "typescript": "~5.2.2"
+    "typescript": "^5.2.2",
+    "unbuild": "^2.0.0"
   },
-  "types": "./dist/index.d.ts",
   "contributors": [
     {
       "name": "Marco Falkenberg",
       "email": "m.falkenberg@mittwald.de"
     }
   ],
-  "dependenciesMeta": {
-    "prettier@2.8.8": {
-      "unplugged": true
-    }
-  },
-  "packageManager": "yarn@4.0.1"
+  "packageManager": "yarn@4.0.1",
+  "unbuild": {
+    "declaration": true
+  }
 }
