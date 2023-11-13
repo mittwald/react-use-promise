@@ -15,10 +15,10 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: yarn
       - run: yarn test
-      - run: yarn compile
+      - run: yarn build
       - run:
           npm version --no-workspaces-update --no-git-tag-version
           ${{github.ref_name}}
-      - run: npm publish --access=public
+      - run: npm publish --access=public --tag=$(npx auto-dist-tag)
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
