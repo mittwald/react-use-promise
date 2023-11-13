@@ -22,7 +22,7 @@
     "test:build": "yarn build",
     "test:format": "yarn format:base --check",
     "test:jest": "node --experimental-vm-modules $(yarn bin jest)",
-    "test:licenses": "yarn license-check --summary --unknown && yarn license-check --unknown --failOn 'UNLICENSED;UNKNOWN'",
+    "test:licenses": "yarn license-check --unknown --failOn 'UNLICENSED;UNKNOWN'",
     "test:lint": "eslint . --cache",
     "test:packages": "yarn all run test"
   },
