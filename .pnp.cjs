@@ -31,7 +31,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/jest-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.1.4"],\
           ["@testing-library/react", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:14.1.2"],\
           ["@types/jest", "npm:29.5.7"],\
-          ["@types/luxon", "npm:3.3.3"],\
+          ["@types/luxon", "npm:3.3.4"],\
           ["@types/react", "npm:18.2.36"],\
           ["@types/react-dom", "npm:18.2.15"],\
           ["@typescript-eslint/eslint-plugin", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.10.0"],\
@@ -44,7 +44,7 @@ const RAW_RUNTIME_STATE =
           ["jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.7.0"],\
           ["license-checker-rseidelsohn", "npm:4.2.10"],\
-          ["luxon", "npm:3.4.3"],\
+          ["luxon", "npm:3.4.4"],\
           ["minimatch", "npm:9.0.3"],\
           ["object-code", "npm:1.3.0"],\
           ["prettier", "npm:2.8.8"],\
@@ -1927,7 +1927,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/jest-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.1.4"],\
           ["@testing-library/react", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:14.1.2"],\
           ["@types/jest", "npm:29.5.7"],\
-          ["@types/luxon", "npm:3.3.3"],\
+          ["@types/luxon", "npm:3.3.4"],\
           ["@types/react", "npm:18.2.36"],\
           ["@types/react-dom", "npm:18.2.15"],\
           ["@typescript-eslint/eslint-plugin", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.10.0"],\
@@ -1940,7 +1940,7 @@ const RAW_RUNTIME_STATE =
           ["jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.7.0"],\
           ["license-checker-rseidelsohn", "npm:4.2.10"],\
-          ["luxon", "npm:3.4.3"],\
+          ["luxon", "npm:3.4.4"],\
           ["minimatch", "npm:9.0.3"],\
           ["object-code", "npm:1.3.0"],\
           ["prettier", "npm:2.8.8"],\
@@ -2526,10 +2526,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/luxon", [\
-      ["npm:3.3.3", {\
-        "packageLocation": "./.yarn/cache/@types-luxon-npm-3.3.3-64838dc4b1-a29f4d794f.zip/node_modules/@types/luxon/",\
+      ["npm:3.3.4", {\
+        "packageLocation": "./.yarn/cache/@types-luxon-npm-3.3.4-992c12d740-9f5f3aa078.zip/node_modules/@types/luxon/",\
         "packageDependencies": [\
-          ["@types/luxon", "npm:3.3.3"]\
+          ["@types/luxon", "npm:3.3.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6909,10 +6909,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["luxon", [\
-      ["npm:3.4.3", {\
-        "packageLocation": "./.yarn/cache/luxon-npm-3.4.3-1b54517fa6-b155c9961c.zip/node_modules/luxon/",\
+      ["npm:3.4.4", {\
+        "packageLocation": "./.yarn/cache/luxon-npm-3.4.4-c93f95dde8-c14164bc33.zip/node_modules/luxon/",\
         "packageDependencies": [\
-          ["luxon", "npm:3.4.3"]\
+          ["luxon", "npm:3.4.4"]\
         ],\
         "linkType": "HARD"\
       }]\
