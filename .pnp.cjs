@@ -33,7 +33,7 @@ const RAW_RUNTIME_STATE =
           ["@types/jest", "npm:29.5.7"],\
           ["@types/luxon", "npm:3.3.3"],\
           ["@types/react", "npm:18.2.36"],\
-          ["@types/react-dom", "npm:18.2.14"],\
+          ["@types/react-dom", "npm:18.2.15"],\
           ["@typescript-eslint/eslint-plugin", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.10.0"],\
           ["@typescript-eslint/parser", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.10.0"],\
           ["@yarnpkg/pnpify", "npm:4.0.0"],\
@@ -1929,7 +1929,7 @@ const RAW_RUNTIME_STATE =
           ["@types/jest", "npm:29.5.7"],\
           ["@types/luxon", "npm:3.3.3"],\
           ["@types/react", "npm:18.2.36"],\
-          ["@types/react-dom", "npm:18.2.14"],\
+          ["@types/react-dom", "npm:18.2.15"],\
           ["@typescript-eslint/eslint-plugin", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.10.0"],\
           ["@typescript-eslint/parser", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.10.0"],\
           ["@yarnpkg/pnpify", "npm:4.0.0"],\
@@ -2291,7 +2291,7 @@ const RAW_RUNTIME_STATE =
           ["@babel/runtime", "npm:7.22.3"],\
           ["@testing-library/dom", "npm:9.3.3"],\
           ["@types/react", "npm:18.2.36"],\
-          ["@types/react-dom", "npm:18.2.14"],\
+          ["@types/react-dom", "npm:18.2.15"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"]\
         ],\
@@ -2628,10 +2628,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/react-dom", [\
-      ["npm:18.2.14", {\
-        "packageLocation": "./.yarn/cache/@types-react-dom-npm-18.2.14-cdfaaeda19-c7feb6542d.zip/node_modules/@types/react-dom/",\
+      ["npm:18.2.15", {\
+        "packageLocation": "./.yarn/cache/@types-react-dom-npm-18.2.15-2269cd02ff-57ea7e9e21.zip/node_modules/@types/react-dom/",\
         "packageDependencies": [\
-          ["@types/react-dom", "npm:18.2.14"],\
+          ["@types/react-dom", "npm:18.2.15"],\
           ["@types/react", "npm:18.2.28"]\
         ],\
         "linkType": "HARD"\
