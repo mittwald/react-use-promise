@@ -30,6 +30,7 @@
   "exports": {
     ".": "./dist/index.mjs"
   },
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -40,10 +41,10 @@
     "test": "yarn test:tsc && yarn test:lint && yarn test:build && yarn test:jest && yarn test:licenses",
     "test:build": "yarn build",
     "test:jest": "node --experimental-vm-modules $(yarn bin jest)",
-    "test:tsc": "tsc --noEmit",
     "test:licenses": "yarn license-check --unknown --failOn 'UNLICENSED;UNKNOWN'",
     "test:lint": "eslint . --cache",
-    "test:packages": "yarn all run test"
+    "test:packages": "yarn all run test",
+    "test:tsc": "tsc --noEmit"
   },
   "dependencies": {
     "@types/luxon": "3.3.7",
