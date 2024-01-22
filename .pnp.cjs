@@ -55,7 +55,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"],\
           ["rimraf", "npm:5.0.5"],\
           ["ts-jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.1.1"],\
-          ["tsd", "npm:0.30.0"],\
+          ["tsd", "npm:0.30.4"],\
           ["typescript", "patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"],\
           ["unbuild", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:2.0.0"]\
         ],\
@@ -1951,7 +1951,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"],\
           ["rimraf", "npm:5.0.5"],\
           ["ts-jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.1.1"],\
-          ["tsd", "npm:0.30.0"],\
+          ["tsd", "npm:0.30.4"],\
           ["typescript", "patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"],\
           ["unbuild", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:2.0.0"]\
         ],\
@@ -9584,10 +9584,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["tsd", [\
-      ["npm:0.30.0", {\
-        "packageLocation": "./.yarn/cache/tsd-npm-0.30.0-daf02e8514-03385459d3.zip/node_modules/tsd/",\
+      ["npm:0.30.4", {\
+        "packageLocation": "./.yarn/cache/tsd-npm-0.30.4-fc8080eb09-82e5af80b5.zip/node_modules/tsd/",\
         "packageDependencies": [\
-          ["tsd", "npm:0.30.0"],\
+          ["tsd", "npm:0.30.4"],\
           ["@tsd/typescript", "npm:5.3.3"],\
           ["eslint-formatter-pretty", "npm:4.1.0"],\
           ["globby", "npm:11.1.0"],\
