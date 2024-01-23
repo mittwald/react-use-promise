@@ -48,7 +48,7 @@ const RAW_RUNTIME_STATE =
           ["minimatch", "npm:9.0.3"],\
           ["object-code", "npm:1.3.2"],\
           ["prettier", "npm:3.1.1"],\
-          ["prettier-plugin-jsdoc", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.1.1"],\
+          ["prettier-plugin-jsdoc", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.3.0"],\
           ["prettier-plugin-pkgsort", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:0.2.1"],\
           ["prettier-plugin-sort-json", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:3.1.0"],\
           ["react", "npm:18.2.0"],\
@@ -1944,7 +1944,7 @@ const RAW_RUNTIME_STATE =
           ["minimatch", "npm:9.0.3"],\
           ["object-code", "npm:1.3.2"],\
           ["prettier", "npm:3.1.1"],\
-          ["prettier-plugin-jsdoc", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.1.1"],\
+          ["prettier-plugin-jsdoc", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.3.0"],\
           ["prettier-plugin-pkgsort", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:0.2.1"],\
           ["prettier-plugin-sort-json", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:3.1.0"],\
           ["react", "npm:18.2.0"],\
@@ -8401,17 +8401,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["prettier-plugin-jsdoc", [\
-      ["npm:1.1.1", {\
-        "packageLocation": "./.yarn/cache/prettier-plugin-jsdoc-npm-1.1.1-8a86538da5-d36370fd54.zip/node_modules/prettier-plugin-jsdoc/",\
+      ["npm:1.3.0", {\
+        "packageLocation": "./.yarn/cache/prettier-plugin-jsdoc-npm-1.3.0-f942157b3d-d3b3f28280.zip/node_modules/prettier-plugin-jsdoc/",\
         "packageDependencies": [\
-          ["prettier-plugin-jsdoc", "npm:1.1.1"]\
+          ["prettier-plugin-jsdoc", "npm:1.3.0"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.1.1", {\
-        "packageLocation": "./.yarn/__virtual__/prettier-plugin-jsdoc-virtual-237390082b/0/cache/prettier-plugin-jsdoc-npm-1.1.1-8a86538da5-d36370fd54.zip/node_modules/prettier-plugin-jsdoc/",\
+      ["virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.3.0", {\
+        "packageLocation": "./.yarn/__virtual__/prettier-plugin-jsdoc-virtual-aa7af46c5a/0/cache/prettier-plugin-jsdoc-npm-1.3.0-f942157b3d-d3b3f28280.zip/node_modules/prettier-plugin-jsdoc/",\
         "packageDependencies": [\
-          ["prettier-plugin-jsdoc", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.1.1"],\
+          ["prettier-plugin-jsdoc", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.3.0"],\
           ["@types/prettier", null],\
           ["binary-searching", "npm:2.0.5"],\
           ["comment-parser", "npm:1.4.1"],\

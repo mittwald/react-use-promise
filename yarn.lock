@@ -6990,15 +6990,15 @@ __metadata:
   linkType: hard
 
 "prettier-plugin-jsdoc@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "prettier-plugin-jsdoc@npm:1.1.1"
+  version: 1.3.0
+  resolution: "prettier-plugin-jsdoc@npm:1.3.0"
   dependencies:
     binary-searching: "npm:^2.0.5"
     comment-parser: "npm:^1.4.0"
     mdast-util-from-markdown: "npm:^2.0.0"
   peerDependencies:
     prettier: ^3.0.0
-  checksum: d36370fd54230dda42acb04c9f96e4639ddb081bdc7532451a8e4344325ecf0ac3ebca5ee18fad2223e8ed5b0aedcd9a60fb85c9c3abb76d2a531eba7987d635
+  checksum: d3b3f28280b76360c20ade2f341608dfad9887b5fde61c99109ee61f3931b52a3d432d140d9995b966461d3478cec58780e5f68847de8816ded2247cab3caa9a
   languageName: node
   linkType: hard
 
