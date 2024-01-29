@@ -31,7 +31,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/jest-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.1.5"],\
           ["@testing-library/react", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:14.1.2"],\
           ["@types/jest", "npm:29.5.11"],\
-          ["@types/luxon", "npm:3.3.7"],\
+          ["@types/luxon", "npm:3.4.2"],\
           ["@types/react", "npm:18.2.45"],\
           ["@types/react-dom", "npm:18.2.18"],\
           ["@typescript-eslint/eslint-plugin", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.14.0"],\
@@ -1927,7 +1927,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/jest-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.1.5"],\
           ["@testing-library/react", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:14.1.2"],\
           ["@types/jest", "npm:29.5.11"],\
-          ["@types/luxon", "npm:3.3.7"],\
+          ["@types/luxon", "npm:3.4.2"],\
           ["@types/react", "npm:18.2.45"],\
           ["@types/react-dom", "npm:18.2.18"],\
           ["@typescript-eslint/eslint-plugin", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.14.0"],\
@@ -2535,10 +2535,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/luxon", [\
-      ["npm:3.3.7", {\
-        "packageLocation": "./.yarn/cache/@types-luxon-npm-3.3.7-b6cc654cb3-282ac72fd5.zip/node_modules/@types/luxon/",\
+      ["npm:3.4.2", {\
+        "packageLocation": "./.yarn/cache/@types-luxon-npm-3.4.2-092583f006-fd89566e30.zip/node_modules/@types/luxon/",\
         "packageDependencies": [\
-          ["@types/luxon", "npm:3.3.7"]\
+          ["@types/luxon", "npm:3.4.2"]\
         ],\
         "linkType": "HARD"\
       }]\
