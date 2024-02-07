@@ -1549,8 +1549,8 @@ __metadata:
   linkType: hard
 
 "@testing-library/jest-dom@npm:^6.4.1":
-  version: 6.4.1
-  resolution: "@testing-library/jest-dom@npm:6.4.1"
+  version: 6.4.2
+  resolution: "@testing-library/jest-dom@npm:6.4.2"
   dependencies:
     "@adobe/css-tools": "npm:^4.3.2"
     "@babel/runtime": "npm:^7.9.2"
@@ -1577,7 +1577,7 @@ __metadata:
       optional: true
     vitest:
       optional: true
-  checksum: ae042927361fb0c1bfe9fb5ed7cbcb7d5acff3236bfad203e4cd99d83e4b6047624df3b9c5fa3199534e6885e4ac5d3777a2a5f536f3b65390218ac48fae50a1
+  checksum: 7ee1e51caffad032734a4a43a00bf72d49080cf1bbf53021b443e91c7fa3762a66f55ce68f1c6643590fe66fbc4df92142659b8cf17c92166a3fb22691987e0d
   languageName: node
   linkType: hard
 
@@ -1884,25 +1884,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*":
-  version: 18.2.43
-  resolution: "@types/react@npm:18.2.43"
+"@types/react@npm:*, @types/react@npm:^18.2.51":
+  version: 18.2.53
+  resolution: "@types/react@npm:18.2.53"
   dependencies:
     "@types/prop-types": "npm:*"
     "@types/scheduler": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: a9d90a93380bb67623f27eba83e2d05b548109f7eb6fd591f5c4a3716bc257cc7cb078455db7ea4308d5f2ff6b4fe48d9a4a560145d9384069a2b5121bc93937
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:^18.2.51":
-  version: 18.2.51
-  resolution: "@types/react@npm:18.2.51"
-  dependencies:
-    "@types/prop-types": "npm:*"
-    "@types/scheduler": "npm:*"
-    csstype: "npm:^3.0.2"
-  checksum: af2935027172ea40695b90b02e98520a097160fa8517f6022e2e2cf8518017e0b84991cc34ee8d72cd91dcb7c5404784d4bada7a4836edf2727c3d6703c16ff8
+  checksum: 9a518aef07c6bb743aa18a2aea7f618d4e7c9e44e14d25119d2e255c48e68ecd901ede8b4eaf22ffe4f52c1ff85e11634ec75e73dcfc0719cc52269629f13d69
   languageName: node
   linkType: hard
 
@@ -7299,11 +7288,11 @@ __metadata:
   linkType: hard
 
 "prettier@npm:^3.2.4":
-  version: 3.2.4
-  resolution: "prettier@npm:3.2.4"
+  version: 3.2.5
+  resolution: "prettier@npm:3.2.5"
   bin:
     prettier: bin/prettier.cjs
-  checksum: e2b735d0552501b3a7ac8bd3ba3b6de2920bb35bd4cd02d08cb9057ebe3e96d83b9a7e4b903d987b7530a50223b12c74d107c154337236ae2c68156ba1e65cd2
+  checksum: d509f9da0b70e8cacc561a1911c0d99ec75117faed27b95cc8534cb2349667dee6351b0ca83fa9d5703f14127faa52b798de40f5705f02d843da133fc3aa416a
   languageName: node
   linkType: hard
 
