@@ -10,25 +10,22 @@
   "description": "Simple and declarative use of Promises in your React components. Observe their state and refresh them in various advanced ways.",
   "keywords": [
     "async",
+    "axios",
     "cache",
-    "custom-hook",
-    "data",
-    "data-fetching",
     "fetch",
     "hooks",
+    "http",
+    "load",
     "react",
-    "react-cache",
-    "react-hook",
-    "react-hooks",
     "react-suspense",
-    "reactjs",
     "suspense"
   ],
   "homepage": "https://github.com/mittwald/react-use-promise#readme",
   "repository": "github:mittwald/react-use-promise",
   "license": "MIT",
   "exports": {
-    ".": "./dist/index.mjs"
+    ".": "./dist/index.mjs",
+    "./http": "./dist/http/index.mjs"
   },
   "types": "./dist/index.d.ts",
   "files": [
@@ -63,6 +60,7 @@
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
     "@yarnpkg/pnpify": "^4.0.1",
+    "axios": "^1.6.7",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-json": "^3.1.0",
@@ -83,7 +81,13 @@
     "unbuild": "^2.0.0"
   },
   "peerDependencies": {
+    "axios": "^1.6.7",
     "react": ">=17.0"
+  },
+  "peerDependenciesMeta": {
+    "axios": {
+      "optional": true
+    }
   },
   "unbuild": {
     "declaration": true
