@@ -27,13 +27,6 @@
     ".": "./dist/index.mjs",
     "./http": "./dist/http/index.mjs"
   },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*"
-      ]
-    }
-  },
   "files": [
     "dist"
   ],
