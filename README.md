@@ -278,7 +278,7 @@ const Score = ({ matchId }) => {
 You can configure `usePromise` and `getAsyncResource` with the following
 options:
 
-#### autoRefresh (only supported by `usePromise`, `useHttp` and `useHttpData`)
+#### autoRefresh – only supported by hooks (`use*`)
 
 Type:
 [Duration like object](https://moment.github.io/luxon/api-docs/index.html#durationfromobject)\
@@ -294,7 +294,7 @@ autoRefresh: {
 }
 ```
 
-#### refreshOnWindowFocus (only supported by `usePromise`, `useHttp` and `useHttpData`)
+#### refreshOnWindowFocus – only supported by hooks (`use*`)
 
 Type: `boolean`\
 Default: `false`
@@ -302,7 +302,7 @@ Default: `false`
 Set this option to `true`, if the resource should automatically be refreshed, if
 the window is re-focused.
 
-#### keepValueWhileLoading (only supported by `usePromise`, `useHttp` and `useHttpData`)
+#### keepValueWhileLoading – only supported by hooks (`use*`)
 
 Type: `boolean`\
 Default: `true`
@@ -338,7 +338,7 @@ the "same code" issue (see
 ["Caveats of default storage key generation"](#caveats-of-default-storage-key-generation)),
 you can set an explicit loader ID, that identifies the loader function.
 
-#### useSuspense (only supported by `usePromise`, `useHttp` and `useHttpData`)
+#### useSuspense – only supported by hooks (`use*`)
 
 Type: `boolean`\
 Default: `true`
