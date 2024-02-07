@@ -55,6 +55,7 @@ const App = () => {
 
 - Simple and declarative use of Promises, [loading-](#defining-loading-views)
   and [error views](#error-handling)
+- Built-in support to load data with [HTTP resources](#-http-resources)
 - Auto-refresh after [timeout](#autorefresh-only-supported-by-usepromise) or on
   [window focus](#refreshonwindowfocus-only-supported-by-usepromise)
 - Type-Safe API
@@ -88,6 +89,11 @@ const App = () => {
 - [Tags](#tags-1)
   - [Hierarchical Tags](#hierarchical-tags)
 - [Refreshing resources](#refreshing-resources)
+- [HTTP Resources](#-http-resources)
+  - [Request config](#request-config)
+  - [Default request config](#default-request-config)
+  - [Caching and refreshing of HTTP Resources](#caching-and-refreshing-of-http-resources)
+  - [API](#http-api)
 - [Lazy loading with Async Resources](#-lazy-loading-with-async-resources)
 - [Defining loading views](#defining-loading-views)
 - [Opt-Out Suspense](#opt-out-suspense)
@@ -633,6 +639,140 @@ You might also use the auto-refresh mechanisms
 ```js
 import { refresh } from "@mittwald/react-use-promise";
 ```
+
+## 🌐 HTTP Resources
+
+A major use case of this library might be to load data from some HTTP-API. This
+is exactly why a preconfigured HTTP resource is included in this package. The
+simplest way is to use the `useHttpData()` method to GET data from a given URL.
+
+```jsx
+import { useHttpData } from "@mittwald/react-use-promise/http";
+
+const NewsItem = ({ id }) => {
+  const news = useHttpData(
+    `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
+  );
+
+  return (
+    <li>
+      {news.by}: {news.title}
+    </li>
+  );
+};
+```
+
+**Important**: As this feature requires the `axios` package you need to include
+it in your dependencies!
+
+```shell
+yarn add axios
+```
+
+### Request config
+
+Under the hood the popular HTTP client Axios is used to perform the request. To
+make all [Axios config](https://axios-http.com/docs/req_config) options
+available to you, the complete config object can be passed as the second
+parameter to all HTTP functions.
+
+```ts
+const videoGames = useHttpData<Article[]>(`/articles`, {
+  params: {
+    catagory: "video-games",
+  },
+});
+```
+
+### Default request config
+
+To set the default config for each request (e.g the `baseURL` or an
+`Authorization` header) you can use the
+[`axios.defaults`](https://axios-http.com/docs/config_defaults) object.
+
+```js
+import axios from "axios";
+
+axios.defaults.baseURL = "https://api.foo.org/v2";
+```
+
+### Caching and refreshing of HTTP Resources
+
+HTTP Resources are cached by the identity of the request config – meaning,
+different request configs result in different HTTP Resources.
+
+Cache tags added to HTTP Resources:
+
+- `http/method/(HTTP METHOD)`
+- `http/uri/(REQUEST URI)`
+
+This lets you refresh HTTP Resources with a certain path.
+
+```js
+import { refresh } from "@mittwald/react-use-promise";
+
+function refreshArticles() {
+  refresh({
+    tag: "http/uri/**/articles",
+  });
+}
+```
+
+### HTTP API
+
+### useHttpData(url, requestConfig?, usePromiseOptions?)
+
+Fetches data from a given URL with an optional request configuration.
+
+Returns: the parsed body data of the response
+
+#### url
+
+The URL to perform the request on
+
+#### requestConfig?
+
+The [Axios request config](https://axios-http.com/docs/req_config)
+
+#### usePromiseOptions?
+
+For possible options see [Options section](#options).
+
+### useHttp(url, requestConfig?, usePromiseOptions?)
+
+Get the response from a given URL with an optional request configuration.
+
+Returns: an [Axios response object](https://axios-http.com/docs/res_schema)
+
+#### url
+
+The URL to perform the request on
+
+#### requestConfig?
+
+The [Axios request config](https://axios-http.com/docs/req_config)
+
+#### usePromiseOptions?
+
+For possible options see [Options section](#options).
+
+### getHttpResource(url, requestConfig?, usePromiseOptions?)
+
+Creates an Async Resource that performs an HTTP request as the loader function.
+
+Returns: an [Axios response object](https://axios-http.com/docs/res_schema)
+
+#### url
+
+The URL to perform the request on
+
+#### requestConfig?
+
+The [Axios request config](https://axios-http.com/docs/req_config)
+
+#### usePromiseOptions?
+
+For possible options see [Options section](#options).
 
 ## 😴 Lazy loading with Async Resources
 
