@@ -3,6 +3,8 @@
 Simple and declarative use of Promises in your React components. Observe their
 state and refresh them in various advanced ways.
 
+**Now with built-in support for 🌐 [HTTP](#-http-resources)!**
+
 ```jsx
 import { Suspense } from "react";
 import { usePromise, refresh } from "@mittwald/react-use-promise";
