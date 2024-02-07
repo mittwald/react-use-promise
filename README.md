@@ -55,7 +55,8 @@ const App = () => {
 
 - Simple and declarative use of Promises, [loading-](#defining-loading-views)
   and [error views](#error-handling)
-- [Auto-refresh](#autorefresh) after timeout
+- Auto-refresh after [timeout](#autorefresh-only-supported-by-usepromise) or on
+  [window focus](#refreshonwindowfocus-only-supported-by-usepromise)
 - Type-Safe API
 - No "double-loading" when using "same" Promise in different places in your app
 - Caching with support for [custom tags](#tags-1)
@@ -196,7 +197,9 @@ const getUserResource = (id) => getAsyncResource(getUser, [id]);
 
 The async resource returned by `getAsyncResource` has the following API.
 
-#### .use()
+#### .use(options?)
+
+For possible options see [Options section](#options).
 
 Returns: the value of the async resource, or the result object when
 `useSuspense: false` (see [Opt-out Suspense](#opt-out-suspense))
@@ -622,6 +625,10 @@ result is available.
 
 Refreshing resources that are not used in any mounted component, will suspend
 the reload until the resource is actually used the next time.
+
+You might also use the auto-refresh mechanisms
+[after timeout](#autorefresh-only-supported-by-usepromise) or
+[refocus window](#refreshonwindowfocus-only-supported-by-usepromise).
 
 ```js
 import { refresh } from "@mittwald/react-use-promise";
