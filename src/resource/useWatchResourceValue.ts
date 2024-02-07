@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
 import { UseWatchResourceOptions, UseWatchResourceResult } from "./types.js";
 import { hash } from "object-code";
+import { useOnWindowFocused } from "../lib/useOnWindowFocused.js";
 
 export const useWatchResourceValue = <
   T,
@@ -16,6 +17,7 @@ export const useWatchResourceValue = <
   const {
     keepValueWhileLoading = true,
     useSuspense = true,
+    refreshOnWindowFocus = false,
     autoRefresh,
   } = options;
 
@@ -27,7 +29,13 @@ export const useWatchResourceValue = <
     if (autoRefresh) {
       return resource.addTTL(autoRefresh);
     }
-  }, [hash(autoRefresh)]);
+  }, [resource, hash(autoRefresh)]);
+
+  useOnWindowFocused(() => {
+    if (refreshOnWindowFocus) {
+      resource.refresh();
+    }
+  }, [resource, refreshOnWindowFocus]);
 
   void resource.load();
 

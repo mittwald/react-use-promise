@@ -23,6 +23,7 @@ export type UseWatchResourceOptions = {
   keepValueWhileLoading?: boolean;
   useSuspense?: boolean;
   autoRefresh?: DurationLikeObject;
+  refreshOnWindowFocus?: boolean;
 } & GetAsyncResourceOptions;
 
 export type NoSuspenseReturnType<T> = Readonly<

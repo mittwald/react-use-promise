@@ -285,6 +285,14 @@ autoRefresh: {
 }
 ```
 
+#### refreshOnWindowFocus (only supported by `usePromise`)
+
+Type: `boolean`\
+Default: `false`
+
+Set this option to `true`, if the resource should automatically be refreshed, if
+the window is re-focused.
+
 #### keepValueWhileLoading (only supported by `usePromise`)
 
 Type: `boolean`\

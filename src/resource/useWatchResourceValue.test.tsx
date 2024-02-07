@@ -1,4 +1,4 @@
-import { beforeEach, expect, jest, test } from "@jest/globals";
+import { beforeEach, describe, expect, jest, test } from "@jest/globals";
 import React, { FC } from "react";
 import { AsyncLoader, UseWatchResourceOptions } from "./types.js";
 import { AsyncResource } from "./AsyncResource.js";
@@ -49,6 +49,10 @@ const expectValue = (value: unknown): void => {
   screen.getByText(JSON.stringify(value));
 };
 
+const waitToBeLoaded = async (percent = 100): Promise<void> => {
+  await act(() => jest.advanceTimersByTimeAsync(loadingTime * (percent / 100)));
+};
+
 test("Loading view is triggered", async () => {
   render(<TestView />);
   screen.getByTestId("loading-view");
@@ -75,15 +79,44 @@ test("renders old value when reloading and then new value", async () => {
 
   // refresh resource
   getName.mockReturnValue("Bar");
-  await act(() => {
+  act(() => {
     testResource.refresh();
   });
-  // wait some time -> old value visible
-  await jest.advanceTimersByTimeAsync(loadingTime / 2);
+  // wait for 50% -> old value visible
+  await waitToBeLoaded(50);
   expectValue("Foo");
 
   await waitForRendered(4);
   expectValue("Bar");
+});
+
+test("focus event triggers resource refresh, if 'refreshOnWindowFocus' is enabled", async () => {
+  options.refreshOnWindowFocus = true;
+  render(<TestView />);
+  await waitToBeLoaded();
+  expectValue("Foo");
+
+  getName.mockReturnValue("Bar");
+  act(() => {
+    window.dispatchEvent(new Event("focus"));
+  });
+
+  await waitToBeLoaded();
+  expectValue("Bar");
+});
+
+test("focus event does not trigger resource refresh, if 'refreshOnWindowFocus' is not enabled", async () => {
+  render(<TestView />);
+  await waitToBeLoaded();
+  expectValue("Foo");
+
+  getName.mockReturnValue("Bar");
+  act(() => {
+    window.dispatchEvent(new Event("focus"));
+  });
+
+  await waitToBeLoaded();
+  expectValue("Foo");
 });
 
 describe("with disabled suspense", () => {
@@ -128,11 +161,11 @@ describe("with disabled suspense", () => {
 
     // refresh resource
     getName.mockReturnValue("Bar");
-    await act(() => {
+    act(() => {
       testResource.refresh();
     });
-    // wait some time -> old value visible
-    await jest.advanceTimersByTimeAsync(loadingTime / 2);
+    // wait 50% -> old value visible
+    await waitToBeLoaded(50);
 
     expectValue({
       maybeValue: "Foo",
@@ -159,12 +192,12 @@ describe("with disabled suspense", () => {
 
     // refresh resource
     getName.mockReturnValue("Bar");
-    await act(() => {
+    act(() => {
       testResource.refresh();
     });
 
-    // wait some time -> old value visible
-    await jest.advanceTimersByTimeAsync(loadingTime / 2);
+    // wait 50% -> old value visible
+    await waitToBeLoaded(50);
 
     expectValue({
       hasValue: false,
