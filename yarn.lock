@@ -6636,9 +6636,9 @@ __metadata:
   linkType: hard
 
 "object-code@npm:^1.3.2":
-  version: 1.3.2
-  resolution: "object-code@npm:1.3.2"
-  checksum: f79fe7d4bce3a270c6ad171a77690d96fa9a3afa25af3fbfd87f426d937d1a0bf9763ea3cc58f0728ba80c312ffa048bbdf4fe8a30b3587e6e1a988b59bbcc49
+  version: 1.3.3
+  resolution: "object-code@npm:1.3.3"
+  checksum: f6413d2097556a2f0643d145ce57ced10025e381927bb5688d32757424ef674463e3487bd17cfff45e2efe378419a30a364fc46f2f96c29ae3d9c8f6f573ca52
   languageName: node
   linkType: hard
 
