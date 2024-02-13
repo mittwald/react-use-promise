@@ -38,6 +38,7 @@ const RAW_RUNTIME_STATE =
           ["@typescript-eslint/parser", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.20.0"],\
           ["@yarnpkg/pnpify", "npm:4.0.1"],\
           ["axios", "npm:1.6.7"],\
+          ["browser-or-node", "npm:3.0.0-pre.0"],\
           ["eslint", "npm:8.56.0"],\
           ["eslint-config-prettier", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:9.1.0"],\
           ["eslint-plugin-json", "npm:3.1.0"],\
@@ -1844,6 +1845,7 @@ const RAW_RUNTIME_STATE =
           ["@typescript-eslint/parser", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:6.20.0"],\
           ["@yarnpkg/pnpify", "npm:4.0.1"],\
           ["axios", "npm:1.6.7"],\
+          ["browser-or-node", "npm:3.0.0-pre.0"],\
           ["eslint", "npm:8.56.0"],\
           ["eslint-config-prettier", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:9.1.0"],\
           ["eslint-plugin-json", "npm:3.1.0"],\
@@ -3539,6 +3541,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["braces", "npm:3.0.2"],\
           ["fill-range", "npm:7.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["browser-or-node", [\
+      ["npm:3.0.0-pre.0", {\
+        "packageLocation": "./.yarn/cache/browser-or-node-npm-3.0.0-pre.0-a139832ac8-16610f6550.zip/node_modules/browser-or-node/",\
+        "packageDependencies": [\
+          ["browser-or-node", "npm:3.0.0-pre.0"]\
         ],\
         "linkType": "HARD"\
       }]\
