@@ -1290,6 +1290,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^6.20.0"
     "@yarnpkg/pnpify": "npm:^4.0.1"
     axios: "npm:^1.6.7"
+    browser-or-node: "npm:^3.0.0-pre.0"
     eslint: "npm:^8.56.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-json: "npm:^3.1.0"
@@ -2615,6 +2616,13 @@ __metadata:
   dependencies:
     fill-range: "npm:^7.0.1"
   checksum: 966b1fb48d193b9d155f810e5efd1790962f2c4e0829f8440b8ad236ba009222c501f70185ef732fef17a4c490bb33a03b90dab0631feafbdf447da91e8165b1
+  languageName: node
+  linkType: hard
+
+"browser-or-node@npm:^3.0.0-pre.0":
+  version: 3.0.0-pre.0
+  resolution: "browser-or-node@npm:3.0.0-pre.0"
+  checksum: 16610f655079cf116c1bd817dc4489023baf79fff57ce4f756dd176aab8853dbac2c6a791b673751021ca3a07da263ce3ecbd296a1438cb92110a36e65644a45
   languageName: node
   linkType: hard
 
