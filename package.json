@@ -24,8 +24,8 @@
   "repository": "github:mittwald/react-use-promise",
   "license": "MIT",
   "exports": {
-    ".": "./dist/index.mjs",
-    "./http": "./dist/http/index.mjs"
+    ".": "./dist/index.js",
+    "./http": "./dist/http/index.js"
   },
   "files": [
     "dist"
