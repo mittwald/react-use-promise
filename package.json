@@ -24,23 +24,30 @@
   "repository": "github:mittwald/react-use-promise",
   "license": "MIT",
   "exports": {
-    ".": "./dist/index.js",
-    "./http": "./dist/http/index.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./http": {
+      "types": "./dist/http/index.d.ts",
+      "import": "./dist/http/index.js"
+    }
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
-    "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx}'",
-    "license-check": "yarn pnpify license-checker-rseidelsohn $*",
-    "test": "yarn test:tsc && yarn test:lint && yarn test:build && yarn test:jest && yarn test:licenses",
-    "test:build": "yarn build",
+    "build": "run build:clean && run tsc",
+    "build:clean": "run rimraf dist",
+    "format": "run prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx}'",
+    "license-check": "run pnpify license-checker-rseidelsohn $*",
+    "test": "run test:tsc && run test:lint && run test:build && run test:jest && run test:licenses",
+    "test:build": "run build",
     "test:jest": "node --experimental-vm-modules $(yarn bin jest)",
-    "test:licenses": "yarn license-check --unknown --failOn 'UNLICENSED;UNKNOWN'",
-    "test:lint": "eslint . --cache",
+    "test:licenses": "run license-check --unknown --failOn 'UNLICENSED;UNKNOWN'",
+    "test:lint": "run eslint . --cache",
     "test:packages": "yarn all run test",
-    "test:tsc": "tsc --noEmit"
+    "test:tsc": "run tsc --noEmit"
   },
   "dependencies": {
     "@types/luxon": "3.4.2",
@@ -79,8 +86,7 @@
     "ts-jest": "^29.1.2",
     "tsd": "^0.30.5",
     "tsup": "^8.0.2",
-    "typescript": "^5.3.3",
-    "unbuild": "^2.0.0"
+    "typescript": "^5.3.3"
   },
   "peerDependencies": {
     "axios": "^1.6.7",
@@ -90,13 +96,5 @@
     "axios": {
       "optional": true
     }
-  },
-  "tsup": {
-    "entry": [
-      "src/index.ts",
-      "src/http/index.ts"
-    ],
-    "experimentalDts": true,
-    "format": "esm"
   }
 }
