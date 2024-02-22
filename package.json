@@ -31,7 +31,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
+    "build": "tsup",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx}'",
     "license-check": "yarn pnpify license-checker-rseidelsohn $*",
     "test": "yarn test:tsc && yarn test:lint && yarn test:build && yarn test:jest && yarn test:licenses",
@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
+    "@microsoft/api-extractor": "^7.40.6",
     "@testing-library/dom": "^9.3.4",
     "@testing-library/jest-dom": "^6.4.1",
     "@testing-library/react": "^14.2.1",
@@ -77,6 +78,7 @@
     "rimraf": "^5.0.5",
     "ts-jest": "^29.1.2",
     "tsd": "^0.30.4",
+    "tsup": "^8.0.2",
     "typescript": "^5.3.3",
     "unbuild": "^2.0.0"
   },
@@ -89,7 +91,13 @@
       "optional": true
     }
   },
-  "unbuild": {
-    "declaration": true
+  "tsup": {
+    "entry": [
+      "src/index.ts",
+      "src/http/index.ts"
+    ],
+    "experimentalDts": true,
+    "clean": true,
+    "format": "esm"
   }
 }
