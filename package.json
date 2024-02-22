@@ -97,7 +97,6 @@
       "src/http/index.ts"
     ],
     "experimentalDts": true,
-    "clean": true,
     "format": "esm"
   }
 }
