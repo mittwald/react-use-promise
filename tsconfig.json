@@ -1,24 +1,22 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "jsx": "react",
-    "stripInternal": true,
+    "baseUrl": ".",
     "declaration": true,
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "declarationDir": "dist/types",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "jsx": "react",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "dist/esm",
+    "rootDir": "src",
     "skipLibCheck": true,
-    "baseUrl": ".",
+    "strict": true,
     "strictFunctionTypes": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "stripInternal": true,
+    "target": "ES2022"
   },
   "exclude": ["test-d/**/*", "*.test.ts"],
-  "include": ["src/**/*.ts"],
-  "ts-node": {
-    "esm": true
-  }
+  "include": ["src/**/*.ts"]
 }

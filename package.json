@@ -25,12 +25,12 @@
   "license": "MIT",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js"
     },
     "./http": {
-      "types": "./dist/http/index.d.ts",
-      "import": "./dist/http/index.js"
+      "types": "./dist/types/http/index.d.ts",
+      "import": "./dist/esm/http/index.js"
     }
   },
   "files": [
@@ -85,7 +85,6 @@
     "rimraf": "^5.0.5",
     "ts-jest": "^29.1.2",
     "tsd": "^0.30.5",
-    "tsup": "^8.0.2",
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
