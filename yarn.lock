@@ -7327,8 +7327,8 @@ __metadata:
   linkType: hard
 
 "tsd@npm:^0.30.5":
-  version: 0.30.5
-  resolution: "tsd@npm:0.30.5"
+  version: 0.30.7
+  resolution: "tsd@npm:0.30.7"
   dependencies:
     "@tsd/typescript": "npm:~5.3.3"
     eslint-formatter-pretty: "npm:^4.1.0"
@@ -7339,7 +7339,7 @@ __metadata:
     read-pkg-up: "npm:^7.0.0"
   bin:
     tsd: dist/cli.js
-  checksum: 10/3d6d0957b5892428eacb97badc0edb70ea77c770e6ea4421bdf448ee0e7314a8818f63476e992b68ec60e237b111e341002325304f2ba592e0fd9243493c087f
+  checksum: 10/9f9fa2d4639415620e434367bab8be85775099c97e16f41abcc2c1f42622233d11e5f18868ae5eda3376ee73b9652f77b4e1884016557c17e492f0cbf8cc3798
   languageName: node
   linkType: hard
 

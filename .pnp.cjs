@@ -58,7 +58,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"],\
           ["rimraf", "npm:5.0.5"],\
           ["ts-jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.1.2"],\
-          ["tsd", "npm:0.30.5"],\
+          ["tsd", "npm:0.30.7"],\
           ["typescript", "patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"]\
         ],\
         "linkType": "SOFT"\
@@ -1704,7 +1704,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"],\
           ["rimraf", "npm:5.0.5"],\
           ["ts-jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.1.2"],\
-          ["tsd", "npm:0.30.5"],\
+          ["tsd", "npm:0.30.7"],\
           ["typescript", "patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"]\
         ],\
         "linkType": "SOFT"\
@@ -8903,10 +8903,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["tsd", [\
-      ["npm:0.30.5", {\
-        "packageLocation": "./.yarn/cache/tsd-npm-0.30.5-05e325a448-3d6d0957b5.zip/node_modules/tsd/",\
+      ["npm:0.30.7", {\
+        "packageLocation": "./.yarn/cache/tsd-npm-0.30.7-c076bf1cf6-9f9fa2d463.zip/node_modules/tsd/",\
         "packageDependencies": [\
-          ["tsd", "npm:0.30.5"],\
+          ["tsd", "npm:0.30.7"],\
           ["@tsd/typescript", "npm:5.3.3"],\
           ["eslint-formatter-pretty", "npm:4.1.0"],\
           ["globby", "npm:11.1.0"],\
