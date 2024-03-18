@@ -53,7 +53,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.2.5"],\
           ["prettier-plugin-jsdoc", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.3.0"],\
           ["prettier-plugin-pkgsort", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:0.2.1"],\
-          ["prettier-plugin-sort-json", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:3.1.0"],\
+          ["prettier-plugin-sort-json", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:4.0.0"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"],\
           ["rimraf", "npm:5.0.5"],\
@@ -1700,7 +1700,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.2.5"],\
           ["prettier-plugin-jsdoc", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.3.0"],\
           ["prettier-plugin-pkgsort", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:0.2.1"],\
-          ["prettier-plugin-sort-json", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:3.1.0"],\
+          ["prettier-plugin-sort-json", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:4.0.0"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"],\
           ["rimraf", "npm:5.0.5"],\
@@ -7800,17 +7800,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["prettier-plugin-sort-json", [\
-      ["npm:3.1.0", {\
-        "packageLocation": "./.yarn/cache/prettier-plugin-sort-json-npm-3.1.0-cbd3ab5d27-6ca7022318.zip/node_modules/prettier-plugin-sort-json/",\
+      ["npm:4.0.0", {\
+        "packageLocation": "./.yarn/cache/prettier-plugin-sort-json-npm-4.0.0-1ae73496c1-2af71c490e.zip/node_modules/prettier-plugin-sort-json/",\
         "packageDependencies": [\
-          ["prettier-plugin-sort-json", "npm:3.1.0"]\
+          ["prettier-plugin-sort-json", "npm:4.0.0"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:3.1.0", {\
-        "packageLocation": "./.yarn/__virtual__/prettier-plugin-sort-json-virtual-1a0efe4394/0/cache/prettier-plugin-sort-json-npm-3.1.0-cbd3ab5d27-6ca7022318.zip/node_modules/prettier-plugin-sort-json/",\
+      ["virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:4.0.0", {\
+        "packageLocation": "./.yarn/__virtual__/prettier-plugin-sort-json-virtual-3bc2fa6bf3/0/cache/prettier-plugin-sort-json-npm-4.0.0-1ae73496c1-2af71c490e.zip/node_modules/prettier-plugin-sort-json/",\
         "packageDependencies": [\
-          ["prettier-plugin-sort-json", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:3.1.0"],\
+          ["prettier-plugin-sort-json", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:4.0.0"],\
           ["@types/prettier", null],\
           ["prettier", "npm:3.2.5"]\
         ],\
