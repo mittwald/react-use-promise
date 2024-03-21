@@ -31,8 +31,10 @@
     "./http": {
       "types": "./dist/types/http/index.d.ts",
       "import": "./dist/esm/http/index.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
+  "types": "./dist/types/index.d.ts",
   "files": [
     "dist"
   ],
