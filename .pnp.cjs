@@ -47,7 +47,7 @@ const RAW_RUNTIME_STATE =
           ["jest-environment-jsdom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.7.0"],\
           ["license-checker-rseidelsohn", "npm:4.3.0"],\
           ["luxon", "npm:3.4.4"],\
-          ["minimatch", "npm:9.0.3"],\
+          ["minimatch", "npm:9.0.4"],\
           ["object-code", "npm:1.3.3"],\
           ["prettier", "npm:3.2.5"],\
           ["prettier-plugin-jsdoc", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.3.0"],\
@@ -1637,7 +1637,7 @@ const RAW_RUNTIME_STATE =
           ["jest-environment-jsdom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.7.0"],\
           ["license-checker-rseidelsohn", "npm:4.3.0"],\
           ["luxon", "npm:3.4.4"],\
-          ["minimatch", "npm:9.0.3"],\
+          ["minimatch", "npm:9.0.4"],\
           ["object-code", "npm:1.3.3"],\
           ["prettier", "npm:3.2.5"],\
           ["prettier-plugin-jsdoc", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.3.0"],\
@@ -4658,7 +4658,7 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:10.3.10"],\
           ["foreground-child", "npm:3.1.1"],\
           ["jackspeak", "npm:2.3.6"],\
-          ["minimatch", "npm:9.0.3"],\
+          ["minimatch", "npm:9.0.4"],\
           ["minipass", "npm:7.0.4"],\
           ["path-scurry", "npm:1.10.1"]\
         ],\
@@ -6877,6 +6877,14 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/minimatch-npm-9.0.3-69d7d6fad5-c81b47d281.zip/node_modules/minimatch/",\
         "packageDependencies": [\
           ["minimatch", "npm:9.0.3"],\
+          ["brace-expansion", "npm:2.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:9.0.4", {\
+        "packageLocation": "./.yarn/cache/minimatch-npm-9.0.4-7be5a33efc-4cdc18d112.zip/node_modules/minimatch/",\
+        "packageDependencies": [\
+          ["minimatch", "npm:9.0.4"],\
           ["brace-expansion", "npm:2.0.1"]\
         ],\
         "linkType": "HARD"\
