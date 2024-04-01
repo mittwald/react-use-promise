@@ -32,7 +32,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/react", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:14.2.2"],\
           ["@types/jest", "npm:29.5.12"],\
           ["@types/luxon", "npm:3.4.2"],\
-          ["@types/react", "npm:18.2.67"],\
+          ["@types/react", "npm:18.2.73"],\
           ["@types/react-dom", "npm:18.2.22"],\
           ["@typescript-eslint/eslint-plugin", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:7.3.1"],\
           ["@typescript-eslint/parser", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:7.3.1"],\
@@ -1622,7 +1622,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/react", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:14.2.2"],\
           ["@types/jest", "npm:29.5.12"],\
           ["@types/luxon", "npm:3.4.2"],\
-          ["@types/react", "npm:18.2.67"],\
+          ["@types/react", "npm:18.2.73"],\
           ["@types/react-dom", "npm:18.2.22"],\
           ["@typescript-eslint/eslint-plugin", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:7.3.1"],\
           ["@typescript-eslint/parser", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:7.3.1"],\
@@ -1860,7 +1860,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/react", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:14.2.2"],\
           ["@babel/runtime", "npm:7.22.3"],\
           ["@testing-library/dom", "npm:9.3.3"],\
-          ["@types/react", "npm:18.2.67"],\
+          ["@types/react", "npm:18.2.73"],\
           ["@types/react-dom", "npm:18.2.22"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"]\
@@ -2185,12 +2185,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/react", [\
-      ["npm:18.2.67", {\
-        "packageLocation": "./.yarn/cache/@types-react-npm-18.2.67-2f005b34d0-d7e248dbe8.zip/node_modules/@types/react/",\
+      ["npm:18.2.73", {\
+        "packageLocation": "./.yarn/cache/@types-react-npm-18.2.73-655555e04d-799e30e734.zip/node_modules/@types/react/",\
         "packageDependencies": [\
-          ["@types/react", "npm:18.2.67"],\
+          ["@types/react", "npm:18.2.73"],\
           ["@types/prop-types", "npm:15.7.5"],\
-          ["@types/scheduler", "npm:0.16.3"],\
           ["csstype", "npm:3.1.3"]\
         ],\
         "linkType": "HARD"\
@@ -2201,7 +2200,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@types-react-dom-npm-18.2.22-5cfb6052f5-310da22244.zip/node_modules/@types/react-dom/",\
         "packageDependencies": [\
           ["@types/react-dom", "npm:18.2.22"],\
-          ["@types/react", "npm:18.2.67"]\
+          ["@types/react", "npm:18.2.73"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2212,15 +2211,6 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/responselike", "npm:1.0.0"],\
           ["@types/node", "npm:20.2.5"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@types/scheduler", [\
-      ["npm:0.16.3", {\
-        "packageLocation": "./.yarn/cache/@types-scheduler-npm-0.16.3-887bfc0086-2b0aec39c2.zip/node_modules/@types/scheduler/",\
-        "packageDependencies": [\
-          ["@types/scheduler", "npm:0.16.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7723,7 +7713,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/react-dom-virtual-876ec877a9/0/cache/react-dom-npm-18.2.0-dd675bca1c-ca5e7762ec.zip/node_modules/react-dom/",\
         "packageDependencies": [\
           ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"],\
-          ["@types/react", "npm:18.2.67"],\
+          ["@types/react", "npm:18.2.73"],\
           ["loose-envify", "npm:1.4.0"],\
           ["react", "npm:18.2.0"],\
           ["scheduler", "npm:0.23.0"]\
