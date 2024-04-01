@@ -1141,7 +1141,7 @@ __metadata:
     react-dom: "npm:^18.2.0"
     rimraf: "npm:^5.0.5"
     ts-jest: "npm:^29.1.2"
-    tsd: "npm:^0.30.7"
+    tsd: "npm:^0.31.0"
     typescript: "npm:^5.4.3"
   peerDependencies:
     axios: ^1.6.7
@@ -1342,10 +1342,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsd/typescript@npm:~5.3.3":
-  version: 5.3.3
-  resolution: "@tsd/typescript@npm:5.3.3"
-  checksum: 10/8191fb2b35a3a912d5ff315f8da76800d11ab19103b8410a4abcf4a0a5fb8ddcba3975af3419c3a73b4ab850b7dbe59435d3701c7631ccac3682a78799baa794
+"@tsd/typescript@npm:~5.4.3":
+  version: 5.4.3
+  resolution: "@tsd/typescript@npm:5.4.3"
+  checksum: 10/976052631d99e361da1a37250198df47b39ca71b3815d4700012d680cbcfda1b453399773fbdcacb7b21e08083582187a1f74d7ecddb1e6226989d239958dbcd
   languageName: node
   linkType: hard
 
@@ -7103,11 +7103,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsd@npm:^0.30.7":
-  version: 0.30.7
-  resolution: "tsd@npm:0.30.7"
+"tsd@npm:^0.31.0":
+  version: 0.31.0
+  resolution: "tsd@npm:0.31.0"
   dependencies:
-    "@tsd/typescript": "npm:~5.3.3"
+    "@tsd/typescript": "npm:~5.4.3"
     eslint-formatter-pretty: "npm:^4.1.0"
     globby: "npm:^11.0.1"
     jest-diff: "npm:^29.0.3"
@@ -7116,7 +7116,7 @@ __metadata:
     read-pkg-up: "npm:^7.0.0"
   bin:
     tsd: dist/cli.js
-  checksum: 10/9f9fa2d4639415620e434367bab8be85775099c97e16f41abcc2c1f42622233d11e5f18868ae5eda3376ee73b9652f77b4e1884016557c17e492f0cbf8cc3798
+  checksum: 10/f7ce2299954d2f378015d21da0ded5ae31998ad7522f60b787987ba42842b42177b1b8c13f880f4eed05736288175aed60347f9aa22ee462ae8ffb0035366f7a
   languageName: node
   linkType: hard
 
