@@ -57,7 +57,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"],\
           ["rimraf", "npm:5.0.5"],\
           ["ts-jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.1.2"],\
-          ["tsd", "npm:0.30.7"],\
+          ["tsd", "npm:0.31.0"],\
           ["typescript", "patch:typescript@npm%3A5.4.3#optional!builtin<compat/typescript>::version=5.4.3&hash=5adc0c"]\
         ],\
         "linkType": "SOFT"\
@@ -1647,7 +1647,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:18.2.0"],\
           ["rimraf", "npm:5.0.5"],\
           ["ts-jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.1.2"],\
-          ["tsd", "npm:0.30.7"],\
+          ["tsd", "npm:0.31.0"],\
           ["typescript", "patch:typescript@npm%3A5.4.3#optional!builtin<compat/typescript>::version=5.4.3&hash=5adc0c"]\
         ],\
         "linkType": "SOFT"\
@@ -1884,10 +1884,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@tsd/typescript", [\
-      ["npm:5.3.3", {\
-        "packageLocation": "./.yarn/cache/@tsd-typescript-npm-5.3.3-cf7fd4d2fa-8191fb2b35.zip/node_modules/@tsd/typescript/",\
+      ["npm:5.4.3", {\
+        "packageLocation": "./.yarn/cache/@tsd-typescript-npm-5.4.3-ddb07afd3f-976052631d.zip/node_modules/@tsd/typescript/",\
         "packageDependencies": [\
-          ["@tsd/typescript", "npm:5.3.3"]\
+          ["@tsd/typescript", "npm:5.4.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8719,11 +8719,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["tsd", [\
-      ["npm:0.30.7", {\
-        "packageLocation": "./.yarn/cache/tsd-npm-0.30.7-c076bf1cf6-9f9fa2d463.zip/node_modules/tsd/",\
+      ["npm:0.31.0", {\
+        "packageLocation": "./.yarn/cache/tsd-npm-0.31.0-d07781623a-f7ce229995.zip/node_modules/tsd/",\
         "packageDependencies": [\
-          ["tsd", "npm:0.30.7"],\
-          ["@tsd/typescript", "npm:5.3.3"],\
+          ["tsd", "npm:0.31.0"],\
+          ["@tsd/typescript", "npm:5.4.3"],\
           ["eslint-formatter-pretty", "npm:4.1.0"],\
           ["globby", "npm:11.1.0"],\
           ["jest-diff", "npm:29.7.0"],\
