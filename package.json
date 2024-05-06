@@ -62,7 +62,7 @@
     "@jest/globals": "^29.7.0",
     "@testing-library/dom": "^9.3.4",
     "@testing-library/jest-dom": "^6.4.2",
-    "@testing-library/react": "^14.2.2",
+    "@testing-library/react": "^15.0.6",
     "@types/jest": "^29.5.12",
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
