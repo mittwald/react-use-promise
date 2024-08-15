@@ -1,7 +1,7 @@
 {
   "name": "@mittwald/react-use-promise",
   "version": "1.0.0",
-  "packageManager": "yarn@4.1.1",
+  "packageManager": "yarn@4.4.0",
   "author": "Mittwald CM Service GmbH & Co. KG <opensource@mittwald.de>",
   "contributors": [
     "Marco Falkenberg <m.falkenberg@mittwald.de>"
