@@ -2324,9 +2324,9 @@ __metadata:
   linkType: hard
 
 "browser-or-node@npm:^3.0.0-pre.0":
-  version: 3.0.0-pre.0
-  resolution: "browser-or-node@npm:3.0.0-pre.0"
-  checksum: 10/16610f655079cf116c1bd817dc4489023baf79fff57ce4f756dd176aab8853dbac2c6a791b673751021ca3a07da263ce3ecbd296a1438cb92110a36e65644a45
+  version: 3.0.0
+  resolution: "browser-or-node@npm:3.0.0"
+  checksum: 10/51d74cc5d0139da3d37e83ff3906fcca20d02c42aa8b81a48d9ea01806f36df1a4b55006670071b1d7423967777275920054ec8b723410534b580b0232c5093d
   languageName: node
   linkType: hard
 
