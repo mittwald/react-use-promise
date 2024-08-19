@@ -3,8 +3,8 @@ import React, { FC } from "react";
 import { AsyncLoader, UseWatchResourceOptions } from "./types.js";
 import { AsyncResource } from "./AsyncResource.js";
 import { useWatchResourceValue } from "./useWatchResourceValue.js";
-import { act, render, screen, waitFor } from "@testing-library/react";
-import { RenderWithLoadingView, sleep } from "../lib/testing.js";
+import { act, screen, waitFor } from "@testing-library/react";
+import { render, RenderWithLoadingView, sleep } from "../lib/testing.js";
 
 let testResource: AsyncResource<string>;
 let getName: jest.Mock<() => string>;

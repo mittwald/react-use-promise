@@ -46,3 +46,5 @@ export type UseWatchResourceResult<TValue, TOptions> = TOptions extends {
 }
   ? NoSuspenseReturnType<TValue>
   : TValue;
+
+export type ResolveLoaderPromiseFn = () => void;

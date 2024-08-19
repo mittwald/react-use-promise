@@ -58,6 +58,7 @@ const App = () => {
 - Simple and declarative use of Promises, [loading-](#defining-loading-views)
   and [error views](#error-handling)
 - Built-in support to load data with [HTTP resources](#-http-resources)
+- Works with data fetching via Next.js server actions
 - Auto-refresh after [timeout](#autorefresh-only-supported-by-usepromise) or on
   [window focus](#refreshonwindowfocus-only-supported-by-usepromise)
 - Type-Safe API
