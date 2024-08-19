@@ -47,7 +47,7 @@ const RAW_RUNTIME_STATE =
           ["jest-environment-jsdom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.7.0"],\
           ["license-checker-rseidelsohn", "npm:4.3.0"],\
           ["luxon", "npm:3.4.4"],\
-          ["minimatch", "npm:9.0.4"],\
+          ["minimatch", "npm:10.0.1"],\
           ["object-code", "npm:1.3.3"],\
           ["prettier", "npm:3.2.5"],\
           ["prettier-plugin-jsdoc", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.3.0"],\
@@ -1655,7 +1655,7 @@ const RAW_RUNTIME_STATE =
           ["jest-environment-jsdom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.7.0"],\
           ["license-checker-rseidelsohn", "npm:4.3.0"],\
           ["luxon", "npm:3.4.4"],\
-          ["minimatch", "npm:9.0.4"],\
+          ["minimatch", "npm:10.0.1"],\
           ["object-code", "npm:1.3.3"],\
           ["prettier", "npm:3.2.5"],\
           ["prettier-plugin-jsdoc", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:1.3.0"],\
@@ -6507,6 +6507,14 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["minimatch", [\
+      ["npm:10.0.1", {\
+        "packageLocation": "./.yarn/cache/minimatch-npm-10.0.1-eabcc0d3a0-082e7ccbc0.zip/node_modules/minimatch/",\
+        "packageDependencies": [\
+          ["minimatch", "npm:10.0.1"],\
+          ["brace-expansion", "npm:2.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:3.1.2", {\
         "packageLocation": "./.yarn/cache/minimatch-npm-3.1.2-9405269906-e0b25b04cd.zip/node_modules/minimatch/",\
         "packageDependencies": [\
