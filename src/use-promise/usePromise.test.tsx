@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import { beforeEach, jest, test } from "@jest/globals";
-import { render, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import { usePromise } from "./usePromise.js";
 import { Store } from "../store/Store.js";
 import * as lib from "../lib/testing.js";
-import { RenderWithLoadingView } from "../lib/testing.js";
+import { render, RenderWithLoadingView } from "../lib/testing.js";
 
 let squareAsync: jest.MockedFunction<typeof lib.squareAsync>;
 let renderCount: number;
@@ -90,11 +90,11 @@ test("AsyncLoader is not called twice when already loaded", async () => {
 });
 
 test("AsyncLoader is called twice when parameter changed", async () => {
-  const dom = render(<SquareNumberView value={4} />);
+  render(<SquareNumberView value={4} />);
   await waitForRendered(2);
 
-  dom.rerender(<span>Other view</span>);
-  dom.rerender(<SquareNumberView value={5} />);
+  render(<span>Other view</span>);
+  render(<SquareNumberView value={5} />);
   await waitForRendered(4);
 
   expect(squareAsync).toHaveBeenCalledTimes(2);

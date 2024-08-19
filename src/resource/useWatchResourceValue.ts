@@ -37,7 +37,9 @@ export const useWatchResourceValue = <
     }
   }, [resource, refreshOnWindowFocus]);
 
-  void resource.load();
+  setTimeout(() => {
+    void resource.load();
+  }, 0);
 
   if (observedValue.isSet) {
     previousValue.current = observedValue;
@@ -71,7 +73,7 @@ export const useWatchResourceValue = <
   }
 
   if (useSuspense) {
-    throw resource.loaderPromise;
+    throw resource.suspensePromise;
   }
 
   return Object.freeze({

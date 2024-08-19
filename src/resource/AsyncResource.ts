@@ -2,6 +2,7 @@ import { emptyValue, EventualValue, setValue } from "../lib/EventualValue.js";
 import {
   AsyncLoader,
   AsyncResourceState,
+  ResolveLoaderPromiseFn,
   UseWatchResourceOptions,
   UseWatchResourceResult,
 } from "./types.js";
@@ -16,7 +17,11 @@ import {
 
 export class AsyncResource<T = unknown> {
   public readonly loader: AsyncLoader<T>;
-  public loaderPromise: Promise<void> | undefined;
+  private loaderPromise: Promise<void> | undefined;
+  public suspensePromise: Promise<void> | undefined;
+  private resolveSuspensePromise: ResolveLoaderPromiseFn = () => {
+    throw new Error("Resolving initial suspense promise is not supported");
+  };
   private loaderPromiseVersion = 0;
   private autoRefreshTimeout: ConsolidatedTimeout;
 
@@ -27,11 +32,12 @@ export class AsyncResource<T = unknown> {
   public constructor(loader: AsyncLoader<T>) {
     this.loader = loader;
     this.autoRefreshTimeout = new ConsolidatedTimeout(() => this.refresh());
+    this.resetPromises();
   }
 
   public refresh(): void {
     this.loaderPromiseVersion++;
-    this.loaderPromise = undefined;
+    this.resetPromises();
     this.value.updateValue(emptyValue);
     this.error.updateValue(emptyValue);
     this.state.updateValue("void");
@@ -47,9 +53,17 @@ export class AsyncResource<T = unknown> {
     }
 
     if (this.loaderPromise === undefined) {
-      this.loaderPromise = this.handleLoading();
+      this.loaderPromise = this.handleLoading().then(() => {
+        this.resolveSuspensePromise();
+      });
     }
-    return this.loaderPromise;
+  }
+
+  private resetPromises(): void {
+    this.suspensePromise = new Promise<void>((resolve) => {
+      this.resolveSuspensePromise = resolve;
+    });
+    this.loaderPromise = undefined;
   }
 
   public isMatchingError(error: true | unknown): boolean {
@@ -74,8 +88,10 @@ export class AsyncResource<T = unknown> {
       error = setValue(e);
     }
 
+    this.resolveSuspensePromise();
+
     if (this.loaderPromiseVersion === loaderPromiseVersion) {
-      this.loaderPromise = undefined;
+      this.resetPromises();
 
       if (result.isSet) {
         this.value.updateValue(result);
