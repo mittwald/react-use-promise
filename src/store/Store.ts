@@ -1,4 +1,3 @@
-import { AsyncResource } from "../resource/AsyncResource.js";
 import { Minimatch } from "minimatch";
 import {
   TagPattern,
@@ -8,50 +7,55 @@ import {
   Tag,
 } from "./types.js";
 
-export class Store {
-  public static default: Store = new Store();
-  private readonly entries = new Map<string, StorageEntry>();
+export class Store<T> {
+  private readonly entries = new Map<string, StorageEntry<T>>();
 
-  private constructor() {
-    // singleton
-  }
+  public constructor() {}
 
-  public getOrSet<T extends AsyncResource>(
+  public getOrSet<TExtends extends T>(
     id: string,
-    resourceBuilder: () => T,
+    dataBuilder: () => TExtends,
     options: StorageEntryOptions = {},
-  ): T {
+  ): TExtends {
     const { tags = [] } = options;
 
     const existing = this.entries.get(id);
 
     if (existing) {
-      return existing.resource as unknown as T;
+      return existing.data as unknown as TExtends;
     }
 
-    const newResource = resourceBuilder();
+    const newData = dataBuilder();
 
     this.entries.set(id, {
-      resource: newResource,
+      data: newData,
       tags,
     });
 
-    return newResource;
+    return newData;
   }
 
-  public get(id: string): AsyncResource | undefined {
-    return this.entries.get(id)?.resource;
+  public set<TExtends extends T>(
+    id: string,
+    dataBuilder: () => TExtends,
+    options: StorageEntryOptions = {},
+  ): void {
+    this.getOrSet(id, dataBuilder, options);
   }
 
-  public findByError(error: true | unknown): AsyncResource[] {
-    return this.getAll().filter((resource) => resource.isMatchingError(error));
+  public get(id: string): T | undefined {
+    return this.entries.get(id)?.data;
   }
 
-  public getAll(tag?: Tag | TagPattern): AsyncResource[] {
+  public findBy(matcher: (entry: T) => boolean): T[] {
+    return this.getAll().filter(matcher);
+  }
+
+  public getAll(tag?: Tag | TagPattern): T[] {
     const entriesArray = Array.from(this.entries.values());
 
     if (tag === undefined) {
-      return entriesArray.map((e) => e.resource);
+      return entriesArray.map((e) => e.data);
     }
 
     const mm = new Minimatch(tag);
@@ -61,7 +65,7 @@ export class Store {
 
     return entriesArray
       .filter((e) => testSomeTagsMatchingPattern(e.tags))
-      .map((e) => e.resource);
+      .map((e) => e.data);
   }
 
   public clear(): void {

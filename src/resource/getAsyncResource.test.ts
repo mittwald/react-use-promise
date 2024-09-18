@@ -1,14 +1,14 @@
 import { beforeEach, expect, jest, test } from "@jest/globals";
 import { sleep } from "../lib/testing.js";
 import { getAsyncResource } from "./getAsyncResource.js";
-import { Store } from "../store/Store.js";
 import { AsyncResource } from "./AsyncResource.js";
+import { asyncResourceStore } from "./store.js";
 
 const sleepTime = 2000;
 
 beforeEach(() => {
   jest.useFakeTimers();
-  Store.default.clear();
+  asyncResourceStore.clear();
 });
 
 afterEach(() => {

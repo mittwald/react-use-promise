@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { beforeEach, jest, test } from "@jest/globals";
 import { screen, waitFor } from "@testing-library/react";
 import { usePromise } from "./usePromise.js";
-import { Store } from "../store/Store.js";
+import { asyncResourceStore } from "../resource/store.js";
 import * as lib from "../lib/testing.js";
 import { render, RenderWithLoadingView } from "../lib/testing.js";
 
@@ -15,7 +15,7 @@ beforeEach(() => {
   jest.useFakeTimers();
   renderCount = 0;
   squareAsync = jest.fn(lib.squareAsync);
-  Store.default.clear();
+  asyncResourceStore.clear();
 });
 
 afterEach(() => {
