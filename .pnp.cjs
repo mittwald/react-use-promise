@@ -42,7 +42,7 @@ const RAW_RUNTIME_STATE =
           ["browser-or-node", "npm:3.0.0"],\
           ["eslint", "npm:8.57.1"],\
           ["eslint-config-prettier", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:9.1.0"],\
-          ["eslint-plugin-json", "npm:3.1.0"],\
+          ["eslint-plugin-json", "npm:4.0.1"],\
           ["eslint-plugin-prettier", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:5.2.1"],\
           ["jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.7.0"],\
@@ -1766,7 +1766,7 @@ const RAW_RUNTIME_STATE =
           ["browser-or-node", "npm:3.0.0"],\
           ["eslint", "npm:8.57.1"],\
           ["eslint-config-prettier", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:9.1.0"],\
-          ["eslint-plugin-json", "npm:3.1.0"],\
+          ["eslint-plugin-json", "npm:4.0.1"],\
           ["eslint-plugin-prettier", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:5.2.1"],\
           ["jest", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:ab927dbd6382aef41d152383d6f81ae7d03ccf176bd35096792c6af95b9a51ec6af7bd8405c7450532585450aeeaf36215a63bcd962c3f6e50d9b5b4ab7a4ffb#npm:29.7.0"],\
@@ -4149,10 +4149,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["eslint-plugin-json", [\
-      ["npm:3.1.0", {\
-        "packageLocation": "./.yarn/cache/eslint-plugin-json-npm-3.1.0-2165d5ec5d-0a4d1efb79.zip/node_modules/eslint-plugin-json/",\
+      ["npm:4.0.1", {\
+        "packageLocation": "./.yarn/cache/eslint-plugin-json-npm-4.0.1-b7f6415dd5-d891eb5326.zip/node_modules/eslint-plugin-json/",\
         "packageDependencies": [\
-          ["eslint-plugin-json", "npm:3.1.0"],\
+          ["eslint-plugin-json", "npm:4.0.1"],\
           ["lodash", "npm:4.17.21"],\
           ["vscode-json-languageservice", "npm:4.2.1"]\
         ],\
