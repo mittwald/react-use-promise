@@ -1,7 +1,7 @@
 import { AsyncFn, FnParameters, GetAsyncResourceOptions } from "./types.js";
 import { defaultStorageKeyBuilder } from "../store/defaultStorageKeyBuilder.js";
-import { Store } from "../store/Store.js";
 import { AsyncResource } from "./AsyncResource.js";
+import { asyncResourceStore } from "./store.js";
 
 const emptyResource = new AsyncResource<undefined>(() =>
   Promise.resolve(undefined),
@@ -41,7 +41,7 @@ export function getAsyncResource<TValue, TParams extends FnParameters>(
 
   const resourceBuilder = () => new AsyncResource(asyncResourceLoader);
 
-  return Store.default.getOrSet(storageKey, resourceBuilder, {
+  return asyncResourceStore.getOrSet(storageKey, resourceBuilder, {
     tags: tags,
   });
 }

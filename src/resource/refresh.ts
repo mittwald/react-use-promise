@@ -1,6 +1,7 @@
-import { Store } from "./store/Store.js";
-import { Tag, TagPattern } from "./store/types.js";
-import { AsyncResource } from "./resource/AsyncResource.js";
+import { Tag, TagPattern } from "../store/types.js";
+import { AsyncResource } from "./AsyncResource.js";
+
+import { asyncResourceStore } from "./store.js";
 
 interface ClearOptions {
   tag?: Tag | TagPattern;
@@ -13,7 +14,7 @@ export function refresh(options: ClearOptions = {}): void {
   const resourceIsMatchingError = (resource: AsyncResource): boolean =>
     error === undefined || resource.isMatchingError(error);
 
-  Store.default
+  asyncResourceStore
     .getAll(tag)
     .filter(resourceIsMatchingError)
     .forEach((resource) => resource.refresh());
