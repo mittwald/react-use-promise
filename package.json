@@ -74,7 +74,7 @@
     "@typescript-eslint/parser": "^7.18.0",
     "@yarnpkg/pnpify": "^4.1.2",
     "axios": "^1.7.7",
-    "eslint": "^8.57.1",
+    "eslint": "^9.11.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-json": "^3.1.0",
     "eslint-plugin-prettier": "^5.2.1",
