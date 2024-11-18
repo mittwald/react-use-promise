@@ -70,7 +70,7 @@
     "@types/jest": "^29.5.13",
     "@types/react": "^18.3.7",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/eslint-plugin": "^8.14.0",
     "@typescript-eslint/parser": "^7.18.0",
     "@yarnpkg/pnpify": "^4.1.2",
     "axios": "^1.7.7",
