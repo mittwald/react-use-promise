@@ -39,11 +39,14 @@ export const useWatchResourceValue = <
     }
   }, [resource, refreshOnWindowFocus]);
 
-  useOnVisibilityChange(() => {
-    if (refreshOnVisibilityChange && document.visibilityState === "visible") {
-      resource.refresh();
-    }
-  }, [resource, refreshOnVisibilityChange]);
+  useOnVisibilityChange(
+    (isVisible) => {
+      if (refreshOnVisibilityChange && isVisible) {
+        resource.refresh();
+      }
+    },
+    [resource, refreshOnVisibilityChange],
+  );
 
   setTimeout(() => {
     void resource.load();

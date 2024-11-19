@@ -1,7 +1,7 @@
 import { DependencyList, useEffect } from "react";
 import { isBrowser } from "browser-or-node";
 
-type Callback = () => void;
+type Callback = (isVisible: boolean) => void;
 
 export const useOnVisibilityChange = (
   cb: Callback,
@@ -9,9 +9,11 @@ export const useOnVisibilityChange = (
 ): void => {
   useEffect(() => {
     if (isBrowser) {
-      document.addEventListener("visibilitychange", cb);
+      document.addEventListener("visibilitychange", () => cb(!document.hidden));
       return () => {
-        document.removeEventListener("visibilitychange", cb);
+        document.removeEventListener("visibilitychange", () =>
+          cb(!document.hidden),
+        );
       };
     }
   }, deps);
