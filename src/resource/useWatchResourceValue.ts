@@ -19,7 +19,7 @@ export const useWatchResourceValue = <
     keepValueWhileLoading = true,
     useSuspense = true,
     refreshOnWindowFocus = false,
-    refreshOnVisibilityChange = false,
+    refreshOnVisibilityChange = refreshOnWindowFocus,
     autoRefresh,
   } = options;
 
