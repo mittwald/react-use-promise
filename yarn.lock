@@ -1188,7 +1188,7 @@ __metadata:
     browser-or-node: "npm:^3.0.0"
     eslint: "npm:^8.57.1"
     eslint-config-prettier: "npm:^9.1.0"
-    eslint-plugin-json: "npm:^3.1.0"
+    eslint-plugin-json: "npm:^4.0.1"
     eslint-plugin-prettier: "npm:^5.2.1"
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
@@ -3080,13 +3080,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-json@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "eslint-plugin-json@npm:3.1.0"
+"eslint-plugin-json@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "eslint-plugin-json@npm:4.0.1"
   dependencies:
     lodash: "npm:^4.17.21"
     vscode-json-languageservice: "npm:^4.1.6"
-  checksum: 10/0a4d1efb790e7417f11b347fa73f737c3c1083340eced39ebb28c7702581ff4c6f61cc8c278773d4eec79b7d6171fb0dbc0150a22a1b4c3b20faf1388b2ccf2c
+  checksum: 10/d891eb5326cca9af5d4a2ebdef5e04761d9a2fca56841d533f755dd475539818d9f43cc7f1e19952276fca8493ea58b4e143ee68f75b2971e2ea8e5e244e0929
   languageName: node
   linkType: hard
 
