@@ -119,6 +119,35 @@ test("focus event does not trigger resource refresh, if 'refreshOnWindowFocus' i
   expectValue("Foo");
 });
 
+test("visibilitychange event triggers resource refresh, if 'refreshOnDocumentVisibilityChange' is enabled", async () => {
+  options.refreshOnDocumentVisibilityChange = true;
+  render(<TestView />);
+  await waitToBeLoaded();
+  expectValue("Foo");
+
+  getName.mockReturnValue("Bar");
+  act(() => {
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+
+  await waitToBeLoaded();
+  expectValue("Bar");
+});
+
+test("visibilitychange event does not trigger resource refresh, if 'refreshOnVisibilityChange' is not enabled", async () => {
+  render(<TestView />);
+  await waitToBeLoaded();
+  expectValue("Foo");
+
+  getName.mockReturnValue("Bar");
+  act(() => {
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+
+  await waitToBeLoaded();
+  expectValue("Foo");
+});
+
 describe("with disabled suspense", () => {
   beforeEach(() => {
     options.useSuspense = false;

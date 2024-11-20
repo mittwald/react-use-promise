@@ -24,6 +24,7 @@ export type UseWatchResourceOptions = {
   useSuspense?: boolean;
   autoRefresh?: DurationLikeObject;
   refreshOnWindowFocus?: boolean;
+  refreshOnDocumentVisibilityChange?: boolean;
 } & GetAsyncResourceOptions;
 
 export type NoSuspenseReturnType<T> = Readonly<

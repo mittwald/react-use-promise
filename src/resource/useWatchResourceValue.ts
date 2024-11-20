@@ -4,6 +4,7 @@ import { useWatchObservableValue } from "../observable-value/useWatchObservableV
 import { UseWatchResourceOptions, UseWatchResourceResult } from "./types.js";
 import { hash } from "object-code";
 import { useOnWindowFocused } from "../lib/useOnWindowFocused.js";
+import { useOnVisibilityChange } from "../lib/useOnVisibilityChange.js";
 
 export const useWatchResourceValue = <
   T,
@@ -18,6 +19,7 @@ export const useWatchResourceValue = <
     keepValueWhileLoading = true,
     useSuspense = true,
     refreshOnWindowFocus = false,
+    refreshOnDocumentVisibilityChange = refreshOnWindowFocus,
     autoRefresh,
   } = options;
 
@@ -36,6 +38,15 @@ export const useWatchResourceValue = <
       resource.refresh();
     }
   }, [resource, refreshOnWindowFocus]);
+
+  useOnVisibilityChange(
+    (isVisible) => {
+      if (refreshOnDocumentVisibilityChange && isVisible) {
+        resource.refresh();
+      }
+    },
+    [resource, refreshOnDocumentVisibilityChange],
+  );
 
   setTimeout(() => {
     void resource.load();
