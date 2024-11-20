@@ -119,8 +119,8 @@ test("focus event does not trigger resource refresh, if 'refreshOnWindowFocus' i
   expectValue("Foo");
 });
 
-test("visibilitychange event triggers resource refresh, if 'refreshOnVisibilityChange' is enabled", async () => {
-  options.refreshOnVisibilityChange = true;
+test("visibilitychange event triggers resource refresh, if 'refreshOnDocumentVisibilityChange' is enabled", async () => {
+  options.refreshOnDocumentVisibilityChange = true;
   render(<TestView />);
   await waitToBeLoaded();
   expectValue("Foo");
