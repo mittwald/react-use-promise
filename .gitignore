@@ -16,6 +16,7 @@ dist/
 dist-cjs/
 coverage/
 *.tsbuildinfo
+node_modules
 
 # Other
 *.log
