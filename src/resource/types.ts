@@ -1,5 +1,5 @@
-import { Tags } from "../store/types.js";
 import { DurationLikeObject } from "luxon";
+import { Tags } from "../store/types.js";
 
 // Async function types
 export type FnParameters = unknown[];
@@ -49,3 +49,5 @@ export type UseWatchResourceResult<TValue, TOptions> = TOptions extends {
   : TValue;
 
 export type ResolveLoaderPromiseFn = () => void;
+
+export type OnRefreshHandler = () => void;

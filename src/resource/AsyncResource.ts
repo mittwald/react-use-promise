@@ -1,19 +1,20 @@
-import { emptyValue, EventualValue, setValue } from "../lib/EventualValue.js";
-import {
-  AsyncLoader,
-  AsyncResourceState,
-  ResolveLoaderPromiseFn,
-  UseWatchResourceOptions,
-  UseWatchResourceResult,
-} from "./types.js";
-import { ObservableValue } from "../observable-value/ObservableValue.js";
-import { useWatchResourceValue } from "./useWatchResourceValue.js";
-import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
 import { DurationLikeObject } from "luxon";
 import {
   ConsolidatedTimeout,
   RemoveTimeout,
 } from "../lib/ConsolidatedTimeout.js";
+import { emptyValue, EventualValue, setValue } from "../lib/EventualValue.js";
+import { ObservableValue } from "../observable-value/ObservableValue.js";
+import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
+import {
+  AsyncLoader,
+  AsyncResourceState,
+  OnRefreshHandler,
+  ResolveLoaderPromiseFn,
+  UseWatchResourceOptions,
+  UseWatchResourceResult,
+} from "./types.js";
+import { useWatchResourceValue } from "./useWatchResourceValue.js";
 
 export class AsyncResource<T = unknown> {
   public readonly loader: AsyncLoader<T>;
@@ -25,9 +26,15 @@ export class AsyncResource<T = unknown> {
   private loaderPromiseVersion = 0;
   private autoRefreshTimeout: ConsolidatedTimeout;
 
-  public value = new ObservableValue<EventualValue<T>>(emptyValue);
-  public error = new ObservableValue<EventualValue<unknown>>(emptyValue);
-  public state = new ObservableValue<AsyncResourceState>("void");
+  public readonly value = new ObservableValue<EventualValue<T>>(emptyValue);
+  public readonly valueWithCache = new ObservableValue<EventualValue<T>>(
+    emptyValue,
+  );
+  public readonly error = new ObservableValue<EventualValue<unknown>>(
+    emptyValue,
+  );
+  public readonly state = new ObservableValue<AsyncResourceState>("void");
+  private readonly onRefreshListeners = new Set<OnRefreshHandler>();
 
   public constructor(loader: AsyncLoader<T>) {
     this.loader = loader;
@@ -41,6 +48,14 @@ export class AsyncResource<T = unknown> {
     this.value.updateValue(emptyValue);
     this.error.updateValue(emptyValue);
     this.state.updateValue("void");
+    this.onRefreshListeners.forEach((listener) => listener());
+  }
+
+  public onRefresh(handler: OnRefreshHandler) {
+    this.onRefreshListeners.add(handler);
+    return () => {
+      this.onRefreshListeners.delete(handler);
+    };
   }
 
   public addTTL(ttl: DurationLikeObject): RemoveTimeout {
@@ -53,9 +68,7 @@ export class AsyncResource<T = unknown> {
     }
 
     if (this.loaderPromise === undefined) {
-      this.loaderPromise = this.handleLoading().then(() => {
-        this.resolveSuspensePromise();
-      });
+      this.loaderPromise = this.handleLoading();
     }
   }
 
@@ -94,6 +107,7 @@ export class AsyncResource<T = unknown> {
       this.resetPromises();
 
       if (result.isSet) {
+        this.valueWithCache.updateValue(result);
         this.value.updateValue(result);
         this.state.updateValue("loaded");
       } else if (error.isSet) {
@@ -109,13 +123,6 @@ export class AsyncResource<T = unknown> {
     options: TOptions = {} as TOptions,
   ): UseWatchResourceResult<T, TOptions> {
     return useWatchResourceValue(this, options);
-  }
-
-  /** @deprecated Renamed to `use` in version 2 */
-  public watch<TOptions extends UseWatchResourceOptions>(
-    options: TOptions = {} as TOptions,
-  ): UseWatchResourceResult<T, TOptions> {
-    return this.use(options);
   }
 
   public watchState(): AsyncResourceState {

@@ -1,5 +1,5 @@
 import { hash } from "object-code";
-import { useEffect, useRef } from "react";
+import { use, useEffect, useRef } from "react";
 import { useOnVisibilityChange } from "../lib/useOnVisibilityChange.js";
 import { useOnWindowFocused } from "../lib/useOnWindowFocused.js";
 import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
@@ -23,9 +23,22 @@ export const useWatchResourceValue = <
     autoRefresh,
   } = options;
 
-  const observedValue = useWatchObservableValue(resource.value);
+  const observedValue = useWatchObservableValue(
+    useSuspense && keepValueWhileLoading
+      ? resource.valueWithCache
+      : resource.value,
+  );
   const error = useWatchObservableValue(resource.error);
+
   const previousValue = useRef(observedValue);
+
+  useEffect(
+    () =>
+      resource.onRefresh(() => {
+        void resource.load();
+      }),
+    [resource],
+  );
 
   useEffect(() => {
     if (autoRefresh) {
@@ -48,9 +61,7 @@ export const useWatchResourceValue = <
     [resource, refreshOnDocumentVisibilityChange],
   );
 
-  setTimeout(() => {
-    void resource.load();
-  }, 0);
+  void resource.load();
 
   if (observedValue.isSet) {
     previousValue.current = observedValue;
@@ -84,7 +95,10 @@ export const useWatchResourceValue = <
   }
 
   if (useSuspense) {
-    throw resource.suspensePromise;
+    if (resource.suspensePromise === undefined) {
+      throw new Error("Invariant violation: Unexpected state");
+    }
+    use(resource.suspensePromise);
   }
 
   return Object.freeze({

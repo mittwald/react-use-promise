@@ -1,19 +1,17 @@
-import React, { FC } from "react";
 import { beforeEach, jest, test } from "@jest/globals";
-import { screen, waitFor } from "@testing-library/react";
-import { usePromise } from "./usePromise.js";
-import { asyncResourceStore } from "../resource/store.js";
+import { cleanup, screen } from "@testing-library/react";
+import React, { act, FC } from "react";
 import * as lib from "../lib/testing.js";
 import { render, RenderWithLoadingView } from "../lib/testing.js";
+import { asyncResourceStore } from "../resource/store.js";
+import { usePromise } from "./usePromise.js";
 
 let squareAsync: jest.MockedFunction<typeof lib.squareAsync>;
-let renderCount: number;
 
 const loadingTime = 10000;
 
 beforeEach(() => {
   jest.useFakeTimers();
-  renderCount = 0;
   squareAsync = jest.fn(lib.squareAsync);
   asyncResourceStore.clear();
 });
@@ -21,11 +19,14 @@ beforeEach(() => {
 afterEach(() => {
   jest.runOnlyPendingTimers();
   jest.useRealTimers();
+  cleanup();
 });
 
-const waitForRendered = async (count: number): Promise<void> => {
-  jest.advanceTimersToNextTimer();
-  await waitFor(() => expect(renderCount).toBe(count));
+const waitToBeLoaded = async (percent = 100): Promise<void> => {
+  await act(
+    async () =>
+      await jest.advanceTimersByTimeAsync(loadingTime * (percent / 100)),
+  );
 };
 
 interface Props {
@@ -36,7 +37,6 @@ const SquareNumberView: FC<Props> = (props) => (
   <RenderWithLoadingView>
     {() => {
       const { value } = props;
-      renderCount++;
 
       const squareNumber = usePromise(
         squareAsync,
@@ -59,43 +59,42 @@ const expectRenderedNumberToBe = (number: string): void => {
 };
 
 test("Loading view is triggered", async () => {
-  render(<SquareNumberView value={4} />);
+  await render(<SquareNumberView value={4} />);
   screen.getByTestId("loading-view");
-  await waitForRendered(2);
+  await waitToBeLoaded();
 });
 
 test("usePromise() returns 'undefined' when loader parameters are 'null'", async () => {
-  render(<SquareNumberView value={null} />);
-  screen.getByTestId("loading-view");
-  await waitForRendered(2);
+  await render(<SquareNumberView value={null} />);
+  await waitToBeLoaded();
   expectRenderedNumberToBe("undefined");
 });
 
 test("SquareNumber component renders after some time", async () => {
-  render(<SquareNumberView value={4} />);
+  await render(<SquareNumberView value={4} />);
   screen.getByTestId("loading-view");
-  await waitForRendered(2);
+  await waitToBeLoaded();
   expectRenderedNumberToBe("16");
 });
 
 test("AsyncLoader is not called twice when already loaded", async () => {
-  const dom = render(<SquareNumberView value={4} />);
-  await waitForRendered(2);
+  const dom = await render(<SquareNumberView value={4} />);
+  await waitToBeLoaded();
 
   dom.rerender(<span>Other view</span>);
   dom.rerender(<SquareNumberView value={4} />);
-  await waitForRendered(3);
+  await waitToBeLoaded();
 
   expect(squareAsync).toHaveBeenCalledTimes(1);
 });
 
 test("AsyncLoader is called twice when parameter changed", async () => {
-  render(<SquareNumberView value={4} />);
-  await waitForRendered(2);
+  await render(<SquareNumberView value={4} />);
+  await waitToBeLoaded();
 
-  render(<span>Other view</span>);
-  render(<SquareNumberView value={5} />);
-  await waitForRendered(4);
+  await render(<span>Other view</span>);
+  await render(<SquareNumberView value={5} />);
+  await waitToBeLoaded();
 
   expect(squareAsync).toHaveBeenCalledTimes(2);
 });
