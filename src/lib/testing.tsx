@@ -1,6 +1,5 @@
-import React, { createElement, FC, ReactNode, Suspense } from "react";
 import { act, render as testingLibRender } from "@testing-library/react";
-import { jest } from "@jest/globals";
+import React, { createElement, FC, ReactNode, Suspense } from "react";
 
 export const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -9,14 +8,10 @@ export const squareAsync = async (value: number, sleepTimeMs: number) => {
   return value * value;
 };
 
-/* Initial loading is done immediately with setTimeout(..., 0) */
-export const waitForInitialTimeout = () =>
-  act(() => jest.advanceTimersToNextTimer());
-
-export const render = (ui: ReactNode) => {
-  const result = testingLibRender(ui);
-  waitForInitialTimeout();
-  return result;
+export const render = async (
+  ui: ReactNode,
+): Promise<ReturnType<typeof testingLibRender>> => {
+  return await act(async () => testingLibRender(ui));
 };
 
 const loadingView = <span data-testid="loading-view">Loading</span>;

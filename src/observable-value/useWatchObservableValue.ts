@@ -1,5 +1,5 @@
-import { ObservableValue } from "./ObservableValue.js";
 import { useEffect, useState } from "react";
+import { ObservableValue } from "./ObservableValue.js";
 
 export const useWatchObservableValue = <T>(
   observable: ObservableValue<T>,

@@ -1,21 +1,19 @@
-import { beforeEach, describe, expect, jest, test } from "@jest/globals";
+import { beforeEach, describe, jest, test } from "@jest/globals";
+import { act, screen } from "@testing-library/react";
 import React, { FC } from "react";
-import { AsyncLoader, UseWatchResourceOptions } from "./types.js";
-import { AsyncResource } from "./AsyncResource.js";
-import { useWatchResourceValue } from "./useWatchResourceValue.js";
-import { act, screen, waitFor } from "@testing-library/react";
 import { render, RenderWithLoadingView, sleep } from "../lib/testing.js";
+import { AsyncResource } from "./AsyncResource.js";
+import { AsyncLoader, UseWatchResourceOptions } from "./types.js";
+import { useWatchResourceValue } from "./useWatchResourceValue.js";
 
 let testResource: AsyncResource<string>;
 let getName: jest.Mock<() => string>;
 let getNameAsync: jest.Mock<AsyncLoader<string>>;
-let renderCount: number;
 let options: UseWatchResourceOptions;
 const loadingTime = 10000;
 
 beforeEach(() => {
   jest.useFakeTimers();
-  renderCount = 0;
   getName = jest.fn(() => "Foo");
   getNameAsync = jest.fn(async () => {
     await sleep(loadingTime);
@@ -33,47 +31,45 @@ afterEach(() => {
 const TestView: FC = () => (
   <RenderWithLoadingView>
     {() => {
-      renderCount++;
       const value = useWatchResourceValue(testResource, options);
       return <span data-testid="resource-value">{JSON.stringify(value)}</span>;
     }}
   </RenderWithLoadingView>
 );
 
-const waitForRendered = async (count: number): Promise<void> => {
-  jest.advanceTimersToNextTimer();
-  await waitFor(() => expect(renderCount).toBe(count));
-};
-
 const expectValue = (value: unknown): void => {
   screen.getByText(JSON.stringify(value));
 };
 
 const waitToBeLoaded = async (percent = 100): Promise<void> => {
-  await act(() => jest.advanceTimersByTimeAsync(loadingTime * (percent / 100)));
+  await act(
+    async () =>
+      await jest.advanceTimersByTimeAsync(loadingTime * (percent / 100)),
+  );
 };
 
 test("Loading view is triggered", async () => {
-  render(<TestView />);
+  await render(<TestView />);
+  await waitToBeLoaded(10);
   screen.getByTestId("loading-view");
-  await waitForRendered(2);
+  await waitToBeLoaded(90);
 });
 
 test("Greeting component renders after some time", async () => {
-  render(<TestView />);
-  await waitForRendered(2);
+  await render(<TestView />);
+  await waitToBeLoaded();
   screen.getByTestId("resource-value");
 });
 
 test("useWatchResourceValue() returns resolved resource value", async () => {
-  render(<TestView />);
-  await waitForRendered(2);
+  await render(<TestView />);
+  await waitToBeLoaded();
   expectValue("Foo");
 });
 
 test("renders old value when reloading and then new value", async () => {
-  render(<TestView />);
-  await waitForRendered(2);
+  await render(<TestView />);
+  await waitToBeLoaded();
 
   expectValue("Foo");
 
@@ -86,13 +82,13 @@ test("renders old value when reloading and then new value", async () => {
   await waitToBeLoaded(50);
   expectValue("Foo");
 
-  await waitForRendered(4);
+  await waitToBeLoaded(50);
   expectValue("Bar");
 });
 
 test("focus event triggers resource refresh, if 'refreshOnWindowFocus' is enabled", async () => {
   options.refreshOnWindowFocus = true;
-  render(<TestView />);
+  await render(<TestView />);
   await waitToBeLoaded();
   expectValue("Foo");
 
@@ -106,7 +102,7 @@ test("focus event triggers resource refresh, if 'refreshOnWindowFocus' is enable
 });
 
 test("focus event does not trigger resource refresh, if 'refreshOnWindowFocus' is not enabled", async () => {
-  render(<TestView />);
+  await render(<TestView />);
   await waitToBeLoaded();
   expectValue("Foo");
 
@@ -121,7 +117,7 @@ test("focus event does not trigger resource refresh, if 'refreshOnWindowFocus' i
 
 test("visibilitychange event triggers resource refresh, if 'refreshOnDocumentVisibilityChange' is enabled", async () => {
   options.refreshOnDocumentVisibilityChange = true;
-  render(<TestView />);
+  await render(<TestView />);
   await waitToBeLoaded();
   expectValue("Foo");
 
@@ -135,7 +131,7 @@ test("visibilitychange event triggers resource refresh, if 'refreshOnDocumentVis
 });
 
 test("visibilitychange event does not trigger resource refresh, if 'refreshOnVisibilityChange' is not enabled", async () => {
-  render(<TestView />);
+  await render(<TestView />);
   await waitToBeLoaded();
   expectValue("Foo");
 
@@ -154,12 +150,12 @@ describe("with disabled suspense", () => {
   });
 
   test("Loading view is not triggered", async () => {
-    render(<TestView />);
+    await render(<TestView />);
     screen.getByTestId("resource-value");
   });
 
   test("useWatchResourceValue() returns empty value when not loaded", async () => {
-    render(<TestView />);
+    await render(<TestView />);
     expectValue({
       hasValue: false,
       isLoading: true,
@@ -167,8 +163,8 @@ describe("with disabled suspense", () => {
   });
 
   test("useWatchResourceValue() returns eventual value when loaded", async () => {
-    render(<TestView />);
-    await waitForRendered(2);
+    await render(<TestView />);
+    await waitToBeLoaded();
     expectValue({
       maybeValue: "Foo",
       value: "Foo",
@@ -178,8 +174,8 @@ describe("with disabled suspense", () => {
   });
 
   test("'isLoading' is true when reloading", async () => {
-    render(<TestView />);
-    await waitForRendered(2);
+    await render(<TestView />);
+    await waitToBeLoaded();
 
     expectValue({
       maybeValue: "Foo",
@@ -203,7 +199,7 @@ describe("with disabled suspense", () => {
       isLoading: true,
     });
 
-    await waitForRendered(4);
+    await waitToBeLoaded(60);
 
     expectValue({
       maybeValue: "Bar",
@@ -216,8 +212,8 @@ describe("with disabled suspense", () => {
   test("value is not set when reloading and 'keepValueWhileLoading' is disabled", async () => {
     options.keepValueWhileLoading = false;
 
-    render(<TestView />);
-    await waitForRendered(2);
+    await render(<TestView />);
+    await waitToBeLoaded();
 
     // refresh resource
     getName.mockReturnValue("Bar");
@@ -233,7 +229,7 @@ describe("with disabled suspense", () => {
       isLoading: true,
     });
 
-    await waitForRendered(4);
+    await waitToBeLoaded(50);
 
     expectValue({
       maybeValue: "Bar",

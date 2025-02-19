@@ -14,5 +14,5 @@ function testResultOfWatchMatchesAsyncLoaderReturnType() {
   expectType<ResultType>(result);
 
   // @ts-expect-error Test access to unknown props
-  result.unknownProp;
+  console.log(result.unknownProp);
 }

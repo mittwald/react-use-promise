@@ -285,7 +285,8 @@ options:
 
 Type:
 [Duration like object](https://moment.github.io/luxon/api-docs/index.html#durationfromobject)\
-Default: `undefined`
+Default:
+`undefined`
 
 When a duration is configured, the resource will automatically be refreshed in
 the provided interval. If the same resource has multiple auto-refresh intervals,
