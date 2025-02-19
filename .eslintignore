@@ -1,5 +1,0 @@
-**/*.js
-**/dist/**/*
-**/dist-cjs/**/*
-**/build/
-**/test-d/**/*

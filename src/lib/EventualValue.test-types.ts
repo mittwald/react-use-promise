@@ -9,7 +9,7 @@ function testAccessingValuePropertyNeedsCheckOfIsSet() {
     expectType<number>(testValue.value);
   } else {
     // @ts-expect-error Value should not be set
-    testValue.value;
+    console.log(testValue.value);
   }
 }
 
@@ -22,6 +22,6 @@ function testSetValueFnCreatesWhereValueIsSet() {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testEmptyValueConstantIsNotSet() {
   // @ts-expect-error Value should not be set
-  emptyValue.value;
+  console.log(emptyValue.value);
   expectType<false>(emptyValue.isSet);
 }

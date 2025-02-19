@@ -14,7 +14,7 @@ function testResultOfUsePromiseMatchesAsyncLoaderReturnType() {
   const result = usePromise(loader, [0]);
   expectType<ResultType>(result);
   // @ts-expect-error Access to unknown prop
-  result.unknownProp;
+  console.log(result.unknownProp);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

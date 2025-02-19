@@ -1,6 +1,6 @@
-import React, { createElement, FC, ReactNode, Suspense } from "react";
-import { act, render as testingLibRender } from "@testing-library/react";
 import { jest } from "@jest/globals";
+import { act, render as testingLibRender } from "@testing-library/react";
+import React, { createElement, FC, ReactNode, Suspense } from "react";
 
 export const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -13,7 +13,7 @@ export const squareAsync = async (value: number, sleepTimeMs: number) => {
 export const waitForInitialTimeout = () =>
   act(() => jest.advanceTimersToNextTimer());
 
-export const render = (ui: ReactNode) => {
+export const render = (ui: ReactNode): ReturnType<typeof testingLibRender> => {
   const result = testingLibRender(ui);
   waitForInitialTimeout();
   return result;

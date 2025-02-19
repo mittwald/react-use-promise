@@ -1,10 +1,10 @@
-import { AsyncResource } from "./AsyncResource.js";
-import { useEffect, useRef } from "react";
-import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
-import { UseWatchResourceOptions, UseWatchResourceResult } from "./types.js";
 import { hash } from "object-code";
-import { useOnWindowFocused } from "../lib/useOnWindowFocused.js";
+import { useEffect, useRef } from "react";
 import { useOnVisibilityChange } from "../lib/useOnVisibilityChange.js";
+import { useOnWindowFocused } from "../lib/useOnWindowFocused.js";
+import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
+import { AsyncResource } from "./AsyncResource.js";
+import { UseWatchResourceOptions, UseWatchResourceResult } from "./types.js";
 
 export const useWatchResourceValue = <
   T,
