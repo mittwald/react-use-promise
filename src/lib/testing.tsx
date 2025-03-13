@@ -1,4 +1,5 @@
 import React, { createElement, FC, ReactNode, Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { act, render as testingLibRender } from "@testing-library/react";
 import { jest } from "@jest/globals";
 
@@ -24,5 +25,7 @@ const loadingView = <span data-testid="loading-view">Loading</span>;
 export const RenderWithLoadingView: FC<{ children: () => ReactNode }> = (
   props,
 ) => (
-  <Suspense fallback={loadingView}>{createElement(props.children)}</Suspense>
+  <ErrorBoundary fallback="ErrorFallback">
+    <Suspense fallback={loadingView}>{createElement(props.children)}</Suspense>
+  </ErrorBoundary>
 );

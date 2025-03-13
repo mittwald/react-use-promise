@@ -1,5 +1,5 @@
 import { AsyncResource } from "./AsyncResource.js";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo } from "react";
 import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
 import { UseWatchResourceOptions, UseWatchResourceResult } from "./types.js";
 import { hash } from "object-code";
@@ -25,7 +25,7 @@ export const useWatchResourceValue = <
 
   const observedValue = useWatchObservableValue(resource.value);
   const error = useWatchObservableValue(resource.error);
-  const previousValue = useRef(observedValue);
+  const previousValue = useMemo(() => ({ current: observedValue }), [resource]);
 
   useEffect(() => {
     if (autoRefresh) {
