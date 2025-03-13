@@ -1,5 +1,6 @@
 import { act, render as testingLibRender } from "@testing-library/react";
 import React, { createElement, FC, ReactNode, Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 export const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -19,5 +20,7 @@ const loadingView = <span data-testid="loading-view">Loading</span>;
 export const RenderWithLoadingView: FC<{ children: () => ReactNode }> = (
   props,
 ) => (
-  <Suspense fallback={loadingView}>{createElement(props.children)}</Suspense>
+  <ErrorBoundary fallback="ErrorFallback">
+    <Suspense fallback={loadingView}>{createElement(props.children)}</Suspense>
+  </ErrorBoundary>
 );

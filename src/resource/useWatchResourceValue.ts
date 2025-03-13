@@ -1,5 +1,5 @@
 import { hash } from "object-code";
-import { use, useEffect, useRef } from "react";
+import { use, useEffect, useMemo } from "react";
 import { useOnVisibilityChange } from "../lib/useOnVisibilityChange.js";
 import { useOnWindowFocused } from "../lib/useOnWindowFocused.js";
 import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
@@ -30,7 +30,7 @@ export const useWatchResourceValue = <
   );
   const error = useWatchObservableValue(resource.error);
 
-  const previousValue = useRef(observedValue);
+  const previousValue = useMemo(() => ({ current: observedValue }), [resource]);
 
   useEffect(
     () =>

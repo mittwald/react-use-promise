@@ -1,5 +1,5 @@
 import { beforeEach, describe, jest, test } from "@jest/globals";
-import { act, screen } from "@testing-library/react";
+import { act, cleanup, screen } from "@testing-library/react";
 import React, { FC } from "react";
 import { render, RenderWithLoadingView, sleep } from "../lib/testing.js";
 import { AsyncResource } from "./AsyncResource.js";
@@ -7,34 +7,46 @@ import { AsyncLoader, UseWatchResourceOptions } from "./types.js";
 import { useWatchResourceValue } from "./useWatchResourceValue.js";
 
 let testResource: AsyncResource<string>;
+let testResource2: AsyncResource<string>;
 let getName: jest.Mock<() => string>;
+let getName2: jest.Mock<() => string>;
+let getTestResource: jest.Mock<() => AsyncResource<string>>;
 let getNameAsync: jest.Mock<AsyncLoader<string>>;
+let getNameAsync2: jest.Mock<AsyncLoader<string>>;
 let options: UseWatchResourceOptions;
 const loadingTime = 10000;
 
 beforeEach(() => {
   jest.useFakeTimers();
   getName = jest.fn(() => "Foo");
+  getName2 = jest.fn(() => "Foo2");
   getNameAsync = jest.fn(async () => {
     await sleep(loadingTime);
     return getName();
   });
+  getNameAsync2 = jest.fn(async () => {
+    await sleep(loadingTime);
+    return getName2();
+  });
+  getTestResource = jest.fn(() => testResource);
   testResource = new AsyncResource(getNameAsync);
+  testResource2 = new AsyncResource(getNameAsync2);
   options = {};
 });
 
 afterEach(() => {
   jest.runOnlyPendingTimers();
   jest.useRealTimers();
+  cleanup();
 });
 
+const renderInternal = () => {
+  const value = useWatchResourceValue(getTestResource(), options);
+  return <span data-testid="resource-value">{JSON.stringify(value)}</span>;
+};
+
 const TestView: FC = () => (
-  <RenderWithLoadingView>
-    {() => {
-      const value = useWatchResourceValue(testResource, options);
-      return <span data-testid="resource-value">{JSON.stringify(value)}</span>;
-    }}
-  </RenderWithLoadingView>
+  <RenderWithLoadingView>{renderInternal}</RenderWithLoadingView>
 );
 
 const expectValue = (value: unknown): void => {
@@ -53,6 +65,33 @@ test("Loading view is triggered", async () => {
   await waitToBeLoaded(10);
   screen.getByTestId("loading-view");
   await waitToBeLoaded(90);
+});
+
+test("Error view is triggered", async () => {
+  await render(<TestView />);
+  getName.mockImplementation(() => {
+    throw new Error("Whoops");
+  });
+  await waitToBeLoaded(10);
+  screen.getByTestId("loading-view");
+  await waitToBeLoaded(90);
+  screen.getByText("ErrorFallback");
+});
+
+test("Error view is triggered after previous success", async () => {
+  await render(<TestView />);
+  await waitToBeLoaded(10);
+  screen.getByTestId("loading-view");
+  await waitToBeLoaded(90);
+
+  getTestResource.mockReturnValue(testResource2);
+  getName2.mockImplementation(() => {
+    throw new Error("Whoops");
+  });
+
+  await render(<TestView />);
+  await waitToBeLoaded(100);
+  screen.getByText("ErrorFallback");
 });
 
 test("Greeting component renders after some time", async () => {
