@@ -9,6 +9,7 @@ export const useWatchObservableValue = <T>(
 
   useEffect(() => {
     watchedObservable.current = observable;
+    setWatchedValue(observable.value);
     return observable.observe(setWatchedValue);
   }, [observable]);
 
