@@ -105,7 +105,7 @@ export const useWatchResourceValue = <
       throw new Error("Invariant violation: Unexpected state");
     }
     if (!skipUse) {
-      use(resource.suspensePromise);      
+      use(resource.suspensePromise);
     }
   }
 
