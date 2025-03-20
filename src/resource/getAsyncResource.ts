@@ -1,9 +1,9 @@
-import { AsyncFn, FnParameters, GetAsyncResourceOptions } from "./types.js";
 import { defaultStorageKeyBuilder } from "../store/defaultStorageKeyBuilder.js";
 import { AsyncResource } from "./AsyncResource.js";
 import { asyncResourceStore } from "./store.js";
+import { AsyncFn, FnParameters, GetAsyncResourceOptions } from "./types.js";
 
-const emptyResource = new AsyncResource<undefined>(() =>
+export const emptyResource = new AsyncResource<undefined>(() =>
   Promise.resolve(undefined),
 );
 

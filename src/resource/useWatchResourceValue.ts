@@ -5,6 +5,7 @@ import { useOnWindowFocused } from "../lib/useOnWindowFocused.js";
 import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
 import { AsyncResource } from "./AsyncResource.js";
 import { UseWatchResourceOptions, UseWatchResourceResult } from "./types.js";
+import { emptyResource } from "./getAsyncResource.js";
 
 export const useWatchResourceValue = <
   T,
@@ -95,10 +96,17 @@ export const useWatchResourceValue = <
   }
 
   if (useSuspense) {
+    /**
+     * Skip 'use' if resource resolves immediately. See details:
+     * https://github.com/facebook/react/issues/31790
+     */
+    const skipUse = resource === emptyResource;
     if (resource.suspensePromise === undefined) {
       throw new Error("Invariant violation: Unexpected state");
     }
-    use(resource.suspensePromise);
+    if (!skipUse) {
+      use(resource.suspensePromise);      
+    }
   }
 
   return Object.freeze({
