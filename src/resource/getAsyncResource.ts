@@ -3,10 +3,6 @@ import { AsyncResource } from "./AsyncResource.js";
 import { asyncResourceStore } from "./store.js";
 import { AsyncFn, FnParameters, GetAsyncResourceOptions } from "./types.js";
 
-export const emptyResource = new AsyncResource<undefined>(() =>
-  Promise.resolve(undefined),
-);
-
 // function overloads for nullable parameters
 export function getAsyncResource<TValue, TParams extends FnParameters>(
   asyncFn: AsyncFn<TValue, TParams>,
@@ -28,7 +24,7 @@ export function getAsyncResource<TValue, TParams extends FnParameters>(
   const { loaderId, tags } = options;
 
   if (parameters === null) {
-    return emptyResource;
+    return AsyncResource.voidInstance;
   }
 
   const storageKey = defaultStorageKeyBuilder({

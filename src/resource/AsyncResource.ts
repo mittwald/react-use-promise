@@ -36,6 +36,10 @@ export class AsyncResource<T = unknown> {
   public readonly state = new ObservableValue<AsyncResourceState>("void");
   private readonly onRefreshListeners = new Set<OnRefreshHandler>();
 
+  public static voidInstance = new AsyncResource<undefined>(() =>
+    Promise.resolve(undefined),
+  );
+
   public constructor(loader: AsyncLoader<T>) {
     this.loader = loader;
     this.autoRefreshTimeout = new ConsolidatedTimeout(() => this.refresh());
