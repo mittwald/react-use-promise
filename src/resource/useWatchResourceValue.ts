@@ -1,10 +1,16 @@
 import { hash } from "object-code";
-import { useEffect, useMemo } from "react";
+import { use, useEffect } from "react";
 import { useOnVisibilityChange } from "../lib/useOnVisibilityChange.js";
 import { useOnWindowFocused } from "../lib/useOnWindowFocused.js";
 import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
 import { AsyncResource } from "./AsyncResource.js";
 import { UseWatchResourceOptions, UseWatchResourceResult } from "./types.js";
+import {
+  emptyValue,
+  setValue,
+  type EventualValue,
+} from "../lib/EventualValue.js";
+import { useRefWithDependencies } from "../lib/useRefWithDependencies.js";
 
 export const useWatchResourceValue = <
   T,
@@ -30,7 +36,9 @@ export const useWatchResourceValue = <
   );
   const error = useWatchObservableValue(resource.error);
 
-  const previousValue = useMemo(() => ({ current: observedValue }), [resource]);
+  const previousValue = useRefWithDependencies<EventualValue<T>>(emptyValue, [
+    resource,
+  ]);
 
   useEffect(
     () =>
@@ -64,7 +72,7 @@ export const useWatchResourceValue = <
   void resource.load();
 
   if (observedValue.isSet) {
-    previousValue.current = observedValue;
+    previousValue.current = setValue(observedValue.value);
     if (useSuspense) {
       return observedValue.value as Result;
     }

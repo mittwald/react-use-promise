@@ -10,7 +10,6 @@ import {
   AsyncLoader,
   AsyncResourceState,
   OnRefreshHandler,
-  ResolveLoaderPromiseFn,
   UseWatchResourceOptions,
   UseWatchResourceResult,
 } from "./types.js";
@@ -18,10 +17,6 @@ import { useWatchResourceValue } from "./useWatchResourceValue.js";
 
 export class AsyncResource<T = unknown> {
   public readonly loader: AsyncLoader<T>;
-  public suspensePromise: Promise<void> | undefined;
-  private resolveSuspensePromise: ResolveLoaderPromiseFn = () => {
-    throw new Error("Resolving initial suspense promise is not supported");
-  };
   public loaderPromise: Promise<void> | undefined;
   private loaderPromiseVersion = 0;
   private autoRefreshTimeout: ConsolidatedTimeout;
@@ -43,12 +38,11 @@ export class AsyncResource<T = unknown> {
   public constructor(loader: AsyncLoader<T>) {
     this.loader = loader;
     this.autoRefreshTimeout = new ConsolidatedTimeout(() => this.refresh());
-    this.resetPromises();
   }
 
   public refresh(): void {
     this.loaderPromiseVersion++;
-    this.resetPromises();
+    this.loaderPromise = undefined;
     this.value.updateValue(emptyValue);
     this.error.updateValue(emptyValue);
     this.state.updateValue("void");
@@ -76,13 +70,6 @@ export class AsyncResource<T = unknown> {
     }
   }
 
-  private resetPromises(): void {
-    this.suspensePromise = new Promise<void>((resolve) => {
-      this.resolveSuspensePromise = resolve;
-    });
-    this.loaderPromise = undefined;
-  }
-
   public isMatchingError(error: true | unknown): boolean {
     if (!this.error.value.isSet) {
       return false;
@@ -105,11 +92,7 @@ export class AsyncResource<T = unknown> {
       error = setValue(e);
     }
 
-    this.resolveSuspensePromise();
-
     if (this.loaderPromiseVersion === loaderPromiseVersion) {
-      this.resetPromises();
-
       if (result.isSet) {
         this.valueWithCache.updateValue(result);
         this.value.updateValue(result);

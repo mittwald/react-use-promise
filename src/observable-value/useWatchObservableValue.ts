@@ -1,19 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { ObservableValue } from "./ObservableValue.js";
+import { useRerender } from "../lib/useRerender.js";
 
 export const useWatchObservableValue = <T>(
   observable: ObservableValue<T>,
 ): T => {
-  const watchedObservable = useRef(observable);
-  const [watchedValue, setWatchedValue] = useState(observable.value);
-
+  const rerender = useRerender();
   useEffect(() => {
-    watchedObservable.current = observable;
-    setWatchedValue(observable.value);
-    return observable.observe(setWatchedValue);
+    return observable.observe(rerender);
   }, [observable]);
-
-  const observableHasChanged = watchedObservable.current !== observable;
-
-  return observableHasChanged ? observable.value : watchedValue;
+  return observable.value;
 };
