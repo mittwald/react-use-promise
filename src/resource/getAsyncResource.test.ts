@@ -30,7 +30,7 @@ const load = async (resource: AsyncResource): Promise<void> => {
 test("Expect loader is not called when parameters is null", async () => {
   const resource = getAsyncResource(loader, null);
   await load(resource);
-  expect(loader).not.toBeCalled();
+  expect(loader).not.toHaveBeenCalled();
 });
 
 test("Expect value is undefined when parameters is null", async () => {
