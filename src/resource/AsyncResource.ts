@@ -18,11 +18,11 @@ import { useWatchResourceValue } from "./useWatchResourceValue.js";
 
 export class AsyncResource<T = unknown> {
   public readonly loader: AsyncLoader<T>;
-  private loaderPromise: Promise<void> | undefined;
   public suspensePromise: Promise<void> | undefined;
   private resolveSuspensePromise: ResolveLoaderPromiseFn = () => {
     throw new Error("Resolving initial suspense promise is not supported");
   };
+  public loaderPromise: Promise<void> | undefined;
   private loaderPromiseVersion = 0;
   private autoRefreshTimeout: ConsolidatedTimeout;
 
