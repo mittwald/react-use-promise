@@ -1,5 +1,5 @@
 import { hash } from "object-code";
-import { use, useEffect } from "react";
+import { useEffect } from "react";
 import { useOnVisibilityChange } from "../lib/useOnVisibilityChange.js";
 import { useOnWindowFocused } from "../lib/useOnWindowFocused.js";
 import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
@@ -103,10 +103,10 @@ export const useWatchResourceValue = <
   }
 
   if (useSuspense) {
-    if (resource.suspensePromise === undefined) {
+    if (resource.loaderPromise === undefined) {
       throw new Error("Invariant violation: Unexpected state");
     }
-    throw resource.suspensePromise;
+    throw resource.loaderPromise;
   }
 
   return Object.freeze({
