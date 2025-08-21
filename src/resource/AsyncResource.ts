@@ -17,7 +17,7 @@ import { useWatchResourceValue } from "./useWatchResourceValue.js";
 
 export class AsyncResource<T = unknown> {
   public readonly loader: AsyncLoader<T>;
-  public loaderPromise: Promise<void> | undefined;
+  private loaderPromise: Promise<void> | undefined;
   private loaderPromiseVersion = 0;
   private autoRefreshTimeout: ConsolidatedTimeout;
 

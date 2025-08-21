@@ -103,10 +103,10 @@ export const useWatchResourceValue = <
   }
 
   if (useSuspense) {
-    if (resource.loaderPromise === undefined) {
+    if (resource.suspensePromise === undefined) {
       throw new Error("Invariant violation: Unexpected state");
     }
-    use(resource.loaderPromise);
+    throw resource.suspensePromise;
   }
 
   return Object.freeze({
