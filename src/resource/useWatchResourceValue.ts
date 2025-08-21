@@ -1,16 +1,10 @@
 import { hash } from "object-code";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useOnVisibilityChange } from "../lib/useOnVisibilityChange.js";
 import { useOnWindowFocused } from "../lib/useOnWindowFocused.js";
 import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
 import { AsyncResource } from "./AsyncResource.js";
 import { UseWatchResourceOptions, UseWatchResourceResult } from "./types.js";
-import {
-  emptyValue,
-  setValue,
-  type EventualValue,
-} from "../lib/EventualValue.js";
-import { useRefWithDependencies } from "../lib/useRefWithDependencies.js";
 
 export const useWatchResourceValue = <
   T,
@@ -36,9 +30,7 @@ export const useWatchResourceValue = <
   );
   const error = useWatchObservableValue(resource.error);
 
-  const previousValue = useRefWithDependencies<EventualValue<T>>(emptyValue, [
-    resource,
-  ]);
+  const previousValue = useMemo(() => ({ current: observedValue }), [resource]);
 
   useEffect(
     () =>
@@ -72,7 +64,7 @@ export const useWatchResourceValue = <
   void resource.load();
 
   if (observedValue.isSet) {
-    previousValue.current = setValue(observedValue.value);
+    previousValue.current = observedValue;
     if (useSuspense) {
       return observedValue.value as Result;
     }
@@ -103,10 +95,10 @@ export const useWatchResourceValue = <
   }
 
   if (useSuspense) {
-    if (resource.loaderPromise === undefined) {
+    if (resource.suspensePromise === undefined) {
       throw new Error("Invariant violation: Unexpected state");
     }
-    throw resource.loaderPromise;
+    throw resource.suspensePromise;
   }
 
   return Object.freeze({
