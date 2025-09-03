@@ -1,11 +1,15 @@
 import { act, render as testingLibRender } from "@testing-library/react";
-import React, { createElement, FC, ReactNode, Suspense } from "react";
+import { createElement, FC, ReactNode, Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 export const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 export const squareAsync = async (value: number, sleepTimeMs: number) => {
   await sleep(sleepTimeMs);
+  return value * value;
+};
+
+export const squareSync = async (value: number, ignoredSleepMs: number) => {
   return value * value;
 };
 

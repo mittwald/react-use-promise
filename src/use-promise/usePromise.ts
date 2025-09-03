@@ -1,5 +1,5 @@
 import {
-  AsyncFn,
+  LoaderFn,
   FnParameters,
   UseWatchResourceResult,
 } from "../resource/types.js";
@@ -12,7 +12,7 @@ export function usePromise<
   TParams extends FnParameters,
   TOptions extends UsePromiseOptions,
 >(
-  asyncLoader: AsyncFn<TValue, TParams>,
+  asyncLoader: LoaderFn<TValue, TParams>,
   parameters: TParams,
   options?: TOptions,
 ): UseWatchResourceResult<TValue, TOptions>;
@@ -22,7 +22,7 @@ export function usePromise<
   TParams extends FnParameters,
   TOptions extends UsePromiseOptions,
 >(
-  asyncLoader: AsyncFn<TValue, TParams>,
+  asyncLoader: LoaderFn<TValue, TParams>,
   parameters: TParams | null,
   options?: TOptions,
 ): UseWatchResourceResult<TValue | undefined, TOptions>;
@@ -32,7 +32,7 @@ export function usePromise<
   TParams extends FnParameters,
   TOptions extends UsePromiseOptions,
 >(
-  asyncLoader: AsyncFn<TValue, TParams>,
+  asyncLoader: LoaderFn<TValue, TParams>,
   parameters: TParams | null,
   options: TOptions = {} as TOptions,
 ): UseWatchResourceResult<TValue | undefined, TOptions> {

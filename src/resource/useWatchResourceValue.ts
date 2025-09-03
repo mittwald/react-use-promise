@@ -35,7 +35,7 @@ export const useWatchResourceValue = <
   useEffect(
     () =>
       resource.onRefresh(() => {
-        void resource.load();
+        resource.load();
       }),
     [resource],
   );
@@ -61,7 +61,23 @@ export const useWatchResourceValue = <
     [resource, refreshOnDocumentVisibilityChange],
   );
 
-  void resource.load();
+  resource.load();
+
+  if (resource.syncValue.isSet) {
+    if (useSuspense) {
+      return resource.syncValue.value as Result;
+    }
+    return Object.freeze({
+      maybeValue: resource.syncValue.value,
+      value: resource.syncValue.value,
+      hasValue: true,
+      isLoading: false,
+    }) as Result;
+  }
+
+  if (resource.syncError.isSet) {
+    throw resource.syncError.value;
+  }
 
   if (observedValue.isSet) {
     previousValue.current = observedValue;

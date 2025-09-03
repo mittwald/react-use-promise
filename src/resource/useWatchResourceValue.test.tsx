@@ -1,9 +1,9 @@
 import { beforeEach, describe, jest, test } from "@jest/globals";
 import { act, cleanup, screen } from "@testing-library/react";
-import React, { FC } from "react";
+import { FC } from "react";
 import { render, RenderWithLoadingView, sleep } from "../lib/testing.js";
 import { AsyncResource } from "./AsyncResource.js";
-import { AsyncLoader, UseWatchResourceOptions } from "./types.js";
+import { ResourceLoader, UseWatchResourceOptions } from "./types.js";
 import { useWatchResourceValue } from "./useWatchResourceValue.js";
 
 let testResource: AsyncResource<string>;
@@ -11,8 +11,8 @@ let testResource2: AsyncResource<string>;
 let getName: jest.Mock<() => string>;
 let getName2: jest.Mock<() => string>;
 let getTestResource: jest.Mock<() => AsyncResource<string>>;
-let getNameAsync: jest.Mock<AsyncLoader<string>>;
-let getNameAsync2: jest.Mock<AsyncLoader<string>>;
+let getNameAsync: jest.Mock<ResourceLoader<string>>;
+let getNameAsync2: jest.Mock<ResourceLoader<string>>;
 let options: UseWatchResourceOptions;
 const loadingTime = 10000;
 

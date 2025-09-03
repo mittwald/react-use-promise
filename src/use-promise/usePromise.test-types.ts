@@ -1,5 +1,5 @@
 import { expectType } from "tsd";
-import { AsyncFn, NoSuspenseReturnType } from "../resource/types.js";
+import { LoaderFn, NoSuspenseReturnType } from "../resource/types.js";
 import { usePromise } from "./usePromise.js";
 
 interface ResultType {
@@ -7,7 +7,7 @@ interface ResultType {
   bar: boolean;
 }
 
-declare const loader: AsyncFn<ResultType, [number]>;
+declare const loader: LoaderFn<ResultType, [number]>;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testResultOfUsePromiseMatchesAsyncLoaderReturnType() {

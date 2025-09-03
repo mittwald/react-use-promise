@@ -1,23 +1,23 @@
 import { defaultStorageKeyBuilder } from "../store/defaultStorageKeyBuilder.js";
 import { AsyncResource } from "./AsyncResource.js";
 import { asyncResourceStore } from "./store.js";
-import { AsyncFn, FnParameters, GetAsyncResourceOptions } from "./types.js";
+import { LoaderFn, FnParameters, GetAsyncResourceOptions } from "./types.js";
 
 // function overloads for nullable parameters
 export function getAsyncResource<TValue, TParams extends FnParameters>(
-  asyncFn: AsyncFn<TValue, TParams>,
+  asyncFn: LoaderFn<TValue, TParams>,
   parameters: TParams,
   options?: GetAsyncResourceOptions,
 ): AsyncResource<TValue>;
 
 export function getAsyncResource<TValue, TParams extends FnParameters>(
-  asyncFn: AsyncFn<TValue, TParams>,
+  asyncFn: LoaderFn<TValue, TParams>,
   parameters: TParams | null,
   options?: GetAsyncResourceOptions,
 ): AsyncResource<TValue | undefined>;
 
 export function getAsyncResource<TValue, TParams extends FnParameters>(
-  asyncFn: AsyncFn<TValue, TParams>,
+  asyncFn: LoaderFn<TValue, TParams>,
   parameters: TParams | null,
   options: GetAsyncResourceOptions = {},
 ): AsyncResource<TValue | undefined> {

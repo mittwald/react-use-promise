@@ -1,18 +1,20 @@
 import { beforeEach, jest, test } from "@jest/globals";
 import { cleanup, screen } from "@testing-library/react";
-import React, { act, FC } from "react";
+import { act, FC } from "react";
 import * as lib from "../lib/testing.js";
 import { render, RenderWithLoadingView } from "../lib/testing.js";
 import { asyncResourceStore } from "../resource/store.js";
 import { usePromise } from "./usePromise.js";
 
 let squareAsync: jest.MockedFunction<typeof lib.squareAsync>;
+let squareSync: jest.MockedFunction<typeof lib.squareSync>;
 
 const loadingTime = 10000;
 
 beforeEach(() => {
   jest.useFakeTimers();
   squareAsync = jest.fn(lib.squareAsync);
+  squareSync = jest.fn(lib.squareSync);
   asyncResourceStore.clear();
 });
 
@@ -31,15 +33,16 @@ const waitToBeLoaded = async (percent = 100): Promise<void> => {
 
 interface Props {
   value: number | null;
+  loader?: typeof squareAsync | typeof squareSync;
 }
 
 const SquareNumberView: FC<Props> = (props) => (
   <RenderWithLoadingView>
     {() => {
-      const { value } = props;
+      const { value, loader = squareAsync } = props;
 
       const squareNumber = usePromise(
-        squareAsync,
+        loader,
         value === null ? null : [value, loadingTime],
       );
 
@@ -62,6 +65,12 @@ test("Loading view is triggered", async () => {
   await render(<SquareNumberView value={4} />);
   screen.getByTestId("loading-view");
   await waitToBeLoaded();
+});
+
+test("Loading view is not triggered when using sync loader", async () => {
+  await render(<SquareNumberView value={4} loader={squareSync} />);
+  expectRenderedNumberToBe("16");
+  expect(() => screen.getByTestId("loading-view")).toThrow();
 });
 
 test("usePromise() returns 'undefined' when loader parameters are 'null'", async () => {

@@ -7,7 +7,7 @@ import { emptyValue, EventualValue, setValue } from "../lib/EventualValue.js";
 import { ObservableValue } from "../observable-value/ObservableValue.js";
 import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
 import {
-  AsyncLoader,
+  ResourceLoader,
   AsyncResourceState,
   OnRefreshHandler,
   ResolveLoaderPromiseFn,
@@ -17,7 +17,7 @@ import {
 import { useWatchResourceValue } from "./useWatchResourceValue.js";
 
 export class AsyncResource<T = unknown> {
-  public readonly loader: AsyncLoader<T>;
+  public readonly loader: ResourceLoader<T>;
   private loaderPromise: Promise<void> | undefined;
   public suspensePromise: Promise<void> | undefined;
   private resolveSuspensePromise: ResolveLoaderPromiseFn = () => {
@@ -33,6 +33,9 @@ export class AsyncResource<T = unknown> {
   public readonly error = new ObservableValue<EventualValue<unknown>>(
     emptyValue,
   );
+  public syncValue: EventualValue<T> = emptyValue;
+  public syncError: EventualValue<unknown> = emptyValue;
+
   public readonly state = new ObservableValue<AsyncResourceState>("void");
   private readonly onRefreshListeners = new Set<OnRefreshHandler>();
 
@@ -40,7 +43,7 @@ export class AsyncResource<T = unknown> {
     Promise.resolve(undefined),
   );
 
-  public constructor(loader: AsyncLoader<T>) {
+  public constructor(loader: ResourceLoader<T>) {
     this.loader = loader;
     this.autoRefreshTimeout = new ConsolidatedTimeout(() => this.refresh());
     this.resetPromises();
@@ -66,13 +69,16 @@ export class AsyncResource<T = unknown> {
     return this.autoRefreshTimeout.addTimeout(ttl);
   }
 
-  public async load(): Promise<void> {
+  public load(): void {
     if (this.value.value.isSet || this.error.value.isSet) {
       return;
     }
 
     if (this.loaderPromise === undefined) {
-      this.loaderPromise = this.handleLoading();
+      const loadingResult = this.handleLoading();
+      if (loadingResult instanceof Promise) {
+        this.loaderPromise = loadingResult;
+      }
     }
   }
 
@@ -90,7 +96,21 @@ export class AsyncResource<T = unknown> {
     return error === true || this.error.value.value === error;
   }
 
-  private async handleLoading(): Promise<void> {
+  private handleLoading(): Promise<void> | void {
+    try {
+      const loaderResult = this.loader();
+      if (loaderResult instanceof Promise) {
+        return this.handleAsyncLoading(loaderResult);
+      }
+      this.syncValue = setValue(loaderResult);
+    } catch (e) {
+      this.syncError = setValue(e);
+    }
+
+    this.autoRefreshTimeout.start();
+  }
+
+  private async handleAsyncLoading(loaderPromise: Promise<T>): Promise<void> {
     const loaderPromiseVersion = ++this.loaderPromiseVersion;
 
     let result: EventualValue<T> = emptyValue;
@@ -99,7 +119,7 @@ export class AsyncResource<T = unknown> {
     this.state.updateValue("loading");
 
     try {
-      const awaitedResult = await this.loader();
+      const awaitedResult = await loaderPromise;
       result = setValue(awaitedResult);
     } catch (e) {
       error = setValue(e);
@@ -109,7 +129,6 @@ export class AsyncResource<T = unknown> {
 
     if (this.loaderPromiseVersion === loaderPromiseVersion) {
       this.resetPromises();
-
       if (result.isSet) {
         this.valueWithCache.updateValue(result);
         this.value.updateValue(result);
@@ -119,8 +138,6 @@ export class AsyncResource<T = unknown> {
         this.state.updateValue("error");
       }
     }
-
-    this.autoRefreshTimeout.start();
   }
 
   public use<TOptions extends UseWatchResourceOptions>(

@@ -1,8 +1,8 @@
-import { AsyncFn } from "./types.js";
+import { LoaderFn } from "./types.js";
 import { getAsyncResource } from "./getAsyncResource.js";
 import { expectType } from "tsd";
 
-declare const loader: AsyncFn<number, [boolean, string]>;
+declare const loader: LoaderFn<number, [boolean, string]>;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testGetAsyncResourceRequiresCorrectParameters() {

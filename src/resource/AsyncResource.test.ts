@@ -1,5 +1,5 @@
 import { beforeEach, jest } from "@jest/globals";
-import { AsyncLoader } from "./types.js";
+import { ResourceLoader } from "./types.js";
 import { AsyncResource } from "./AsyncResource.js";
 import { sleep } from "../lib/testing.js";
 
@@ -7,14 +7,14 @@ let loaderCalls = 0;
 let sleepTime: jest.Mock<() => number>;
 const loadingTime = 10000;
 
-let loader: jest.Mock<AsyncLoader>;
+let loader: jest.Mock<ResourceLoader>;
 const loaderImpl = async () => {
   loaderCalls++;
   await sleep(sleepTime());
   return `#${loaderCalls} call`;
 };
 
-let errorLoader: jest.Mock<AsyncLoader>;
+let errorLoader: jest.Mock<ResourceLoader>;
 const errorLoaderImpl = async () => {
   loaderCalls++;
   await sleep(sleepTime());

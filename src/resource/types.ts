@@ -4,12 +4,14 @@ import { Tags } from "../store/types.js";
 // Async function types
 export type FnParameters = unknown[];
 
-export type AsyncFn<TResult, TParams extends FnParameters> = (
+export type LoaderFn<TResult, TParams extends FnParameters> = (
   ...args: TParams
-) => Promise<TResult>;
+) => Promise<TResult> | TResult;
 
 // Async resource types
-export type AsyncLoader<TResult = unknown> = () => Promise<TResult>;
+export type ResourceLoader<TResult = unknown> = () =>
+  | Promise<TResult>
+  | TResult;
 
 export type AsyncResourceState = "void" | "loading" | "loaded" | "error";
 
