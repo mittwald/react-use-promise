@@ -1,11 +1,5 @@
-import { Minimatch } from "minimatch";
-import {
-  TagPattern,
-  Tags,
-  StorageEntry,
-  StorageEntryOptions,
-  Tag,
-} from "./types.js";
+import { StorageEntry, StorageEntryOptions } from "./types.js";
+import { Tags, type Tag } from "./tags.js";
 
 export class Store<T> {
   private readonly entries = new Map<string, StorageEntry<T>>();
@@ -29,7 +23,7 @@ export class Store<T> {
 
     this.entries.set(id, {
       data: newData,
-      tags,
+      tags: new Tags(tags),
     });
 
     return newData;
@@ -51,21 +45,14 @@ export class Store<T> {
     return this.getAll().filter(matcher);
   }
 
-  public getAll(tag?: Tag | TagPattern): T[] {
+  public getAll(tag?: Tag): T[] {
     const entriesArray = Array.from(this.entries.values());
 
     if (tag === undefined) {
       return entriesArray.map((e) => e.data);
     }
 
-    const mm = new Minimatch(tag);
-
-    const testSomeTagsMatchingPattern = (tags: Tags): boolean =>
-      tags.some((t) => mm.match(t));
-
-    return entriesArray
-      .filter((e) => testSomeTagsMatchingPattern(e.tags))
-      .map((e) => e.data);
+    return entriesArray.filter((e) => e.tags.matching(tag)).map((e) => e.data);
   }
 
   public clear(): void {

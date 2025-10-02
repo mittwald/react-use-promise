@@ -1,9 +1,7 @@
-export type Tag = string;
-export type TagPattern = string;
-export type Tags = Tag[];
+import type { Tags, TagsInput } from "../store/tags.js";
 
 export interface StorageEntryOptions {
-  tags?: Tags;
+  tags?: TagsInput;
 }
 
 export interface StorageEntry<T> {

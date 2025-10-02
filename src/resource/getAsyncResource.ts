@@ -1,3 +1,4 @@
+import { Tags } from "../store/tags.js";
 import { defaultStorageKeyBuilder } from "../store/defaultStorageKeyBuilder.js";
 import { AsyncResource } from "./AsyncResource.js";
 import { asyncResourceStore } from "./store.js";
@@ -35,7 +36,10 @@ export function getAsyncResource<TValue, TParams extends FnParameters>(
 
   const asyncResourceLoader = () => asyncFn(...parameters);
 
-  const resourceBuilder = () => new AsyncResource(asyncResourceLoader);
+  const resourceBuilder = () =>
+    new AsyncResource(asyncResourceLoader, {
+      tags: new Tags(tags),
+    });
 
   return asyncResourceStore.getOrSet(storageKey, resourceBuilder, {
     tags: tags,

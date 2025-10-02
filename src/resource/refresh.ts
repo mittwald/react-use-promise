@@ -1,10 +1,10 @@
-import { Tag, TagPattern } from "../store/types.js";
+import type { Tag } from "../store/tags.js";
 import { AsyncResource } from "./AsyncResource.js";
 
 import { asyncResourceStore } from "./store.js";
 
 interface ClearOptions {
-  tag?: Tag | TagPattern;
+  tag?: Tag;
   error?: true | unknown;
 }
 

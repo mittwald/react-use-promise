@@ -13,11 +13,14 @@ import {
   ResolveLoaderPromiseFn,
   UseWatchResourceOptions,
   UseWatchResourceResult,
+  type AsyncResourceMeta,
 } from "./types.js";
 import { useWatchResourceValue } from "./useWatchResourceValue.js";
+import { loaderContext } from "./context.js";
 
 export class AsyncResource<T = unknown> {
   public readonly loader: ResourceLoader<T>;
+  public readonly meta: AsyncResourceMeta;
   private loaderPromise: Promise<void> | undefined;
   public suspensePromise: Promise<void> | undefined;
   private resolveSuspensePromise: ResolveLoaderPromiseFn = () => {
@@ -38,30 +41,48 @@ export class AsyncResource<T = unknown> {
 
   public readonly state = new ObservableValue<AsyncResourceState>("void");
   private readonly onRefreshListeners = new Set<OnRefreshHandler>();
+  private static readonly onBeforeRefreshListeners =
+    new Set<OnRefreshHandler>();
 
   public static voidInstance = new AsyncResource<undefined>(() =>
     Promise.resolve(undefined),
   );
 
-  public constructor(loader: ResourceLoader<T>) {
-    this.loader = loader;
+  public constructor(loader: ResourceLoader<T>, meta: AsyncResourceMeta = {}) {
+    this.loader = loaderContext.bind(
+      {
+        asyncResource: this,
+      },
+      loader,
+    );
+    this.meta = meta;
     this.autoRefreshTimeout = new ConsolidatedTimeout(() => this.refresh());
     this.resetPromises();
   }
 
   public refresh(): void {
+    AsyncResource.onBeforeRefreshListeners.forEach((listener) =>
+      listener(this as AsyncResource<unknown>),
+    );
     this.loaderPromiseVersion++;
     this.resetPromises();
     this.value.updateValue(emptyValue);
     this.error.updateValue(emptyValue);
     this.state.updateValue("void");
-    this.onRefreshListeners.forEach((listener) => listener());
+    this.onRefreshListeners.forEach((listener) => listener(this));
   }
 
   public onRefresh(handler: OnRefreshHandler) {
     this.onRefreshListeners.add(handler);
     return () => {
       this.onRefreshListeners.delete(handler);
+    };
+  }
+
+  public static onBeforeRefresh(handler: OnRefreshHandler) {
+    this.onBeforeRefreshListeners.add(handler);
+    return () => {
+      this.onBeforeRefreshListeners.delete(handler);
     };
   }
 

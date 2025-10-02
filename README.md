@@ -319,7 +319,7 @@ refresh as well.
 
 #### tags
 
-Type: `string[]`\
+Type: `Array<string|[string, string]>`\
 Default: `undefined`
 
 With this option you can assign tags to resources. Tags allow you to be
@@ -623,6 +623,13 @@ refresh({
 // - chat/12345/messages/1
 // - chat/12345/messages/2
 ```
+
+### Scoped Tags
+
+Scoped Tags are bound to a certain scope (e.g. `id`, `url`, `type`) to avoid
+conflicts with values from other scopes. Scoped Tags are represented by the
+tuple type `[scope: string, value: string]`. The value can also be a
+hierarchical Tag.
 
 ## Refreshing resources
 

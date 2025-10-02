@@ -2,6 +2,7 @@ import { Store } from "./Store.js";
 import { AsyncResource } from "../resource/AsyncResource.js";
 import { beforeEach } from "@jest/globals";
 import { setValue } from "../lib/EventualValue.js";
+import type { Tag, TagsInput } from "./tags.js";
 
 const testStore = new Store<AsyncResource>();
 
@@ -75,54 +76,39 @@ describe("getOrSet()", () => {
 });
 
 describe("getAll()", () => {
-  test("returns all entries", () => {
-    testStore.getOrSet("42", () => testResource1);
-    testStore.getOrSet("43", () => testResource2);
-    const all = testStore.getAll();
-    expect(all).toHaveLength(2);
-    expect(all).toEqual(expect.arrayContaining([testResource1, testResource2]));
-  });
-
-  test("returns no entries when no tag matches", () => {
-    testStore.getOrSet("42", () => testResource1, {
-      tags: ["entry/42/tag/1", "entry/42/tag/2"],
-    });
-    const all = testStore.getAll("foo");
-    expect(all).toHaveLength(0);
-  });
-
-  test("returns no entries when no tag matches glob", () => {
-    testStore.getOrSet("42", () => testResource1, {
-      tags: ["entry/42/tag/1", "entry/42/tag/2"],
-    });
-    const all = testStore.getAll("foo/**");
-    expect(all).toHaveLength(0);
-  });
-
-  test("returns entry when one tag matches exactly", () => {
-    testStore.getOrSet("42", () => testResource1, {
-      tags: ["entry/42/tag/1", "entry/42/tag/2"],
-    });
-    const all = testStore.getAll("entry/42/tag/1");
-    expect(all).toHaveLength(1);
-  });
-
-  test("returns entry when one tag matches glob", () => {
-    testStore.getOrSet("42", () => testResource1, {
-      tags: ["entry/42/tag/1", "entry/42/tag/2"],
-    });
-    const all = testStore.getAll("entry/42/**");
-    expect(all).toHaveLength(1);
-  });
-
-  test("returns all entries with tag matching glob", () => {
-    testStore.getOrSet("42", () => testResource1, {
-      tags: ["entry/42/tag/1", "entry/43/tag/2"],
-    });
-    testStore.getOrSet("43", () => testResource2, {
-      tags: ["entry/43/tag/1", "entry/43/tag/2"],
-    });
-    const all = testStore.getAll("entry/**");
-    expect(all).toHaveLength(2);
-  });
+  test.each<[TagsInput, TagsInput, Tag | undefined, AsyncResource[]]>([
+    [[], [], undefined, [testResource1, testResource2]],
+    [[], [], "foo", []],
+    [[], [], "foo/**", []],
+    [
+      ["entry/42/tag/1", "entry/42/tag/2"],
+      [],
+      "entry/42/tag/1",
+      [testResource1],
+    ],
+    [["entry/42/tag/1", "entry/42/tag/2"], [], "entry/42/**", [testResource1]],
+    [
+      ["entry/42/tag/1", "entry/42/tag/2"],
+      ["entry/43/tag/1", "entry/43/tag/2"],
+      "entry/**",
+      [testResource1, testResource2],
+    ],
+    [[["scope", "42"]], [], "42", []],
+    [[["scope", "42"]], [], ["scope", "43"], []],
+    [[["scope", "42"]], [], ["scope", "42"], [testResource1]],
+    [[["scope", "42"]], [], ["scope", "*"], [testResource1]],
+  ])(
+    "return all resources matching tags",
+    (firstResourceTags, secondResourceTags, selectedTag, expectedResources) => {
+      testStore.getOrSet("42", () => testResource1, {
+        tags: firstResourceTags,
+      });
+      testStore.getOrSet("43", () => testResource2, {
+        tags: secondResourceTags,
+      });
+      const all = testStore.getAll(selectedTag);
+      expect(all).toHaveLength(expectedResources.length);
+      expect(all).toEqual(expectedResources);
+    },
+  );
 });

@@ -1,5 +1,6 @@
 import { DurationLikeObject } from "luxon";
-import { Tags } from "../store/types.js";
+import type { Tags, TagsInput } from "../store/tags.js";
+import type { AsyncResource } from "./AsyncResource.js";
 
 // Async function types
 export type FnParameters = unknown[];
@@ -17,8 +18,12 @@ export type AsyncResourceState = "void" | "loading" | "loaded" | "error";
 
 export type GetAsyncResourceOptions = {
   loaderId?: string;
-  tags?: Tags;
+  tags?: TagsInput;
 };
+
+export interface AsyncResourceMeta {
+  tags?: Tags;
+}
 
 // useWatchResource types
 export type UseWatchResourceOptions = {
@@ -52,4 +57,4 @@ export type UseWatchResourceResult<TValue, TOptions> = TOptions extends {
 
 export type ResolveLoaderPromiseFn = () => void;
 
-export type OnRefreshHandler = () => void;
+export type OnRefreshHandler = <T>(resource: AsyncResource<T>) => void;

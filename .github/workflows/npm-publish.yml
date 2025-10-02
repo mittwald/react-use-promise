@@ -11,12 +11,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           registry-url: https://registry.npmjs.org/
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10
       - run: pnpm i
       - run: pnpm test
       - run: pnpm build
