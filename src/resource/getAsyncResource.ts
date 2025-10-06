@@ -1,8 +1,8 @@
-import { Tags } from "../store/tags.js";
-import { defaultStorageKeyBuilder } from "../store/defaultStorageKeyBuilder.js";
-import { AsyncResource } from "./AsyncResource.js";
-import { asyncResourceStore } from "./store.js";
-import { LoaderFn, FnParameters, GetAsyncResourceOptions } from "./types.js";
+import { Tags } from "../store/Tags";
+import { defaultStorageKeyBuilder } from "../store/defaultStorageKeyBuilder";
+import { AsyncResource } from "./AsyncResource";
+import { asyncResourceStore } from "./store";
+import { LoaderFn, FnParameters, GetAsyncResourceOptions } from "./types";
 
 // function overloads for nullable parameters
 export function getAsyncResource<TValue, TParams extends FnParameters>(

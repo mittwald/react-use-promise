@@ -1,8 +1,8 @@
-import { test, expect } from "@jest/globals";
-import { ObservableValue } from "./ObservableValue.js";
-import React, { FC } from "react";
-import { useWatchObservableValue } from "./useWatchObservableValue.js";
-import { act, render, screen } from "@testing-library/react";
+import { expect, beforeEach, test } from "vitest";
+import { ObservableValue } from "./ObservableValue";
+import { FC } from "react";
+import { useWatchObservableValue } from "./useWatchObservableValue";
+import { act, render, screen, cleanup } from "@testing-library/react";
 
 let renderCount: number;
 
@@ -12,6 +12,7 @@ const TestComponent: FC<{ value: ObservableValue<string> }> = (props) => {
 };
 
 beforeEach(() => {
+  cleanup();
   renderCount = 0;
 });
 

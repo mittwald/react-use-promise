@@ -1,6 +1,6 @@
-import { getHttpResource } from "./getHttpResource.js";
-import { beforeEach } from "@jest/globals";
-import { asyncResourceStore } from "../resource/store.js";
+import { getHttpResource } from "./getHttpResource";
+import { beforeEach, expect, test } from "vitest";
+import { asyncResourceStore } from "../resource/store";
 
 beforeEach(() => {
   asyncResourceStore.clear();

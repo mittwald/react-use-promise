@@ -1,5 +1,5 @@
-import { LoaderFn } from "./types.js";
-import { getAsyncResource } from "./getAsyncResource.js";
+import { LoaderFn } from "./types";
+import { getAsyncResource } from "./getAsyncResource";
 import { expectType } from "tsd";
 
 declare const loader: LoaderFn<number, [boolean, string]>;

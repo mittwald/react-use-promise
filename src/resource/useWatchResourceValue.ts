@@ -1,10 +1,10 @@
 import { hash } from "object-code";
 import { useEffect, useMemo } from "react";
-import { useOnVisibilityChange } from "../lib/useOnVisibilityChange.js";
-import { useOnWindowFocused } from "../lib/useOnWindowFocused.js";
-import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
-import { AsyncResource } from "./AsyncResource.js";
-import { UseWatchResourceOptions, UseWatchResourceResult } from "./types.js";
+import { useOnVisibilityChange } from "../lib/useOnVisibilityChange";
+import { useOnWindowFocused } from "../lib/useOnWindowFocused";
+import { useWatchObservableValue } from "../observable-value/useWatchObservableValue";
+import { AsyncResource } from "./AsyncResource";
+import { UseWatchResourceOptions, UseWatchResourceResult } from "./types";
 
 export const useWatchResourceValue = <
   T,

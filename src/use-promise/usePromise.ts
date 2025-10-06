@@ -2,9 +2,9 @@ import {
   LoaderFn,
   FnParameters,
   UseWatchResourceResult,
-} from "../resource/types.js";
-import { getAsyncResource } from "../resource/getAsyncResource.js";
-import { UsePromiseOptions } from "./types.js";
+} from "../resource/types";
+import { getAsyncResource } from "../resource/getAsyncResource";
+import { UsePromiseOptions } from "./types";
 
 // function overloads for nullable parameters
 export function usePromise<

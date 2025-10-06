@@ -1,33 +1,40 @@
-import { beforeEach, jest, test } from "@jest/globals";
+import {
+  afterEach,
+  vitest,
+  beforeEach,
+  expect,
+  test,
+  MockedFunction,
+} from "vitest";
 import { cleanup, screen } from "@testing-library/react";
 import { act, FC } from "react";
-import * as lib from "../lib/testing.js";
-import { render, RenderWithLoadingView } from "../lib/testing.js";
-import { asyncResourceStore } from "../resource/store.js";
-import { usePromise } from "./usePromise.js";
+import * as lib from "../lib/testing";
+import { render, RenderWithLoadingView } from "../lib/testing";
+import { asyncResourceStore } from "../resource/store";
+import { usePromise } from "./usePromise";
 
-let squareAsync: jest.MockedFunction<typeof lib.squareAsync>;
-let squareSync: jest.MockedFunction<typeof lib.squareSync>;
+let squareAsync: MockedFunction<typeof lib.squareAsync>;
+let squareSync: MockedFunction<typeof lib.squareSync>;
 
 const loadingTime = 10000;
 
 beforeEach(() => {
-  jest.useFakeTimers();
-  squareAsync = jest.fn(lib.squareAsync);
-  squareSync = jest.fn(lib.squareSync);
+  vitest.useFakeTimers();
+  squareAsync = vitest.fn(lib.squareAsync);
+  squareSync = vitest.fn(lib.squareSync);
   asyncResourceStore.clear();
 });
 
 afterEach(() => {
-  jest.runOnlyPendingTimers();
-  jest.useRealTimers();
+  vitest.runOnlyPendingTimers();
+  vitest.useRealTimers();
   cleanup();
 });
 
 const waitToBeLoaded = async (percent = 100): Promise<void> => {
   await act(
     async () =>
-      await jest.advanceTimersByTimeAsync(loadingTime * (percent / 100)),
+      await vitest.advanceTimersByTimeAsync(loadingTime * (percent / 100)),
   );
 };
 

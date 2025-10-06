@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { AsyncResource } from "../resource/AsyncResource.js";
-import { getAsyncResource } from "../resource/getAsyncResource.js";
-import { GetAsyncResourceOptions } from "../resource/types.js";
+import { AsyncResource } from "../resource/AsyncResource";
+import { getAsyncResource } from "../resource/getAsyncResource";
+import { GetAsyncResourceOptions } from "../resource/types";
 
 export const getHttpResource = <T>(
   url: string,

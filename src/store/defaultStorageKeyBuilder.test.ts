@@ -1,5 +1,5 @@
-import { test, expect } from "@jest/globals";
-import { defaultStorageKeyBuilder } from "./defaultStorageKeyBuilder.js";
+import { test, expect } from "vitest";
+import { defaultStorageKeyBuilder } from "./defaultStorageKeyBuilder";
 
 const builderInput = (override: object = {}) => ({
   parameters: ["foo", { bar: "baz" }],
