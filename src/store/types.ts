@@ -1,4 +1,4 @@
-import type { Tags, TagsInput } from "../store/tags.js";
+import type { Tags, TagsInput } from "./Tags";
 
 export interface StorageEntryOptions {
   tags?: TagsInput;

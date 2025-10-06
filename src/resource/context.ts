@@ -1,5 +1,5 @@
 import { createCascade } from "context";
-import type { AsyncResource } from "./AsyncResource.js";
+import type { AsyncResource } from "./AsyncResource";
 
 type LoaderContext = {
   asyncResource: AsyncResource;

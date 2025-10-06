@@ -1,42 +1,42 @@
-import { beforeEach, describe, jest, test } from "@jest/globals";
+import { vitest, beforeEach, test, Mock, afterEach, describe } from "vitest";
 import { act, cleanup, screen } from "@testing-library/react";
 import { FC } from "react";
-import { render, RenderWithLoadingView, sleep } from "../lib/testing.js";
-import { AsyncResource } from "./AsyncResource.js";
-import { ResourceLoader, UseWatchResourceOptions } from "./types.js";
-import { useWatchResourceValue } from "./useWatchResourceValue.js";
+import { render, RenderWithLoadingView, sleep } from "../lib/testing";
+import { AsyncResource } from "./AsyncResource";
+import { ResourceLoader, UseWatchResourceOptions } from "./types";
+import { useWatchResourceValue } from "./useWatchResourceValue";
 
 let testResource: AsyncResource<string>;
 let testResource2: AsyncResource<string>;
-let getName: jest.Mock<() => string>;
-let getName2: jest.Mock<() => string>;
-let getTestResource: jest.Mock<() => AsyncResource<string>>;
-let getNameAsync: jest.Mock<ResourceLoader<string>>;
-let getNameAsync2: jest.Mock<ResourceLoader<string>>;
+let getName: Mock<() => string>;
+let getName2: Mock<() => string>;
+let getTestResource: Mock<() => AsyncResource<string>>;
+let getNameAsync: Mock<ResourceLoader<string>>;
+let getNameAsync2: Mock<ResourceLoader<string>>;
 let options: UseWatchResourceOptions;
 const loadingTime = 10000;
 
 beforeEach(() => {
-  jest.useFakeTimers();
-  getName = jest.fn(() => "Foo");
-  getName2 = jest.fn(() => "Foo2");
-  getNameAsync = jest.fn(async () => {
+  vitest.useFakeTimers();
+  getName = vitest.fn(() => "Foo");
+  getName2 = vitest.fn(() => "Foo2");
+  getNameAsync = vitest.fn(async () => {
     await sleep(loadingTime);
     return getName();
   });
-  getNameAsync2 = jest.fn(async () => {
+  getNameAsync2 = vitest.fn(async () => {
     await sleep(loadingTime);
     return getName2();
   });
-  getTestResource = jest.fn(() => testResource);
+  getTestResource = vitest.fn(() => testResource);
   testResource = new AsyncResource(getNameAsync);
   testResource2 = new AsyncResource(getNameAsync2);
   options = {};
 });
 
 afterEach(() => {
-  jest.runOnlyPendingTimers();
-  jest.useRealTimers();
+  vitest.runOnlyPendingTimers();
+  vitest.useRealTimers();
   cleanup();
 });
 
@@ -56,7 +56,7 @@ const expectValue = (value: unknown): void => {
 const waitToBeLoaded = async (percent = 100): Promise<void> => {
   await act(
     async () =>
-      await jest.advanceTimersByTimeAsync(loadingTime * (percent / 100)),
+      await vitest.advanceTimersByTimeAsync(loadingTime * (percent / 100)),
   );
 };
 

@@ -1,5 +1,5 @@
-import { jest } from "@jest/globals";
-import { ObservableValue } from "./ObservableValue.js";
+import { vitest, expect, test } from "vitest";
+import { ObservableValue } from "./ObservableValue";
 
 test("has initial value", () => {
   const v = new ObservableValue("foo");
@@ -14,7 +14,7 @@ test("value can be updated", () => {
 
 test("observers are called on update", () => {
   const v = new ObservableValue("foo");
-  const observer = jest.fn();
+  const observer = vitest.fn();
   v.observe(observer);
   v.updateValue("bar");
   expect(observer).toHaveBeenCalledTimes(1);
@@ -23,7 +23,7 @@ test("observers are called on update", () => {
 
 test("observers can be unbound", () => {
   const v = new ObservableValue("foo");
-  const observer = jest.fn();
+  const observer = vitest.fn();
   const unbind = v.observe(observer);
   v.updateValue("bar");
   unbind();
@@ -33,8 +33,8 @@ test("observers can be unbound", () => {
 
 test("multiple observers are called", () => {
   const v = new ObservableValue("foo");
-  const observer1 = jest.fn();
-  const observer2 = jest.fn();
+  const observer1 = vitest.fn();
+  const observer2 = vitest.fn();
   v.observe(observer1);
   v.observe(observer2);
   v.updateValue("bar");

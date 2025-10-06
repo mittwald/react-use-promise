@@ -1,2 +1,2 @@
-export * from "./useHttp.js";
-export * from "./getHttpResource.js";
+export * from "./useHttp";
+export * from "./getHttpResource";

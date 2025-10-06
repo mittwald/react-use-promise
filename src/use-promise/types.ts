@@ -1,7 +1,7 @@
 import {
   GetAsyncResourceOptions,
   UseWatchResourceOptions,
-} from "../resource/types.js";
+} from "../resource/types";
 
 export type UsePromiseOptions = GetAsyncResourceOptions &
   UseWatchResourceOptions;

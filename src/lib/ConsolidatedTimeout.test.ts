@@ -1,29 +1,30 @@
-import { beforeEach, jest } from "@jest/globals";
-import { ConsolidatedTimeout } from "./ConsolidatedTimeout.js";
+import { ConsolidatedTimeout } from "./ConsolidatedTimeout";
+import { vitest, beforeEach, expect, test } from "vitest";
 
-const callback = jest.fn();
+const callback = vitest.fn();
 
 let timeout: ConsolidatedTimeout;
 
 beforeEach((): void => {
-  jest.resetAllMocks();
-  jest.useFakeTimers();
+  vitest.resetAllMocks();
+  vitest.clearAllTimers();
+  vitest.useFakeTimers();
   timeout = new ConsolidatedTimeout(callback);
 });
 
 const testCallbackIsCalledAfter = (ms: number): void => {
   const beforeCalls = callback.mock.calls.length;
-  jest.advanceTimersByTime(ms - 1);
+  vitest.advanceTimersByTime(ms - 1);
   expect(callback).toHaveBeenCalledTimes(beforeCalls);
-  jest.advanceTimersByTime(1);
+  vitest.advanceTimersByTime(1);
   expect(callback).toHaveBeenCalledTimes(beforeCalls + 1);
 };
 
 const testCallbackIsNotCalledAfter = (ms: number): void => {
   const beforeCalls = callback.mock.calls.length;
-  jest.advanceTimersByTime(ms - 1);
+  vitest.advanceTimersByTime(ms - 1);
   expect(callback).toHaveBeenCalledTimes(beforeCalls);
-  jest.advanceTimersByTime(1);
+  vitest.advanceTimersByTime(1);
   expect(callback).toHaveBeenCalledTimes(beforeCalls);
 };
 
