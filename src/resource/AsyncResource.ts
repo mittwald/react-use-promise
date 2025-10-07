@@ -155,6 +155,7 @@ export class AsyncResource<T = unknown> {
         this.error.updateValue(error);
         this.state.updateValue("error");
       }
+      this.autoRefreshTimeout.start();
     }
   }
 
