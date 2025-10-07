@@ -54,10 +54,11 @@ const expectValue = (value: unknown): void => {
 };
 
 const waitToBeLoaded = async (percent = 100): Promise<void> => {
-  await act(
-    async () =>
-      await vitest.advanceTimersByTimeAsync(loadingTime * (percent / 100)),
-  );
+  await waitTime(loadingTime * (percent / 100));
+};
+
+const waitTime = async (ms: number): Promise<void> => {
+  await act(async () => await vitest.advanceTimersByTimeAsync(ms));
 };
 
 test("Loading view is triggered", async () => {
@@ -181,6 +182,29 @@ test("visibilitychange event does not trigger resource refresh, if 'refreshOnVis
 
   await waitToBeLoaded();
   expectValue("Foo");
+});
+
+describe("auto refresh", () => {
+  test("foo", async () => {
+    const refreshMs = 10000;
+    options.autoRefresh = { milliseconds: refreshMs };
+
+    await render(<TestView />);
+    await waitToBeLoaded();
+    expectValue("Foo");
+
+    getName.mockReturnValue("Bar");
+
+    await waitTime(refreshMs);
+    await waitToBeLoaded();
+    expectValue("Bar");
+
+    getName.mockReturnValue("Baz");
+
+    await waitTime(refreshMs);
+    await waitToBeLoaded();
+    expectValue("Baz");
+  });
 });
 
 describe("with disabled suspense", () => {
