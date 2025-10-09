@@ -41,7 +41,15 @@ export function getAsyncResource<TValue, TParams extends FnParameters>(
       tags: new Tags(tags),
     });
 
-  return asyncResourceStore.getOrSet(storageKey, resourceBuilder, {
-    tags: tags,
-  });
+  const asyncResource = asyncResourceStore.getOrSet(
+    storageKey,
+    resourceBuilder,
+    {
+      tags: tags,
+    },
+  );
+
+  asyncResource.updateLoader(asyncResourceLoader);
+
+  return asyncResource;
 }

@@ -16,7 +16,7 @@ import { useWatchResourceValue } from "./useWatchResourceValue";
 import { loaderContext } from "./context";
 
 export class AsyncResource<T = unknown> {
-  public readonly loader: ResourceLoader<T>;
+  private loader: ResourceLoader<T>;
   public readonly meta: AsyncResourceMeta;
   private loaderPromise: Promise<void> | undefined;
   public suspensePromise: Promise<void> | undefined;
@@ -46,15 +46,25 @@ export class AsyncResource<T = unknown> {
   );
 
   public constructor(loader: ResourceLoader<T>, meta: AsyncResourceMeta = {}) {
-    this.loader = loaderContext.bind(
-      {
-        asyncResource: this,
-      },
-      loader,
-    );
+    this.loader = this.buildLoaderWithContext(loader);
     this.meta = meta;
     this.autoRefreshTimeout = new ConsolidatedTimeout(() => this.refresh());
     this.resetPromises();
+  }
+
+  private buildLoaderWithContext(
+    newLoader: ResourceLoader<T>,
+  ): ResourceLoader<T> {
+    return loaderContext.bind(
+      {
+        asyncResource: this,
+      },
+      newLoader,
+    );
+  }
+
+  public updateLoader(newLoader: ResourceLoader<T>): void {
+    this.loader = this.buildLoaderWithContext(newLoader);
   }
 
   public refresh(): void {

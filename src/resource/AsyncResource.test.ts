@@ -10,6 +10,7 @@ import {
 import { ResourceLoader } from "./types";
 import { AsyncResource } from "./AsyncResource";
 import { sleep } from "../lib/testing";
+import { getAsyncResource } from "./getAsyncResource";
 
 let loaderCalls = 0;
 let sleepTime: Mock<() => number>;
@@ -49,18 +50,41 @@ describe("calling load()", () => {
   test("triggers loader", async () => {
     const resource = new AsyncResource(loader);
     expect(loader).toHaveBeenCalledTimes(0);
-    void resource.load();
+    resource.load();
     expect(loader).toHaveBeenCalledTimes(1);
+  });
+
+  test("resource uses 'fresh' loader when function execution scope changes", async () => {
+    const loaded: string[] = [];
+
+    const scopedFn = async (scopedInputVar: string) => {
+      const resource = getAsyncResource(async () => {
+        await sleep(sleepTime());
+        return scopedInputVar;
+      }, []);
+
+      resource.refresh();
+      resource.load();
+      await vitest.advanceTimersByTimeAsync(loadingTime);
+      if (resource.value.value.isSet) {
+        loaded.push(resource.value.value.value);
+      }
+    };
+
+    await scopedFn("foo");
+    await scopedFn("bar");
+
+    expect(loaded).toEqual(["foo", "bar"]);
   });
 
   test("twice does not trigger loader twice", async () => {
     const resource = new AsyncResource(loader);
     // load
-    void resource.load();
+    resource.load();
     expect(loader).toHaveBeenCalledTimes(1);
     // after 100ms load again
     await vitest.advanceTimersByTimeAsync(loadingTime / 2);
-    void resource.load();
+    resource.load();
     expect(loader).toHaveBeenCalledTimes(1);
     // wait for second load
     await vitest.advanceTimersByTimeAsync(loadingTime);
@@ -71,13 +95,13 @@ describe("calling load()", () => {
     const resource = new AsyncResource(loader);
     // #1 load for 50ms
     sleepTime.mockReturnValue(50);
-    void resource.load();
+    resource.load();
     // after 10ms clear
     await vitest.advanceTimersByTimeAsync(10);
     void resource.refresh();
     // 2# load for 20ms
     sleepTime.mockReturnValue(20);
-    void resource.load();
+    resource.load();
     // wait for second load
     await vitest.advanceTimersByTimeAsync(20);
     if (!resource.value.value.isSet) {
@@ -89,7 +113,7 @@ describe("calling load()", () => {
   test("will be aborted if cleared during loading", async () => {
     const resource = new AsyncResource(loader);
     // load
-    void resource.load();
+    resource.load();
     // while still loading
     await vitest.advanceTimersByTimeAsync(loadingTime / 2);
     resource.refresh();
@@ -108,7 +132,7 @@ describe(".value", () => {
   test("is set after loader is done", async () => {
     const resource = new AsyncResource(loader);
     // load
-    void resource.load();
+    resource.load();
     // wait for load
     await vitest.advanceTimersByTimeAsync(loadingTime);
     if (!resource.value.value.isSet) {
@@ -120,7 +144,7 @@ describe(".value", () => {
   test("is empty after clear()", async () => {
     const resource = new AsyncResource(loader);
     // load
-    void resource.load();
+    resource.load();
     // wait for load
     await vitest.advanceTimersByTimeAsync(loadingTime);
     resource.refresh();
@@ -130,12 +154,12 @@ describe(".value", () => {
   test("is updated after loading again when cleared", async () => {
     const resource = new AsyncResource(loader);
     // load
-    void resource.load();
+    resource.load();
     // wait for load
     await vitest.advanceTimersByTimeAsync(loadingTime);
     resource.refresh();
     // load again for 1000ms
-    void resource.load();
+    resource.load();
     // wait for load
     await vitest.advanceTimersByTimeAsync(loadingTime);
     if (!resource.value.value.isSet) {
@@ -154,7 +178,7 @@ describe(".error", () => {
   test("is set after loader throws error", async () => {
     const resource = new AsyncResource(errorLoader);
     // load
-    void resource.load();
+    resource.load();
     // wait for load
     await vitest.advanceTimersByTimeAsync(loadingTime);
     if (!resource.error.value.isSet) {
@@ -166,7 +190,7 @@ describe(".error", () => {
   test("is empty after clear()", async () => {
     const resource = new AsyncResource(errorLoader);
     // load
-    void resource.load();
+    resource.load();
     // wait for load
     await vitest.advanceTimersByTimeAsync(loadingTime);
     resource.refresh();
@@ -176,7 +200,7 @@ describe(".error", () => {
   test("is empty when becoming stale", async () => {
     const resource = new AsyncResource(errorLoader);
     // load
-    void resource.load();
+    resource.load();
     // wait for load
     await vitest.advanceTimersByTimeAsync(loadingTime);
     expect(resource.error.value.isSet).toBe(true);
@@ -185,13 +209,13 @@ describe(".error", () => {
   test("is updated after loading again when cleared", async () => {
     const resource = new AsyncResource(errorLoader);
     // load
-    void resource.load();
+    resource.load();
     // wait for load
     await vitest.advanceTimersByTimeAsync(loadingTime);
     resource.refresh();
     errorLoader.mockImplementation(loaderImpl);
     // load again (now without error)
-    void resource.load();
+    resource.load();
     // wait for load
     await vitest.advanceTimersByTimeAsync(loadingTime);
     if (!resource.value.value.isSet) {
