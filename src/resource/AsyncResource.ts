@@ -6,7 +6,7 @@ import { useWatchObservableValue } from "../observable-value/useWatchObservableV
 import {
   ResourceLoader,
   AsyncResourceState,
-  OnRefreshHandler,
+  AsyncResourceEventHandler,
   ResolveLoaderPromiseFn,
   UseWatchResourceOptions,
   UseWatchResourceResult,
@@ -37,9 +37,12 @@ export class AsyncResource<T = unknown> {
   public syncError: EventualValue<unknown> = emptyValue;
 
   public readonly state = new ObservableValue<AsyncResourceState>("void");
-  private readonly onRefreshListeners = new Set<OnRefreshHandler>();
+  private readonly onRefreshListeners = new Set<AsyncResourceEventHandler>();
+
   private static readonly onBeforeRefreshListeners =
-    new Set<OnRefreshHandler>();
+    new Set<AsyncResourceEventHandler>();
+  private static readonly onLoadListeners =
+    new Set<AsyncResourceEventHandler>();
 
   public static voidInstance = new AsyncResource<undefined>(() =>
     Promise.resolve(undefined),
@@ -68,28 +71,37 @@ export class AsyncResource<T = unknown> {
   }
 
   public refresh(): void {
-    AsyncResource.onBeforeRefreshListeners.forEach((listener) =>
-      listener(this as AsyncResource<unknown>),
-    );
+    this.callListeners(AsyncResource.onBeforeRefreshListeners);
     this.loaderPromiseVersion++;
     this.resetPromises();
     this.value.updateValue(emptyValue);
     this.error.updateValue(emptyValue);
     this.state.updateValue("void");
-    this.onRefreshListeners.forEach((listener) => listener(this));
+    this.callListeners(this.onRefreshListeners);
   }
 
-  public onRefresh(handler: OnRefreshHandler) {
+  private callListeners(listeners: Set<AsyncResourceEventHandler>) {
+    listeners.forEach((handler) => handler(this));
+  }
+
+  public onRefresh(handler: AsyncResourceEventHandler) {
     this.onRefreshListeners.add(handler);
     return () => {
       this.onRefreshListeners.delete(handler);
     };
   }
 
-  public static onBeforeRefresh(handler: OnRefreshHandler) {
+  public static onBeforeRefresh(handler: AsyncResourceEventHandler) {
     this.onBeforeRefreshListeners.add(handler);
     return () => {
       this.onBeforeRefreshListeners.delete(handler);
+    };
+  }
+
+  public static onLoad(handler: AsyncResourceEventHandler) {
+    this.onLoadListeners.add(handler);
+    return () => {
+      this.onLoadListeners.delete(handler);
     };
   }
 
@@ -134,7 +146,7 @@ export class AsyncResource<T = unknown> {
     } catch (e) {
       this.syncError = setValue(e);
     }
-
+    this.callListeners(AsyncResource.onLoadListeners);
     this.autoRefreshTimeout.start();
   }
 
@@ -165,6 +177,7 @@ export class AsyncResource<T = unknown> {
         this.error.updateValue(error);
         this.state.updateValue("error");
       }
+      this.callListeners(AsyncResource.onLoadListeners);
       this.autoRefreshTimeout.start();
     }
   }

@@ -57,4 +57,4 @@ export type UseWatchResourceResult<TValue, TOptions> = TOptions extends {
 
 export type ResolveLoaderPromiseFn = () => void;
 
-export type OnRefreshHandler = <T>(resource: AsyncResource<T>) => void;
+export type AsyncResourceEventHandler = <T>(resource: AsyncResource<T>) => void;
