@@ -140,6 +140,8 @@ export class AsyncResource<T = unknown> {
     try {
       const loaderResult = this.loader();
       if (loaderResult instanceof Promise) {
+        this.syncValue = emptyValue;
+        this.syncError = emptyValue;
         return this.handleAsyncLoading(loaderResult);
       }
       this.syncValue = setValue(loaderResult);
