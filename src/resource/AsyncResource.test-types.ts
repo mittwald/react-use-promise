@@ -1,4 +1,4 @@
-import { AsyncResource } from "./AsyncResource";
+import { AsyncResource } from "./AsyncResource.js";
 import { expectType } from "tsd";
 
 interface ResultType {

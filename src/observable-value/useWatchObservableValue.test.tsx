@@ -1,7 +1,7 @@
 import { expect, beforeEach, test } from "vitest";
-import { ObservableValue } from "./ObservableValue";
+import { ObservableValue } from "./ObservableValue.js";
 import { FC } from "react";
-import { useWatchObservableValue } from "./useWatchObservableValue";
+import { useWatchObservableValue } from "./useWatchObservableValue.js";
 import { act, render, screen, cleanup } from "@testing-library/react";
 
 let renderCount: number;

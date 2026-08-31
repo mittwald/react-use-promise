@@ -1,5 +1,5 @@
 import { expectType } from "tsd";
-import { emptyValue, EventualValue, setValue } from "./EventualValue";
+import { emptyValue, EventualValue, setValue } from "./EventualValue.js";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testAccessingValuePropertyNeedsCheckOfIsSet() {

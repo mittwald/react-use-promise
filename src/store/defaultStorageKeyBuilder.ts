@@ -1,4 +1,4 @@
-import { StorageKeyBuilder } from "./types";
+import { StorageKeyBuilder } from "./types.js";
 import { hash } from "object-code";
 
 export const defaultStorageKeyBuilder: StorageKeyBuilder = (input) => {

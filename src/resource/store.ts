@@ -1,4 +1,4 @@
-import { Store } from "../store/Store";
-import { AsyncResource } from "./AsyncResource";
+import { Store } from "../store/Store.js";
+import { AsyncResource } from "./AsyncResource.js";
 
 export const asyncResourceStore = new Store<AsyncResource>();

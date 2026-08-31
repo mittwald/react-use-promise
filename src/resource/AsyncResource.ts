@@ -1,8 +1,11 @@
 import { DurationLikeObject } from "luxon";
-import { ConsolidatedTimeout, RemoveTimeout } from "../lib/ConsolidatedTimeout";
-import { emptyValue, EventualValue, setValue } from "../lib/EventualValue";
-import { ObservableValue } from "../observable-value/ObservableValue";
-import { useWatchObservableValue } from "../observable-value/useWatchObservableValue";
+import {
+  ConsolidatedTimeout,
+  RemoveTimeout,
+} from "../lib/ConsolidatedTimeout.js";
+import { emptyValue, EventualValue, setValue } from "../lib/EventualValue.js";
+import { ObservableValue } from "../observable-value/ObservableValue.js";
+import { useWatchObservableValue } from "../observable-value/useWatchObservableValue.js";
 import {
   ResourceLoader,
   AsyncResourceState,
@@ -11,9 +14,9 @@ import {
   UseWatchResourceOptions,
   UseWatchResourceResult,
   type AsyncResourceMeta,
-} from "./types";
-import { useWatchResourceValue } from "./useWatchResourceValue";
-import { loaderContext } from "./context";
+} from "./types.js";
+import { useWatchResourceValue } from "./useWatchResourceValue.js";
+import { loaderContext } from "./context.js";
 
 export class AsyncResource<T = unknown> {
   private loader: ResourceLoader<T>;

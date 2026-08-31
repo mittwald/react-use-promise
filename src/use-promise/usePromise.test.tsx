@@ -8,10 +8,10 @@ import {
 } from "vitest";
 import { cleanup, screen } from "@testing-library/react";
 import { act, FC } from "react";
-import * as lib from "../lib/testing";
-import { render, RenderWithLoadingView } from "../lib/testing";
-import { asyncResourceStore } from "../resource/store";
-import { usePromise } from "./usePromise";
+import * as lib from "../lib/testing.js";
+import { render, RenderWithLoadingView } from "../lib/testing.js";
+import { asyncResourceStore } from "../resource/store.js";
+import { usePromise } from "./usePromise.js";
 
 let squareAsync: MockedFunction<typeof lib.squareAsync>;
 let squareSync: MockedFunction<typeof lib.squareSync>;

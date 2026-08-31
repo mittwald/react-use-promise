@@ -1,4 +1,4 @@
-import { Tags } from "./Tags";
+import { Tags } from "./Tags.js";
 import { expect, test } from "vitest";
 
 test("simple tags are store in tags", () => {

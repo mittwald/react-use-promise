@@ -1,5 +1,5 @@
 import { vitest, expect, test } from "vitest";
-import { ObservableValue } from "./ObservableValue";
+import { ObservableValue } from "./ObservableValue.js";
 
 test("has initial value", () => {
   const v = new ObservableValue("foo");

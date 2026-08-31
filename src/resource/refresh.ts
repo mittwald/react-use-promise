@@ -1,7 +1,7 @@
-import type { Tag } from "../store/Tags";
-import { AsyncResource } from "./AsyncResource";
+import type { Tag } from "../store/Tags.js";
+import { AsyncResource } from "./AsyncResource.js";
 
-import { asyncResourceStore } from "./store";
+import { asyncResourceStore } from "./store.js";
 
 interface ClearOptions {
   tag?: Tag;

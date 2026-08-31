@@ -1,5 +1,5 @@
-import { StorageEntry, StorageEntryOptions } from "./types";
-import { Tags, type Tag } from "./Tags";
+import { StorageEntry, StorageEntryOptions } from "./types.js";
+import { Tags, type Tag } from "./Tags.js";
 
 export class Store<T> {
   private readonly entries = new Map<string, StorageEntry<T>>();
