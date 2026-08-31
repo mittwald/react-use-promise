@@ -1,8 +1,8 @@
 import { vitest, beforeEach, expect, test, afterEach } from "vitest";
-import { sleep } from "../lib/testing";
-import { getAsyncResource } from "./getAsyncResource";
-import { AsyncResource } from "./AsyncResource";
-import { asyncResourceStore } from "./store";
+import { sleep } from "../lib/testing.js";
+import { getAsyncResource } from "./getAsyncResource.js";
+import { AsyncResource } from "./AsyncResource.js";
+import { asyncResourceStore } from "./store.js";
 
 const sleepTime = 2000;
 

@@ -1,5 +1,5 @@
 import { test, expect } from "vitest";
-import { defaultStorageKeyBuilder } from "./defaultStorageKeyBuilder";
+import { defaultStorageKeyBuilder } from "./defaultStorageKeyBuilder.js";
 
 const builderInput = (override: object = {}) => ({
   parameters: ["foo", { bar: "baz" }],

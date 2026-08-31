@@ -1,4 +1,4 @@
-import { ConsolidatedTimeout } from "./ConsolidatedTimeout";
+import { ConsolidatedTimeout } from "./ConsolidatedTimeout.js";
 import { vitest, beforeEach, expect, test } from "vitest";
 
 const callback = vitest.fn();

@@ -1,8 +1,8 @@
-import { Store } from "./Store";
-import { AsyncResource } from "../resource/AsyncResource";
+import { Store } from "./Store.js";
+import { AsyncResource } from "../resource/AsyncResource.js";
 import { expect, beforeEach, test, describe } from "vitest";
-import { setValue } from "../lib/EventualValue";
-import type { Tag, TagsInput } from "./Tags";
+import { setValue } from "../lib/EventualValue.js";
+import type { Tag, TagsInput } from "./Tags.js";
 
 const testStore = new Store<AsyncResource>();
 

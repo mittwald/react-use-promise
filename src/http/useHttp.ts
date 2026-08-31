@@ -1,6 +1,6 @@
 import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { UseWatchResourceOptions } from "../resource/types";
-import { getHttpResource } from "./getHttpResource";
+import { UseWatchResourceOptions } from "../resource/types.js";
+import { getHttpResource } from "./getHttpResource.js";
 
 export const useHttp = <T>(
   url: string,

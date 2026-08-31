@@ -1,10 +1,10 @@
 import { vitest, beforeEach, test, Mock, afterEach, describe } from "vitest";
 import { act, cleanup, screen } from "@testing-library/react";
 import { FC } from "react";
-import { render, RenderWithLoadingView, sleep } from "../lib/testing";
-import { AsyncResource } from "./AsyncResource";
-import { ResourceLoader, UseWatchResourceOptions } from "./types";
-import { useWatchResourceValue } from "./useWatchResourceValue";
+import { render, RenderWithLoadingView, sleep } from "../lib/testing.js";
+import { AsyncResource } from "./AsyncResource.js";
+import { ResourceLoader, UseWatchResourceOptions } from "./types.js";
+import { useWatchResourceValue } from "./useWatchResourceValue.js";
 
 let testResource: AsyncResource<string>;
 let testResource2: AsyncResource<string>;

@@ -1,4 +1,4 @@
-import { Observer, UnbindObserver } from "./types";
+import { Observer, UnbindObserver } from "./types.js";
 
 export class ObservableValue<T> {
   public value: T;

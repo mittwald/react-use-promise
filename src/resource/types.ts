@@ -1,6 +1,6 @@
 import { DurationLikeObject } from "luxon";
-import type { Tags, TagsInput } from "../store/Tags";
-import type { AsyncResource } from "./AsyncResource";
+import type { Tags, TagsInput } from "../store/Tags.js";
+import type { AsyncResource } from "./AsyncResource.js";
 
 // Async function types
 export type FnParameters = unknown[];

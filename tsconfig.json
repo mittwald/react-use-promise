@@ -7,8 +7,8 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "allowJs": true,
-    "module": "es6",
-    "moduleResolution": "bundler",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "outDir": "dist/esm",
     "rootDir": "src",
     "skipLibCheck": true,
@@ -19,13 +19,5 @@
     "target": "ES2022"
   },
   "exclude": ["test-d/**/*", "*.test.ts"],
-  "include": ["src/**/*.ts"],
-  "tsc-alias": {
-    "verbose": false,
-    "resolveFullPaths": true,
-    "fileExtensions": {
-      "inputGlob": "{js,jsx,mjs}",
-      "outputCheck": ["js", "json", "jsx", "mjs"]
-    }
-  }
+  "include": ["src/**/*.ts"]
 }

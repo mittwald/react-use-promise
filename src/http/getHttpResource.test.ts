@@ -1,6 +1,6 @@
-import { getHttpResource } from "./getHttpResource";
+import { getHttpResource } from "./getHttpResource.js";
 import { beforeEach, expect, test } from "vitest";
-import { asyncResourceStore } from "../resource/store";
+import { asyncResourceStore } from "../resource/store.js";
 
 beforeEach(() => {
   asyncResourceStore.clear();

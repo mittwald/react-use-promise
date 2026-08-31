@@ -1,6 +1,6 @@
 import { expectType } from "tsd";
-import { LoaderFn, NoSuspenseReturnType } from "../resource/types";
-import { usePromise } from "./usePromise";
+import { LoaderFn, NoSuspenseReturnType } from "../resource/types.js";
+import { usePromise } from "./usePromise.js";
 
 interface ResultType {
   foo: number;

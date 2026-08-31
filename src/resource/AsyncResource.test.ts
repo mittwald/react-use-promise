@@ -7,10 +7,10 @@ import {
   afterEach,
   describe,
 } from "vitest";
-import { ResourceLoader } from "./types";
-import { AsyncResource } from "./AsyncResource";
-import { sleep } from "../lib/testing";
-import { getAsyncResource } from "./getAsyncResource";
+import { ResourceLoader } from "./types.js";
+import { AsyncResource } from "./AsyncResource.js";
+import { sleep } from "../lib/testing.js";
+import { getAsyncResource } from "./getAsyncResource.js";
 
 let loaderCalls = 0;
 let sleepTime: Mock<() => number>;
