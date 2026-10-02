@@ -28,6 +28,7 @@ export class AsyncResource<T = unknown> {
   };
   private loaderPromiseVersion = 0;
   private autoRefreshTimeout: ConsolidatedTimeout;
+  private lastUsedAt = Date.now();
 
   public readonly value = new ObservableValue<EventualValue<T>>(emptyValue);
   public readonly valueWithCache = new ObservableValue<EventualValue<T>>(
@@ -71,6 +72,21 @@ export class AsyncResource<T = unknown> {
 
   public updateLoader(newLoader: ResourceLoader<T>): void {
     this.loader = this.buildLoaderWithContext(newLoader);
+  }
+
+  public markAsUsed(): void {
+    this.lastUsedAt = Date.now();
+  }
+
+  public isUnusedFor(ms: number): boolean {
+    const isLoading = this.loaderPromise !== undefined;
+    const isObserved =
+      this.onRefreshListeners.size > 0 ||
+      [this.value, this.valueWithCache, this.error, this.state].some(
+        (observable) => observable.observerCount > 0,
+      );
+
+    return !isLoading && !isObserved && Date.now() - this.lastUsedAt >= ms;
   }
 
   public refresh(): void {

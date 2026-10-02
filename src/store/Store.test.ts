@@ -75,6 +75,16 @@ describe("getOrSet()", () => {
   });
 });
 
+describe("deleteBy()", () => {
+  test("deletes only matching entries", () => {
+    testStore.getOrSet("42", () => testResource1);
+    testStore.getOrSet("43", () => testResource2);
+    testStore.deleteBy((res) => res === testResource1);
+    expect(testStore.get("42")).toBeUndefined();
+    expect(testStore.get("43")).toBe(testResource2);
+  });
+});
+
 describe("getAll()", () => {
   test.each<[TagsInput, TagsInput, Tag | undefined, AsyncResource[]]>([
     [[], [], undefined, [testResource1, testResource2]],

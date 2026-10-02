@@ -45,6 +45,14 @@ export class Store<T> {
     return this.getAll().filter(matcher);
   }
 
+  public deleteBy(matcher: (entry: T) => boolean): void {
+    this.entries.forEach((entry, id) => {
+      if (matcher(entry.data)) {
+        this.entries.delete(id);
+      }
+    });
+  }
+
   public getAll(tag?: Tag): T[] {
     const entriesArray = Array.from(this.entries.values());
 
