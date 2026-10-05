@@ -4,6 +4,7 @@ export type SimpleTag = string;
 export type ScopedTag = [string, string];
 export type Tag = SimpleTag | ScopedTag;
 export type TagsInput = Tag[];
+export type TagsMatcher = (tags: Tags) => boolean;
 
 export class Tags {
   public readonly tags: readonly Tag[];
@@ -16,7 +17,11 @@ export class Tags {
     });
   }
 
-  public matching(tag: Tag) {
+  public matching(tag: Tag): boolean {
+    return Tags.createMatcher(tag)(this);
+  }
+
+  public static createMatcher(tag: Tag): TagsMatcher {
     const firstIsSimple = isSimpleTag(tag);
     const firstMiniMatch = new Minimatch(firstIsSimple ? tag : tag[1]);
 
@@ -35,7 +40,7 @@ export class Tags {
       return false;
     };
 
-    return this.tags.some(matcher);
+    return (tags) => tags.tags.some(matcher);
   }
 
   public getByScope(scope: string) {

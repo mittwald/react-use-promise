@@ -9,11 +9,10 @@ export const useOnVisibilityChange = (
 ): void => {
   useEffect(() => {
     if (isBrowser) {
-      document.addEventListener("visibilitychange", () => cb(!document.hidden));
+      const onVisibilityChange = (): void => cb(!document.hidden);
+      document.addEventListener("visibilitychange", onVisibilityChange);
       return () => {
-        document.removeEventListener("visibilitychange", () =>
-          cb(!document.hidden),
-        );
+        document.removeEventListener("visibilitychange", onVisibilityChange);
       };
     }
   }, deps);

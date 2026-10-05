@@ -52,7 +52,8 @@ export class Store<T> {
       return entriesArray.map((e) => e.data);
     }
 
-    return entriesArray.filter((e) => e.tags.matching(tag)).map((e) => e.data);
+    const isMatching = Tags.createMatcher(tag);
+    return entriesArray.filter((e) => isMatching(e.tags)).map((e) => e.data);
   }
 
   public clear(): void {
