@@ -167,6 +167,7 @@ export class AsyncResource<T = unknown> {
     } catch (e) {
       this.syncError = setValue(e);
     }
+    this.markAsUsed();
     this.callListeners(AsyncResource.onLoadListeners);
     this.autoRefreshTimeout.start();
   }
@@ -198,6 +199,7 @@ export class AsyncResource<T = unknown> {
         this.error.updateValue(error);
         this.state.updateValue("error");
       }
+      this.markAsUsed();
       this.callListeners(AsyncResource.onLoadListeners);
       this.autoRefreshTimeout.start();
     }

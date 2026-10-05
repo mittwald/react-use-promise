@@ -16,6 +16,11 @@ const loader = vitest.fn(async (id: number) => {
   return `Value ${id}`;
 });
 
+const slowLoader = async (): Promise<string> => {
+  await sleep(unusedForMs * 2);
+  return "Value";
+};
+
 const getResource = (): AsyncResource<string> => getAsyncResource(loader, [1]);
 
 const loadResource = async (): Promise<AsyncResource<string>> => {
@@ -68,13 +73,21 @@ test("keeps resources that were used within the given duration", async () => {
 });
 
 test("keeps resources that are still loading", () => {
-  const slowLoader = async (): Promise<string> => {
-    await sleep(unusedForMs * 2);
-    return "Value";
-  };
   const resource = getAsyncResource(slowLoader, []);
   resource.load();
   vitest.advanceTimersByTime(unusedForMs);
+
+  removeUnusedResources({ unusedFor });
+
+  expectStoredResources(resource);
+});
+
+test("keeps resources for the given duration after loading finished", async () => {
+  const resource = getAsyncResource(slowLoader, []);
+  resource.load();
+  const loaded = resource.suspensePromise;
+  await vitest.advanceTimersByTimeAsync(unusedForMs * 2);
+  await loaded;
 
   removeUnusedResources({ unusedFor });
 
