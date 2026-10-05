@@ -11,8 +11,7 @@ export type LoaderFn<TResult, TParams extends FnParameters> = (
 
 // Async resource types
 export type ResourceLoader<TResult = unknown> = () =>
-  | Promise<TResult>
-  | TResult;
+  Promise<TResult> | TResult;
 
 export type AsyncResourceState = "void" | "loading" | "loaded" | "error";
 
