@@ -1,4 +1,5 @@
 export * from "./resource/refresh.js";
+export * from "./resource/releaseUnusedResources.js";
 export * from "./use-promise/usePromise.js";
 export * from "./resource/getAsyncResource.js";
 export * from "./resource/AsyncResource.js";

@@ -50,6 +50,7 @@ export function getAsyncResource<TValue, TParams extends FnParameters>(
   );
 
   asyncResource.updateLoader(asyncResourceLoader);
+  asyncResource.markAsUsed();
 
   return asyncResource;
 }

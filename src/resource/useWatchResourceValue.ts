@@ -40,6 +40,8 @@ export const useWatchResourceValue = <
     [resource],
   );
 
+  useEffect(() => () => resource.markAsUsed(), [resource]);
+
   useEffect(() => {
     if (autoRefresh) {
       return resource.addTTL(autoRefresh);
