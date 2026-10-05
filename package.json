@@ -21,7 +21,10 @@
     "suspense"
   ],
   "homepage": "https://github.com/mittwald/react-use-promise#readme",
-  "repository": "github:mittwald/react-use-promise",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mittwald/react-use-promise.git"
+  },
   "license": "MIT",
   "exports": {
     ".": {
