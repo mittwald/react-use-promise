@@ -9,6 +9,11 @@ export interface StorageEntry<T> {
   readonly tags: Tags;
 }
 
+export interface ReleasedStorageEntry<T> {
+  readonly dataRef: WeakRef<T & object>;
+  readonly tags: Tags;
+}
+
 type StorageKeyBuilderInput = unknown;
 
 export type StorageKeyBuilder = (input: StorageKeyBuilderInput) => string;

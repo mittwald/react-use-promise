@@ -1,10 +1,11 @@
 import { act, cleanup } from "@testing-library/react";
 import { FC, Suspense } from "react";
 import { afterEach, beforeEach, expect, test, vitest } from "vitest";
-import { render, sleep } from "../lib/testing.js";
+import { FakeWeakRef, render, sleep } from "../lib/testing.js";
 import { AsyncResource } from "./AsyncResource.js";
 import { getAsyncResource } from "./getAsyncResource.js";
-import { removeUnusedResources } from "./removeUnusedResources.js";
+import { refresh } from "./refresh.js";
+import { releaseUnusedResources } from "./releaseUnusedResources.js";
 import { asyncResourceStore } from "./store.js";
 
 const loadingTime = 1000;
@@ -32,6 +33,11 @@ const loadResource = async (): Promise<AsyncResource<string>> => {
   return resource;
 };
 
+const releaseAndCollect = (resource: AsyncResource): void => {
+  releaseUnusedResources({ unusedFor });
+  FakeWeakRef.collect(resource);
+};
+
 const expectStoredResources = (...expected: AsyncResource[]): void => {
   const stored = asyncResourceStore.getAll();
   expect(stored).toHaveLength(expected.length);
@@ -42,6 +48,7 @@ const expectStoredResources = (...expected: AsyncResource[]): void => {
 
 beforeEach(() => {
   vitest.useFakeTimers();
+  vitest.stubGlobal("WeakRef", FakeWeakRef);
   asyncResourceStore.clear();
   loader.mockClear();
 });
@@ -49,14 +56,15 @@ beforeEach(() => {
 afterEach(() => {
   vitest.runOnlyPendingTimers();
   vitest.useRealTimers();
+  vitest.unstubAllGlobals();
   cleanup();
 });
 
-test("removes resources that were not used for the given duration", async () => {
-  await loadResource();
+test("releases resources that were not used for the given duration", async () => {
+  const resource = await loadResource();
   vitest.advanceTimersByTime(unusedForMs);
 
-  removeUnusedResources({ unusedFor });
+  releaseAndCollect(resource);
 
   expectStoredResources();
 });
@@ -67,7 +75,7 @@ test("keeps resources that were used within the given duration", async () => {
   getResource();
   vitest.advanceTimersByTime(unusedForMs / 2);
 
-  removeUnusedResources({ unusedFor });
+  releaseAndCollect(resource);
 
   expectStoredResources(resource);
 });
@@ -77,7 +85,7 @@ test("keeps resources that are still loading", () => {
   resource.load();
   vitest.advanceTimersByTime(unusedForMs);
 
-  removeUnusedResources({ unusedFor });
+  releaseAndCollect(resource);
 
   expectStoredResources(resource);
 });
@@ -89,7 +97,7 @@ test("keeps resources for the given duration after loading finished", async () =
   await vitest.advanceTimersByTimeAsync(unusedForMs * 2);
   await loaded;
 
-  removeUnusedResources({ unusedFor });
+  releaseAndCollect(resource);
 
   expectStoredResources(resource);
 });
@@ -107,26 +115,37 @@ test("keeps resources while watched and for the given duration after unmount", a
   expect(view.container.textContent).toBe("Value 1");
 
   vitest.advanceTimersByTime(unusedForMs);
-  removeUnusedResources({ unusedFor });
+  releaseAndCollect(resource);
   expectStoredResources(resource);
 
   view.unmount();
-  removeUnusedResources({ unusedFor });
+  releaseAndCollect(resource);
   expectStoredResources(resource);
 
   vitest.advanceTimersByTime(unusedForMs);
-  removeUnusedResources({ unusedFor });
+  releaseAndCollect(resource);
   expectStoredResources();
 });
 
-test("loads removed resources again on next use", async () => {
-  const removedResource = await loadResource();
+test("released resources stay reachable while they are still referenced", async () => {
+  const resource = await loadResource();
   vitest.advanceTimersByTime(unusedForMs);
-  removeUnusedResources({ unusedFor });
+
+  releaseUnusedResources({ unusedFor });
+  refresh();
+
+  expect(resource.value.value.isSet).toBe(false);
+  expect(getResource()).toBe(resource);
+});
+
+test("loads collected resources again on next use", async () => {
+  const collectedResource = await loadResource();
+  vitest.advanceTimersByTime(unusedForMs);
+  releaseAndCollect(collectedResource);
 
   const newResource = await loadResource();
 
-  expect(newResource).not.toBe(removedResource);
+  expect(newResource).not.toBe(collectedResource);
   expect(newResource.value.value).toEqual({ isSet: true, value: "Value 1" });
   expect(loader).toHaveBeenCalledTimes(2);
 });

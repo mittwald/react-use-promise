@@ -1,7 +1,8 @@
 import { Store } from "./Store.js";
 import { AsyncResource } from "../resource/AsyncResource.js";
-import { expect, beforeEach, test, describe } from "vitest";
+import { afterEach, expect, beforeEach, test, describe, vitest } from "vitest";
 import { setValue } from "../lib/EventualValue.js";
+import { FakeWeakRef } from "../lib/testing.js";
 import type { Tag, TagsInput } from "./Tags.js";
 
 const testStore = new Store<AsyncResource>();
@@ -75,13 +76,38 @@ describe("getOrSet()", () => {
   });
 });
 
-describe("deleteBy()", () => {
-  test("deletes only matching entries", () => {
+describe("releaseBy()", () => {
+  beforeEach(() => {
+    vitest.stubGlobal("WeakRef", FakeWeakRef);
+  });
+
+  afterEach(() => {
+    vitest.unstubAllGlobals();
+  });
+
+  test("keeps released entries while they are still referenced", () => {
     testStore.getOrSet("42", () => testResource1);
     testStore.getOrSet("43", () => testResource2);
-    testStore.deleteBy((res) => res === testResource1);
+    testStore.releaseBy((res) => res === testResource1);
+    expect(testStore.get("42")).toBe(testResource1);
+    expect(testStore.getAll()).toEqual([testResource1, testResource2]);
+  });
+
+  test("drops released entries once they are garbage collected", () => {
+    testStore.getOrSet("42", () => testResource1);
+    testStore.getOrSet("43", () => testResource2);
+    testStore.releaseBy((res) => res === testResource1);
+    FakeWeakRef.collect(testResource1);
     expect(testStore.get("42")).toBeUndefined();
-    expect(testStore.get("43")).toBe(testResource2);
+    expect(testStore.getAll()).toEqual([testResource2]);
+  });
+
+  test("holds released entries strongly again when they are requested", () => {
+    testStore.getOrSet("42", () => testResource1);
+    testStore.releaseBy(() => true);
+    expect(testStore.getOrSet("42", () => testResource2)).toBe(testResource1);
+    FakeWeakRef.collect(testResource1);
+    expect(testStore.get("42")).toBe(testResource1);
   });
 });
 

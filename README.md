@@ -84,7 +84,7 @@ const App = () => {
   - [Async resource](#async-resource-1)
   - [Options](#options)
   - [refresh](#refresh-1)
-  - [removeUnusedResources](#removeunusedresources)
+  - [releaseUnusedResources](#releaseunusedresources)
 - [Caching](#caching)
   - [Challenges concerning Caching](#challenges-concerning-caching)
   - [Resource store](#resource-store)
@@ -387,32 +387,34 @@ The following options are supported:
   with a matching error. See the [Error handling](#error-handling) section for
   more details.
 
-### removeUnusedResources
+### releaseUnusedResources
 
 Resources stay in the [resource store](#resource-store) until the page is
-reloaded. In long-running applications, call `removeUnusedResources`
-periodically to keep the store from growing.
+reloaded. In long-running applications, call `releaseUnusedResources`
+periodically, so resources that are no longer used can be garbage collected.
 
-#### removeUnusedResources(options)
+#### releaseUnusedResources(options)
 
-Removes all resources from the resource store that are not loading, not watched
+Releases all resources in the resource store that are not loading, not watched
 by a mounted component and were not used for the duration given in `unusedFor`.
 A resource counts as used whenever `getAsyncResource` returns it (also called by
-`usePromise` and factories created with `resourceify`) and when the last
-component watching it unmounts.
+`usePromise` and factories created with `resourceify`), when it has finished
+loading and when the last component watching it unmounts.
 
 ```js
-import { removeUnusedResources } from "@mittwald/react-use-promise";
+import { releaseUnusedResources } from "@mittwald/react-use-promise";
 
 setInterval(() => {
-  removeUnusedResources({ unusedFor: { minutes: 15 } });
+  releaseUnusedResources({ unusedFor: { minutes: 15 } });
 }, 60_000);
 ```
 
-When a removed resource is needed again, a new resource is created and its
-loader is called again, so components using it suspend until it has loaded.
-References to a removed resource, like a resource stored in a variable, are not
-refreshed by `refresh()` anymore.
+The store keeps only a weak reference to a released resource. As long as your
+application still references it, for example in a variable, it stays in the
+store: `refresh()` reaches it, and `getAsyncResource` returns it again and holds
+it strongly from then on. Otherwise the resource is garbage collected together
+with its cached value. Using it again creates a new resource, which calls its
+loader again, so components using it suspend until it has loaded.
 
 ### resourceify
 
@@ -461,7 +463,8 @@ Every time when `usePromise` resp. `getAsyncResource` is called, either a new
 resource is created or an existing resource is taken from the resource store. If
 a resources has loaded once, it exists in the store and contains the cached
 result of the async loader function. It stays there until the page is reloaded
-or it is removed by [`removeUnusedResources`](#removeunusedresources).
+or it is released by [`releaseUnusedResources`](#releaseunusedresources) and
+garbage collected.
 
 It is noticeable that not the raw result is cached in some "result cache" – **it
 is the resource the keeps the cached result which itself is stored in the
