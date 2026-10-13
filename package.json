@@ -63,7 +63,7 @@
     "context": "^3.1.0",
     "luxon": "~3.7.2",
     "minimatch": "^10.2.6",
-    "object-code": "^1.3.4"
+    "object-code": "^2.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.7",
